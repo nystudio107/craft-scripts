@@ -41,15 +41,14 @@ LOCAL_MYSQL_CMD="REPLACE_ME"
 
 # -- REMOTE settings --
 
-# Remote ssh credentials
+# Remote ssh credentials, user@domain.com
 REMOTE_SSH_LOGIN="REPLACE_ME"
 
 # Remote path constants; paths should always have a trailing /
 REMOTE_ROOT_PATH="REPLACE_ME"
-REMOTE_ASSETS_PATH=$LOCAL_ROOT_PATH"REPLACE_ME"
+REMOTE_ASSETS_PATH=$REMOTE_ROOT_PATH"REPLACE_ME"
 
 # Remote database constants
 REMOTE_DB_NAME="REPLACE_ME"
 REMOTE_DB_PASSWORD="REPLACE_ME"
 REMOTE_DB_USER="REPLACE_ME"
-REMOTE_MYSQL_CMD="REPLACE_ME"
