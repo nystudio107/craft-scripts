@@ -24,7 +24,7 @@ fi
 
 source ".env.sh"
 
-echo "Settings base permissions for the project $LOCAL_ROOT_PATH"
+echo "Setting base permissions for the project $LOCAL_ROOT_PATH"
 chown -R $LOCAL_CHOWN_USER:$LOCAL_CHOWN_GROUP $LOCAL_ROOT_PATH
 chmod -R $GLOBAL_DIR_PERMS $LOCAL_ROOT_PATH
 find $LOCAL_ROOT_PATH -type f ! -name "*.sh" -exec chmod $GLOBAL_FILE_PERMS {} \;
