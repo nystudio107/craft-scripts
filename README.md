@@ -9,6 +9,8 @@ There are several scripts included in `craft-scripts`, each of which perform dif
 
 The `set_perms.sh` script sets the Craft CMS install file permissions in a strict manner, to assist in hardening Craft CMS installs.
 
+See [Hardening Craft CMS Permissions](https://nystudio107.com/blog/hardening-craft-cms-permissions) for a detailed writeup.
+
 ### pull_db.sh
 
 The `pull_db.sh` script pulls down a database dump from a remote server, and then dumps it into your local database
