@@ -71,7 +71,7 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 
 ## Craft-Scripts Changelog
 
-### 1.0.0 -- 2016.11.05
+### 1.0.0 -- 2016.12.05
 
 * [Added] Initial release
 

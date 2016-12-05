@@ -21,13 +21,13 @@ LOCAL_ASSETS_PATH=$LOCAL_ROOT_PATH"REPLACE_ME"
 LOCAL_CHOWN_USER="admin"
 LOCAL_CHOWN_GROUP="apache"
 
-# Local directories that should be writeable by the $CHOWN_GROUP
+# Local directories relative to LOCAL_ROOT_PATH that should be writeable by the $CHOWN_GROUP
 LOCAL_WRITEABLE_DIRS=(
                 "craft/storage"
                 "public/assets"
                 )
 
-# Local asset directories to sync with remote assets
+# Local asset directories relative to LOCAL_ASSETS_PATH that should be synched with remote assets
 LOCAL_ASSETS_DIRS=(
                 ""
                 )
