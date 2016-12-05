@@ -12,7 +12,7 @@
 GLOBAL_DIR_PERMS=755     # `-rwxr-xr-x`
 GLOBAL_FILE_PERMS=644    # `-rw-r--r--`
 
-# The permissinos for files & directories that need to be writeable
+# The permissions for files & directories that need to be writeable
 WRITEABLE_DIR_PERMS=775  # `-rwxrwxr-x`
 WRITEABLE_FILE_PERMS=664 # `-rw-rw-r--`
 
