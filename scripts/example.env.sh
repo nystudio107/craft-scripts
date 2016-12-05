@@ -23,7 +23,6 @@ LOCAL_CHOWN_GROUP="apache"
 
 # Local directories that should be writeable by the $CHOWN_GROUP
 LOCAL_WRITEABLE_DIRS=(
-                "craft/config"
                 "craft/storage"
                 "public/assets"
                 )
