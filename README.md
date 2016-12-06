@@ -15,9 +15,13 @@ See [Hardening Craft CMS Permissions](https://nystudio107.com/blog/hardening-cra
 
 The `pull_db.sh` script pulls down a database dump from a remote server, and then dumps it into your local database
 
+See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
+
 ### pull_assets.sh
 
 The `pull_assets.sh` script pulls down an arbitrary number of asset directories from a remote server, since we keep client-uploadable assets out of the git repo
+
+See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
 
 ### Setting it up
 
