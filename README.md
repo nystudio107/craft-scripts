@@ -57,6 +57,8 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 
 `LOCAL_MYSQL_CMD` is the command for the local mysql executable, normally just `mysql`. It is provided because some setups like MAMP require a full path to a copy of `mysql` inside of the application bundle.
 
+`LOCAL_MYSQLDUMP_CMD` is the command for the local mysqldump executable, normally just `mysqldump`. It is provided because some setups like MAMP require a full path to a copy of `mysqldump` inside of the application bundle.
+
 #### Remote Settings
 
 All settings that are prefaced with `REMOTE_` refer to the remote environment where assets and the database will be pulled from.
