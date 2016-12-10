@@ -37,7 +37,7 @@ LOCAL_DB_NAME="REPLACE_ME"
 LOCAL_DB_PASSWORD="REPLACE_ME"
 LOCAL_DB_USER="REPLACE_ME"
 
-# There are here for MAMP, which requires a full path to the `mysql` executable inside the application package
+# These are here for MAMP, which requires a full path to the `mysql` executable inside the application package
 LOCAL_MYSQL_CMD="mysql"
 LOCAL_MYSQLDUMP_CMD="mysqldump"
 
