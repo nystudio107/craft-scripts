@@ -65,6 +65,8 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 
 `REMOTE_SSH_LOGIN` is your ssh login to the remote server, e.g.: `user@domain.com`
 
+`REMOTE_SSH_PORT` is the port to use for ssh on the remote server. This is normally `22`
+
 `REMOTE_ROOT_PATH` is the absolute path to the root of your Craft install on the remote server, with a trailing `/` after it.
 
 `REMOTE_ASSETS_PATH` is the relative path to the remote assets directories, with a trailing `/` after it.
