@@ -43,8 +43,9 @@ LOCAL_MYSQLDUMP_CMD="mysqldump"
 
 # -- REMOTE settings --
 
-# Remote ssh credentials, user@domain.com
+# Remote ssh credentials, user@domain.com and Remote SSH Port
 REMOTE_SSH_LOGIN="REPLACE_ME"
+REMOTE_SSH_PORT="22"
 
 # Remote path constants; paths should always have a trailing /
 REMOTE_ROOT_PATH="REPLACE_ME"
