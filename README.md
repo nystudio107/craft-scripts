@@ -71,6 +71,10 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 
 `REMOTE_ASSETS_PATH` is the relative path to the remote assets directories, with a trailing `/` after it.
 
+`REMOTE_DB_HOST` is the host name of the remote mysql Craft CMS database. This is normally `localhost`
+
+`REMOTE_DB_PORT` is the port number of the remote mysql Craft CMS database. This is normally `3306`
+
 `REMOTE_DB_NAME` is the name of the remote mysql Craft CMS database
 
 `REMOTE_DB_PASSWORD` is the password for the remote mysql Craft CMS database
