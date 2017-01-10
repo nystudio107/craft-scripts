@@ -59,6 +59,12 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 
 `LOCAL_MYSQLDUMP_CMD` is the command for the local mysqldump executable, normally just `mysqldump`. It is provided because some setups like MAMP require a full path to a copy of `mysqldump` inside of the application bundle.
 
+##### Using mysql within a local docker container
+
+`LOCAL_MYSQL_CMD` which is normally just `mysql`, is prepended with `docker exec -i CONTAINER_NAME` to execute the command within the container. (Example: `docker exec -i container_mysql_1 mysql`)
+
+`LOCAL_MYSQLDUMP_CMD` which is normally just `mysqldump`, is prepended with `docker exec CONTAINER_NAME` to execute the command within the container. (Example: `docker exec container_mysql_1 mysql`)
+
 #### Remote Settings
 
 All settings that are prefaced with `REMOTE_` refer to the remote environment where assets and the database will be pulled from.
