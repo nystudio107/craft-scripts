@@ -11,6 +11,12 @@ The `set_perms.sh` script sets the Craft CMS install file permissions in a stric
 
 See [Hardening Craft CMS Permissions](https://nystudio107.com/blog/hardening-craft-cms-permissions) for a detailed writeup.
 
+### clear_caches.sh
+
+The `clear_caches.sh` script clears the Craft CMS caches by removing all of the `craft/storage/runtime/` cache dirs, as well as emptying the `craft_templatecaches` db table.
+
+See [Hardening Craft CMS Permissions](https://nystudio107.com/blog/hardening-craft-cms-permissions) for a detailed writeup.
+
 ### pull_db.sh
 
 The `pull_db.sh` script pulls down a database dump from a remote server, and then dumps it into your local database
@@ -80,11 +86,5 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 `REMOTE_DB_PASSWORD` is the password for the remote mysql Craft CMS database
 
 `REMOTE_DB_USER` is the user for the remote mysql Craft CMS database
-
-## Craft-Scripts Changelog
-
-### 1.0.0 -- 2016.12.05
-
-* [Added] Initial release
 
 Brought to you by [nystudio107](https://nystudio107.com/)

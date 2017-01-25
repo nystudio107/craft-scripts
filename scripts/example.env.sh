@@ -3,7 +3,7 @@
 # @copyright Copyright (c) 2016 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts-environment
-# @since     1.0.0
+# @since     1.0.1
 # @license   MIT
 #
 # This file should be renamed to '.env.sh' and it should reside in the

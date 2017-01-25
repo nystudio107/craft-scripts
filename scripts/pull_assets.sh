@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Craft-Permissions
+# @author    nystudio107
+# @copyright Copyright (c) 2016 nystudio107
+# @link      https://nystudio107.com/
+# @package   craft-permissions
+# @since     1.0.1
+# @license   MIT
+
 # Make sure the `.env.sh` exists
 if [[ ! -f ".env.sh" ]] ; then
     echo 'File ".env.sh" is missing, aborting.'

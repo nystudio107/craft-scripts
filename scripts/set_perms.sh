@@ -5,7 +5,7 @@
 # @copyright Copyright (c) 2016 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-permissions
-# @since     1.0.0
+# @since     1.0.1
 # @license   MIT
 
 # The permissions for all files & directories in the Craft CMS install
