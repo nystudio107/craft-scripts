@@ -15,8 +15,6 @@ See [Hardening Craft CMS Permissions](https://nystudio107.com/blog/hardening-cra
 
 The `clear_caches.sh` script clears the Craft CMS caches by removing all of the `craft/storage/runtime/` cache dirs, as well as emptying the `craft_templatecaches` db table.
 
-See [Hardening Craft CMS Permissions](https://nystudio107.com/blog/hardening-craft-cms-permissions) for a detailed writeup.
-
 ### pull_db.sh
 
 The `pull_db.sh` script pulls down a database dump from a remote server, and then dumps it into your local database
