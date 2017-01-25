@@ -15,6 +15,12 @@ See [Hardening Craft CMS Permissions](https://nystudio107.com/blog/hardening-cra
 
 The `clear_caches.sh` script clears the Craft CMS caches by removing all of the `craft/storage/runtime/` cache dirs, as well as emptying the `craft_templatecaches` db table.
 
+If you want to add this to your Forge / DeployBot / Buddy.works deploy script so that caches are auto-cleared on deploy, set up the `.env.sh` on your remote server(s) and then add this to your deploy script:
+
+    cd scripts && ./clear_caches.sh
+
+The above assumes that the current working directory is the project root already.
+
 ### pull_db.sh
 
 The `pull_db.sh` script pulls down a database dump from a remote server, and then dumps it into your local database
