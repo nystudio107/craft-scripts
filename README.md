@@ -21,6 +21,8 @@ If you want to add this to your Forge / DeployBot / Buddy.works deploy script so
 
 The above assumes that the current working directory is the project root already.
 
+![Screenshot](resources/img/forge_clear_caches.png)
+
 ### pull_db.sh
 
 The `pull_db.sh` script pulls down a database dump from a remote server, and then dumps it into your local database
