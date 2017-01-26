@@ -75,7 +75,7 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 
 `LOCAL_MYSQL_CMD` which is normally just `mysql`, is prepended with `docker exec -i CONTAINER_NAME` to execute the command within the container. (Example: `docker exec -i container_mysql_1 mysql`)
 
-`LOCAL_MYSQLDUMP_CMD` which is normally just `mysqldump`, is prepended with `docker exec CONTAINER_NAME` to execute the command within the container. (Example: `docker exec container_mysql_1 mysql`)
+`LOCAL_MYSQLDUMP_CMD` which is normally just `mysqldump`, is prepended with `docker exec CONTAINER_NAME` to execute the command within the container. (Example: `docker exec container_mysql_1 mysqldump`)
 
 #### Remote Settings
 
