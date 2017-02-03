@@ -1,6 +1,6 @@
 # Craft Scripts Environment
 # @author    nystudio107
-# @copyright Copyright (c) 2016 nystudio107
+# @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts-environment
 # @since     1.0.1
