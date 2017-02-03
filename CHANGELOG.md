@@ -7,7 +7,7 @@
 * Harmonized the comments
 * Harmonized the {} usage for quoted or combined variables
 
-## 1.0.1 - 2016.01.24
+## 1.0.1 - 2017.01.24
 ### Added
 * Broke out the changelog to CHANGELOG.md
 * Added mysql host and port constants
