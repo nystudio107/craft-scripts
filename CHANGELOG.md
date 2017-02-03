@@ -1,5 +1,12 @@
 # Craft-Scripts Changelog
 
+## 1.0.2 - 2017.02.03
+### Added
+* Exclude cache/temporary tables from db dumps (both local and remote)
+* Move to a global setting for `GLOBAL_DB_TABLE_PREFIX`
+* Harmonized the comments
+* Harmonized the {} usage for quoted or combined variables
+
 ## 1.0.1 - 2016.01.24
 ### Added
 * Broke out the changelog to CHANGELOG.md
