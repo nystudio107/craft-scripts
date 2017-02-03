@@ -1,21 +1,26 @@
 # Craft Scripts Environment
+#
+# Local environmental config for nystudio107 Craft scripts
+#
 # @author    nystudio107
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts-environment
-# @since     1.0.1
+# @since     1.0.2
 # @license   MIT
 #
 # This file should be renamed to '.env.sh' and it should reside in the
 # `scripts` directory.  Add '.env.sh' to your .gitignore.
 
-# Local environmental config for nystudio107 Craft scripts
+# -- GLOBAL settings --
+
+GLOBAL_DB_TABLE_PREFIX="craft_"
 
 # -- LOCAL settings --
 
 # Local path constants; paths should always have a trailing /
 LOCAL_ROOT_PATH="REPLACE_ME"
-LOCAL_ASSETS_PATH=$LOCAL_ROOT_PATH"REPLACE_ME"
+LOCAL_ASSETS_PATH=${LOCAL_ROOT_PATH}"REPLACE_ME"
 
 # Local user & group that should own the Craft CMS install
 LOCAL_CHOWN_USER="admin"
@@ -49,7 +54,7 @@ REMOTE_SSH_PORT="22"
 
 # Remote path constants; paths should always have a trailing /
 REMOTE_ROOT_PATH="REPLACE_ME"
-REMOTE_ASSETS_PATH=$REMOTE_ROOT_PATH"REPLACE_ME"
+REMOTE_ASSETS_PATH=${REMOTE_ROOT_PATH}"REPLACE_ME"
 
 # Remote database constants
 REMOTE_DB_NAME="REPLACE_ME"

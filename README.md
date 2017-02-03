@@ -45,6 +45,13 @@ See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudi
 
 All configuration is done in the `.env.sh` file, rather than in the scripts themselves. This is is so that the same scripts can be used in multiple environments such as `local` dev, `staging`, and `live` production without modification. Just create a `.env.sh` file in each environment, and keep it out of your git repo via `.gitignore`.
 
+
+#### Global Settings
+
+All settings that are prefaced with `GLOBAL_` apply to **all** environments.
+
+`GLOBAL_DB_TABLE_PREFIX` is the Craft database table prefix, usually `craft_`
+
 #### Local Settings
 
 All settings that are prefaced with `LOCAL_` refer to the local environment where the script will be run, **not** your `local` dev environment.
