@@ -29,6 +29,12 @@ The `pull_db.sh` script pulls down a database dump from a remote server, and the
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
 
+You’ll note the warning from mysql:
+
+    mysql: [Warning] Using a password on the command line interface can be insecure.
+
+I wouldn’t lose any sleep over it, but if you are really paranoid, [here’s how to secure it](https://akrabat.com/password-less-command-line-scripts-with-mysql-5-6/). What the `craft-scripts` are doing isn’t any less secure than if you typed it on the command line yourself; everything sent over the wire is always encrypted via ssh.
+
 ### pull_assets.sh
 
 The `pull_assets.sh` script pulls down an arbitrary number of asset directories from a remote server, since we keep client-uploadable assets out of the git repo
