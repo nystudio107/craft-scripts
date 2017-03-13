@@ -46,7 +46,6 @@ scp -P $REMOTE_SSH_PORT -- $REMOTE_SSH_LOGIN:"$TMP_DB_PATH" "$TMP_DB_PATH"
 
 # Backup the local db
 LOCAL_DB_CREDS="--user=${LOCAL_DB_USER} --password=${LOCAL_DB_PASSWORD} ${LOCAL_DB_NAME}"
-echo $LOCAL_DB_CREDS
 $LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS --single-transaction --no-data > "$BACKUP_DB_PATH"
 $LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS --no-create-info $IGNORED_TABLES_STRING >> "$BACKUP_DB_PATH"
 echo "*** Backed up local database to $BACKUP_DB_PATH"
