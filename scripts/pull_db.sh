@@ -23,6 +23,7 @@ source ".env.sh"
 EXCLUDED_TABLES=(
             "assetindexdata"
             "assettransformindex"
+            "cache"
             "sessions"
             "templatecaches"
             "templatecachecriteria"

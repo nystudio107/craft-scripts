@@ -23,6 +23,7 @@ CRAFT_CACHE_DIRS=(
 
 # Craft Database tables to be emptied to clear the cache
 CRAFT_CACHE_TABLES=(
+                "cache"
                 "templatecaches"
                 )
 
