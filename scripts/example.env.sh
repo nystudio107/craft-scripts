@@ -5,7 +5,7 @@
 # @author    nystudio107
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
-# @package   craft-scripts-environment
+# @package   craft-scripts
 # @since     1.0.2
 # @license   MIT
 #
@@ -41,8 +41,15 @@ LOCAL_ASSETS_DIRS=(
 LOCAL_DB_NAME="REPLACE_ME"
 LOCAL_DB_PASSWORD="REPLACE_ME"
 LOCAL_DB_USER="REPLACE_ME"
+LOCAL_DB_HOST="localhost"
+LOCAL_DB_PORT="3306"
 
-# These are here for MAMP, which requires a full path to the `mysql` executable inside the application package
+# If are using mysql 5.6.10 or later and you have `login-path` setup as per:
+# https://opensourcedbms.com/dbms/passwordless-authentication-using-mysql_config_editor-with-mysql-5-6/
+# you can use it instead of the above LOCAL_DB_* constants; otherwise leave this blank
+LOCAL_DB_LOGIN_PATH=""
+
+# The `mysql` and `mysqldump` commands to run locally
 LOCAL_MYSQL_CMD="mysql"
 LOCAL_MYSQLDUMP_CMD="mysqldump"
 
@@ -62,3 +69,12 @@ REMOTE_DB_PASSWORD="REPLACE_ME"
 REMOTE_DB_USER="REPLACE_ME"
 REMOTE_DB_HOST="localhost"
 REMOTE_DB_PORT="3306"
+
+# If are using mysql 5.6.10 or later and you have `login-path` setup as per:
+# https://opensourcedbms.com/dbms/passwordless-authentication-using-mysql_config_editor-with-mysql-5-6/
+# you can use it instead of the above REMOTE_DB_* constants; otherwise leave this blank
+REMOTE_DB_LOGIN_PATH=""
+
+# The `mysql` and `mysqldump` commands to run remotely
+REMOTE_MYSQL_CMD="mysql"
+REMOTE_MYSQLDUMP_CMD="mysqldump"

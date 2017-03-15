@@ -16,8 +16,14 @@ if [[ ! -f ".env.sh" ]] ; then
     echo 'File ".env.sh" is missing, aborting.'
     exit
 fi
-
 source ".env.sh"
+
+# Make sure the `common_env.sh` exists
+if [[ ! -f "common/common_env.sh" ]] ; then
+    echo 'File "common/common_env.sh" is missing, aborting.'
+    exit
+fi
+source "common/common_env.sh"
 
 for DIR in "${LOCAL_ASSETS_DIRS[@]}"
 do

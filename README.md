@@ -11,6 +11,16 @@ The `set_perms.sh` script sets the Craft CMS install file permissions in a stric
 
 See [Hardening Craft CMS Permissions](https://nystudio107.com/blog/hardening-craft-cms-permissions) for a detailed writeup.
 
+Note: if you use `git`, and change file permissions on your remote server, you may encounter git complaining about `overwriting existing local changes` when you try to deploy. This is because git considers changing the executable flag to be a change in the file, so it thinks you changed the files on your server (and the changes are not checked into your git repo).
+
+To fix this, we just need to tell git to ignore permission changes on the server. You can change the `fileMode` setting for `git` on your server, telling it to ignore permission changes of the files on the server:
+
+    git config --global core.fileMode false
+
+See the [git-config man page](https://git-scm.com/docs/git-config#git-config-corefileMode) for details.
+
+The other way to fix this is to set the permission using `set_perms.sh` in `local` dev, and then check the files into your git repo. This will cause them to be saved with the correct permissions in your git repo to begin with.
+
 ### clear_caches.sh
 
 The `clear_caches.sh` script clears the Craft CMS caches by removing all of the `craft/storage/runtime/` cache dirs, as well as emptying the `craft_templatecaches` db table.
@@ -25,15 +35,29 @@ The above assumes that the current working directory is the project root already
 
 ### pull_db.sh
 
-The `pull_db.sh` script pulls down a database dump from a remote server, and then dumps it into your local database
+The `pull_db.sh` script pulls down a database dump from a remote server, and then dumps it into your local database.
+
+The db dumps that `craft-scripts` does will exclude tables that are temporary/cache tables that we don't want in our backups/restores, such as the `templatecaches` table.
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
 
-You’ll note the warning from mysql:
+If you're using `mysql 5.6` or later, you’ll note the warning from mysql:
 
     mysql: [Warning] Using a password on the command line interface can be insecure.
 
-I wouldn’t lose any sleep over it, but if you are really paranoid, [here’s how to secure it](https://akrabat.com/password-less-command-line-scripts-with-mysql-5-6/). What the `craft-scripts` are doing isn’t any less secure than if you typed it on the command line yourself; everything sent over the wire is always encrypted via ssh.
+What the `craft-scripts` is doing isn’t any less secure than if you typed it on the command line yourself; everything sent over the wire is always encrypted via ssh. However, you can set up `login-path` to store your credentials in an encrypted file as per the [Passwordless authentication using mysql_config_editor with MySQL 5.6](https://opensourcedbms.com/dbms/passwordless-authentication-using-mysql_config_editor-with-mysql-5-6/) article.
+
+If you set `LOCAL_DB_LOGIN_PATH` or `REMOTE_DB_LOGIN_PATH` it will use `--login-path=` for your db credentials on the respective environments instead of sending them in via the commandline.
+
+For example, for my `local` dev setup:
+
+    mysql_config_editor set --login-path=localdev --user=homestead --host=localhost --port=3306 --password
+
+And then in the `.env.sh` I set it to:
+
+    LOCAL_DB_LOGIN_PATH="localdev"
+
+...and it will use my stored, encrypted credentials instead of passing them in via commandline. You can also set this up on your remote server, and then set it via `REMOTE_DB_LOGIN_PATH`
 
 ### pull_assets.sh
 
@@ -80,6 +104,10 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 
 `LOCAL_DB_USER` is the user for the local mysql Craft CMS database
 
+`LOCAL_DB_HOST` is the host name of the local mysql database host. This is normally `localhost`
+
+`LOCAL_DB_PORT` is the port number of the local mysql database host. This is normally `3306`
+
 `LOCAL_MYSQL_CMD` is the command for the local mysql executable, normally just `mysql`. It is provided because some setups like MAMP require a full path to a copy of `mysql` inside of the application bundle.
 
 `LOCAL_MYSQLDUMP_CMD` is the command for the local mysqldump executable, normally just `mysqldump`. It is provided because some setups like MAMP require a full path to a copy of `mysqldump` inside of the application bundle.
@@ -102,14 +130,18 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 
 `REMOTE_ASSETS_PATH` is the relative path to the remote assets directories, with a trailing `/` after it.
 
-`REMOTE_DB_HOST` is the host name of the remote mysql Craft CMS database. This is normally `localhost`
-
-`REMOTE_DB_PORT` is the port number of the remote mysql Craft CMS database. This is normally `3306`
-
 `REMOTE_DB_NAME` is the name of the remote mysql Craft CMS database
 
 `REMOTE_DB_PASSWORD` is the password for the remote mysql Craft CMS database
 
 `REMOTE_DB_USER` is the user for the remote mysql Craft CMS database
+
+`REMOTE_DB_HOST` is the host name of the remote mysql database host. This is normally `localhost`
+
+`REMOTE_DB_PORT` is the port number of the remote mysql database host. This is normally `3306`
+
+`REMOTE_MYSQL_CMD` is the command for the local mysql executable, normally just `mysql`.
+
+`REMOTE_MYSQLDUMP_CMD` is the command for the local mysqldump executable, normally just `mysqldump`.
 
 Brought to you by [nystudio107](https://nystudio107.com/)

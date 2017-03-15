@@ -7,7 +7,7 @@
 # @author    nystudio107
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
-# @package   craft-permissions
+# @package   craft-scripts
 # @since     1.0.2
 # @license   MIT
 
@@ -24,8 +24,14 @@ if [[ ! -f ".env.sh" ]] ; then
     echo 'File ".env.sh" is missing, aborting.'
     exit
 fi
-
 source ".env.sh"
+
+# Make sure the `common_env.sh` exists
+if [[ ! -f "common/common_env.sh" ]] ; then
+    echo 'File "common/common_env.sh" is missing, aborting.'
+    exit
+fi
+source "common/common_env.sh"
 
 echo "Setting base permissions for the project ${LOCAL_ROOT_PATH}"
 chown -R ${LOCAL_CHOWN_USER}:${LOCAL_CHOWN_GROUP} "${LOCAL_ROOT_PATH}"
