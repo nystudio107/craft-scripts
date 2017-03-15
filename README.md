@@ -53,7 +53,7 @@ For example, for my `local` dev setup:
 
     mysql_config_editor set --login-path=localdev --user=homestead --host=localhost --port=3306 --password
 
-And then in the `.env.sh` I set it to:
+...and then enter the password for that user. And then in the `.env.sh` I set it to:
 
     LOCAL_DB_LOGIN_PATH="localdev"
 
