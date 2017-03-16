@@ -41,7 +41,7 @@ The db dumps that `craft-scripts` does will exclude tables that are temporary/ca
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
 
-If you're using `mysql 5.6` or later, you’ll note the warning from mysql:
+If you're using `mysql 5.6` or later, you’ll note the warning from mysql (this is [not an issue if you’re using MariaDB](https://mariadb.com/kb/en/mariadb/mysql_config_editor-compatibility/)):
 
     mysql: [Warning] Using a password on the command line interface can be insecure.
 
