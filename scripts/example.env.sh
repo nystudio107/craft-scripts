@@ -53,6 +53,12 @@ LOCAL_DB_LOGIN_PATH=""
 LOCAL_MYSQL_CMD="mysql"
 LOCAL_MYSQLDUMP_CMD="mysqldump"
 
+# Local backups path; paths should always have a trailing /
+LOCAL_BACKUPS_PATH="REPLACE_ME"
+
+# The maximum age of local backups in days; backups older than this will be automatically removed
+LOCAL_BACKUPS_MAX_AGE="180"
+
 # -- REMOTE settings --
 
 # Remote ssh credentials, user@domain.com and Remote SSH Port
