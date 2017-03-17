@@ -57,7 +57,7 @@ LOCAL_MYSQLDUMP_CMD="mysqldump"
 LOCAL_BACKUPS_PATH="REPLACE_ME"
 
 # The maximum age of local backups in days; backups older than this will be automatically removed
-LOCAL_BACKUPS_MAX_AGE="180"
+LOCAL_BACKUPS_MAX_AGE=90
 
 # -- REMOTE settings --
 

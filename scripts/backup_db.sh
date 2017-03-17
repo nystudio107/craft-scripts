@@ -39,7 +39,7 @@ if [[ ! -d "${LOCAL_BACKUPS_PATH}" ]] ; then
 fi
 
 # Set the backup db file name, parent directory path, and full path
-BACKUP_DB_NAME="${LOCAL_DB_NAME}-db-backup-$(date '+%Y%m%d').sql"
+BACKUP_DB_NAME="${LOCAL_DB_NAME}-db-backup-$(date '+%Y%m%d-%H%M%S').sql"
 BACKUP_DB_DIR_PATH="${LOCAL_BACKUPS_PATH}${LOCAL_DB_NAME}/"
 BACKUP_DB_PATH="${BACKUP_DB_DIR_PATH}${BACKUP_DB_NAME}"
 
@@ -57,6 +57,14 @@ echo "*** Backed up local database to ${BACKUP_DB_PATH}.gz"
 
 # Remove backups older than LOCAL_BACKUPS_MAX_AGE
 TMP_LOG_PATH="/tmp/${REMOTE_DB_NAME}-db-backups.log"
-find "${BACKUP_DB_DIR_PATH}" -ctime +${LOCAL_BACKUPS_MAX_AGE} -exec rm -rfv "{}" \; &> $TMP_LOG_PATH
+find "${BACKUP_DB_DIR_PATH}" -name "*.sql.gz" -ctime ${LOCAL_BACKUPS_MAX_AGE} -exec rm -fv "{}" \; &> $TMP_LOG_PATH
 FILE_COUNT=`cat $TMP_LOG_PATH | wc -l`
-echo "*** ${FILE_COUNT} old database backups removed; details logged to ${TMP_LOG_PATH}"
+PLURAL_CHAR="s"
+if [ $FILE_COUNT == 1 ] ; then
+    PLURAL_CHAR=""
+fi
+DETAILS_MSG="; details logged to ${TMP_LOG_PATH}"
+if [ $FILE_COUNT == 0 ] ; then
+    DETAILS_MSG=""
+fi
+echo "*** ${FILE_COUNT} old database backup${PLURAL_CHAR} removed${DETAILS_MSG}"

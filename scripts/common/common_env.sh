@@ -15,3 +15,10 @@
 if [[ "${REMOTE_SSH_PORT}" == "" || "${REMOTE_SSH_PORT}" == "REPLACE_ME" ]] ; then
     REMOTE_SSH_PORT="22"
 fi
+
+if [[ "${LOCAL_BACKUPS_PATH}" == "" || "${LOCAL_BACKUPS_PATH}" == "REPLACE_ME" ]] ; then
+    LOCAL_BACKUPS_PATH="/tmp/"
+fi
+if [[ "${LOCAL_BACKUPS_MAX_AGE}" == "" || "${LOCAL_BACKUPS_MAX_AGE}" == "REPLACE_ME" ]] ; then
+    LOCAL_BACKUPS_MAX_AGE=90
+fi
