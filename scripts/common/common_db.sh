@@ -63,7 +63,7 @@ fi
 if [ "${REMOTE_DB_LOGIN_PATH}" != "" ] ; then
     REMOTE_DB_CREDS="--login-path=${REMOTE_DB_LOGIN_PATH} "
 fi
-REMOTE_DB_CREDS="${REMOTE_DB_CREDS}${REMOTE_DB_NAME}"
+REMOTE_DB_CREDS="${REMOTE_DB_CREDS}\"${REMOTE_DB_NAME}\""
 
 # Build the local mysql credentials
 LOCAL_DB_CREDS=""
@@ -83,4 +83,4 @@ fi
 if [ "${LOCAL_DB_LOGIN_PATH}" != "" ] ; then
     LOCAL_DB_CREDS="--login-path=${LOCAL_DB_LOGIN_PATH} "
 fi
-LOCAL_DB_CREDS="${LOCAL_DB_CREDS}${LOCAL_DB_NAME}"
+LOCAL_DB_CREDS="${LOCAL_DB_CREDS}\"${LOCAL_DB_NAME}\""
