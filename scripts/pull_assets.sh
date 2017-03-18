@@ -11,19 +11,22 @@
 # @since     1.0.2
 # @license   MIT
 
+# Get the directory of the currently executing script
+DIR="$(dirname "${BASH_SOURCE[0]}")"
+
 # Make sure the `.env.sh` exists
-if [[ ! -f ".env.sh" ]] ; then
-    echo 'File ".env.sh" is missing, aborting.'
+if [[ ! -f "${DIR}/.env.sh" ]] ; then
+    echo 'File "${DIR}/.env.sh" is missing, aborting.'
     exit
 fi
-source ".env.sh"
+source "${DIR}/.env.sh"
 
 # Make sure the `common_env.sh` exists
-if [[ ! -f "common/common_env.sh" ]] ; then
-    echo 'File "common/common_env.sh" is missing, aborting.'
+if [[ ! -f "${DIR}/common/common_env.sh" ]] ; then
+    echo 'File "${DIR}/common/common_env.sh" is missing, aborting.'
     exit
 fi
-source "common/common_env.sh"
+source "${DIR}/common/common_env.sh"
 
 for DIR in "${LOCAL_ASSETS_DIRS[@]}"
 do
