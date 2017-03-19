@@ -4,6 +4,7 @@
 ### Added
 * Added the ability to run the scripts from anywhere (no need to `cd` to the directory)
 * Added `backup_db.sh` for doing local, rotating database backups
+* Added the ability to pull backups down from the remote server via `pull_backups.sh`
 * Added support for `.gz` compressing the database before transfering it, to speed things up
 * Added support for restoring directly from a `.gz` compressed database dump
 * Added additional arguments to the `mysqldump`

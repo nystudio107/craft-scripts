@@ -49,7 +49,7 @@ See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudi
 
 The `backup_db.sh` script backs up the local database into a timestamped, `gzip` compressed archive into the directory set via `LOCAL_BACKUPS_PATH`. It will also automatically rotate out (delete) any backups that are older than `GLOBAL_DB_BACKUPS_MAX_AGE` old.
 
-The database backups exclude temporary/cache tables, and are stored in a directory named after the database, inside of `LOCAL_BACKUPS_PATH`.
+The database backups exclude temporary/cache tables, and are stored in the sub-directory `LOCAL_DB_NAME/db`, inside of `LOCAL_BACKUPS_PATH`.
 
 If you're using [Forge](https://forge.laravel.com/) you can set the `backup_db.sh` script to right nightly (or whatever interval you want) via the Scheduler. If you're using [ServerPilot.io](https://serverpilot.io/community/articles/how-to-use-cron-to-schedule-scripts.html) or are managing the server yourself, just set the `backup_db.sh` script to run via `cron` at whatever interval you desire.
 
@@ -110,7 +110,7 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 
 `LOCAL_DB_LOGIN_PATH` if this is set, it will use `--login-path=` for your local db credentials instead of sending them in via the commandline (see below)
 
-`LOCAL_BACKUPS_PATH` is the absolute path to the directory where backups should be stored. For database backups, a directory with the name of the database will be created inside the `LOCAL_BACKUPS_PATH` directory to store the database backups. Paths should always have a trailing /
+`LOCAL_BACKUPS_PATH` is the absolute path to the directory where local backups should be stored. For database backups, a sub-directory `LOCAL_DB_NAME/db` will be created inside the `LOCAL_BACKUPS_PATH` directory to store the database backups. Paths should always have a trailing `/`
 
 ##### Using mysql within a local docker container
 
@@ -145,6 +145,8 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 `REMOTE_MYSQLDUMP_CMD` is the command for the local mysqldump executable, normally just `mysqldump`.
 
 `REMOTE_DB_LOGIN_PATH` if this is set, it will use `--login-path=` for your remote db credentials instead of sending them in via the commandline (see below)
+
+`REMOTE_BACKUPS_PATH` is the absolute path to the directory where the remote backups are stored. For database backups, a sub-directory `REMOTE_DB_NAME/db` inside the `REMOTE_BACKUPS_PATH` directory is used for the database backups. Paths should always have a trailing `/`
 
 ### Using login-path with mysql 5.6
 
