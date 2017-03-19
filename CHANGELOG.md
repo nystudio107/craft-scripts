@@ -12,6 +12,7 @@
 * Added additional arguments to the `mysqldump`
 * Added `common/defaults.sh` to set reasonable defaults for many settings
 * Added the ability to change the `craft` folder location
+* Added an `example.gitignore` that you can use in your Craft CMS projects
 * Added `com.example.launch_daemon.plist` as a Mac [Launch Daemon](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html) example
 
 ### Changed

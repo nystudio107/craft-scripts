@@ -149,7 +149,9 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 
 ### Permissions and Git
 
-If you use `git`, and change file permissions on your remote server, you may encounter git complaining about `overwriting existing local changes` when you try to deploy. This is because git considers changing the executable flag to be a change in the file, so it thinks you changed the files on your server (and the changes are not checked into your git repo).
+If you use `git`, a sample `.gitignore` file that you can modify & use for your Craft CMS projects is included in `craft-scripts` as `example.gitignore`. If you wish to use it, the file should be copied to your Craft CMS project root, and renamed `.gitignore`
+
+If you change file permissions on your remote server, you may encounter git complaining about `overwriting existing local changes` when you try to deploy. This is because git considers changing the executable flag to be a change in the file, so it thinks you changed the files on your server (and the changes are not checked into your git repo).
 
 To fix this, we just need to tell git to ignore permission changes on the server. You can change the `fileMode` setting for `git` on your server, telling it to ignore permission changes of the files on the server:
 
