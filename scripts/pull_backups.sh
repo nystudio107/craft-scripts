@@ -2,13 +2,13 @@
 
 # Pull Backups
 #
-# Pull remote backups down from a remote to local
+# Pull backups down from a remote to local
 #
 # @author    nystudio107
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-permissions
-# @since     1.0.4
+# @since     1.1.0
 # @license   MIT
 
 # Get the directory of the currently executing script

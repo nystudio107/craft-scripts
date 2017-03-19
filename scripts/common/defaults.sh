@@ -6,7 +6,7 @@
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts
-# @since     1.0.4
+# @since     1.1.0
 # @license   MIT
 
 # -- GLOBAL settings --
