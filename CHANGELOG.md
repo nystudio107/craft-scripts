@@ -1,6 +1,6 @@
 # Craft-Scripts Changelog
 
-## 1.0.4 - 2017.03.19
+## 1.1.0 - 2017.03.19
 ### Added
 * Added the ability to run the scripts from anywhere (no need to `cd` to the directory)
 * Added `backup_db.sh` for doing local, rotating database backups
