@@ -8,7 +8,7 @@
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts
-# @since     1.0.2
+# @since     1.0.4
 # @license   MIT
 
 # The permissions for all files & directories in the Craft CMS install
@@ -22,20 +22,23 @@ WRITEABLE_FILE_PERMS=664 # `-rw-rw-r--`
 # Get the directory of the currently executing script
 DIR="$(dirname "${BASH_SOURCE[0]}")"
 
-# Make sure the `.env.sh` exists
-if [[ ! -f "${DIR}/.env.sh" ]] ; then
-    echo 'File "${DIR}/.env.sh" is missing, aborting.'
-    exit
-fi
-source "${DIR}/.env.sh"
+# Include files
+INCLUDE_FILES=(
+            ".env.sh"
+            "common/common_env.sh"
+            )
+for INCLUDE_FILE in "${INCLUDE_FILES[@]}"
+do
+    if [ -f "${DIR}/${INCLUDE_FILE}" ]
+    then
+        source "${DIR}/${INCLUDE_FILE}"
+    else
+        echo 'File "${DIR}/${INCLUDE_FILE}" is missing, aborting.'
+        exit 1
+    fi
+done
 
-# Make sure the `common_env.sh` exists
-if [[ ! -f "${DIR}/common/common_env.sh" ]] ; then
-    echo 'File "${DIR}/common/common_env.sh" is missing, aborting.'
-    exit
-fi
-source "${DIR}/common/common_env.sh"
-
+# Set project permissions
 echo "Setting base permissions for the project ${LOCAL_ROOT_PATH}"
 chown -R ${LOCAL_CHOWN_USER}:${LOCAL_CHOWN_GROUP} "${LOCAL_ROOT_PATH}"
 chmod -R ${GLOBAL_DIR_PERMS} "${LOCAL_ROOT_PATH}"

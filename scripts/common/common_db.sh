@@ -8,7 +8,7 @@
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts
-# @since     1.0.3
+# @since     1.0.4
 # @license   MIT
 
 # Set defaults in case they have an older `.env.sh`

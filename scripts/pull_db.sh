@@ -8,32 +8,28 @@
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts
-# @since     1.0.2
+# @since     1.0.4
 # @license   MIT
 
 # Get the directory of the currently executing script
 DIR="$(dirname "${BASH_SOURCE[0]}")"
 
-# Make sure the `.env.sh` exists
-if [[ ! -f "${DIR}/.env.sh" ]] ; then
-    echo 'File "${DIR}/.env.sh" is missing, aborting.'
-    exit
-fi
-source "${DIR}/.env.sh"
-
-# Make sure the `common_env.sh` exists
-if [[ ! -f "${DIR}/common/common_env.sh" ]] ; then
-    echo 'File "${DIR}/common/common_env.sh" is missing, aborting.'
-    exit
-fi
-source "${DIR}/common/common_env.sh"
-
-# Make sure the `common_db.sh` exists
-if [[ ! -f "${DIR}/common/common_db.sh" ]] ; then
-    echo 'File "${DIR}/common/common_db.sh" is missing, aborting.'
-    exit
-fi
-source "${DIR}/common/common_db.sh"
+# Include files
+INCLUDE_FILES=(
+            ".env.sh"
+            "common/common_env.sh"
+            "common/common_db.sh"
+            )
+for INCLUDE_FILE in "${INCLUDE_FILES[@]}"
+do
+    if [ -f "${DIR}/${INCLUDE_FILE}" ]
+    then
+        source "${DIR}/${INCLUDE_FILE}"
+    else
+        echo 'File "${DIR}/${INCLUDE_FILE}" is missing, aborting.'
+        exit 1
+    fi
+done
 
 # Temporary db dump path (remote & local)
 TMP_DB_PATH="/tmp/${REMOTE_DB_NAME}-db-dump-$(date '+%Y%m%d').sql"
