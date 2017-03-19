@@ -41,7 +41,9 @@ See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudi
 
 ### pull_assets.sh
 
-The `pull_assets.sh` script pulls down an arbitrary number of asset directories from a remote server, since we keep client-uploadable assets out of the git repo
+The `pull_assets.sh` script pulls down an arbitrary number of asset directories from a remote server, since we keep client-uploadable assets out of the git repo. The directories it will pull down are specified in `LOCAL_ASSETS_DIRS`
+
+It will also pull down the Craft `userphotos` and `rebrand` directories from `craft/storage` by default. The directories it will pull down are specified in `LOCAL_CRAFT_FILE_DIRS`
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
 
@@ -93,6 +95,8 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 `LOCAL_WRITEABLE_DIRS` is a quoted list of directories relative to `LOCAL_ROOT_PATH` that should be writeable by your webserver.
 
 `LOCAL_ASSETS_DIRS` is a quoted list of asset directories relative to `LOCAL_ASSETS_PATH` that you want to pull down from the remote server. It's done this way in case you wish to sync some asset directories, but not others. If you want to pull down all asset directories in `LOCAL_ASSETS_PATH`, just leave one blank quoted string in this array
+
+`LOCAL_CRAFT_FILE_DIRS` is a quoted list of Craft file directories relative to `LOCAL_CRAFT_FILES_PATH` that you want to pull down from the remote server. By default, it will pull down the `userphotos` and `rebrand` directories in `craft/storage`, which typically are not kept in `git`. If you don't want it to sync anything, just leave the setting empty, e.g.: `LOCAL_CRAFT_FILE_DIRS=()`
 
 `LOCAL_DB_NAME` is the name of the local mysql Craft CMS database
 

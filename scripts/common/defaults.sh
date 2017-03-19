@@ -41,14 +41,8 @@ LOCAL_ASSETS_DIRS=(
                 ""
                 )
 
-# Craft-specific file directories relative LOCAL_CRAFT_FILES_PATH that should be synched with remote files
+# Craft-specific file directories relative to LOCAL_CRAFT_FILES_PATH that should be synched with remote files
 LOCAL_CRAFT_FILE_DIRS=(
-                "rebrand"
-                "userphotos"
-                )
-
-# Craft-specific asset directories relative LOCAL_CRAFT_ASSETS_PATH that should be synched with remote assets
-LOCAL_CRAFT_ASSET_DIRS=(
                 "rebrand"
                 "userphotos"
                 )
