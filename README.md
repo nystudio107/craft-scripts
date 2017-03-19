@@ -11,15 +11,7 @@ The `set_perms.sh` script sets the Craft CMS install file permissions in a stric
 
 See [Hardening Craft CMS Permissions](https://nystudio107.com/blog/hardening-craft-cms-permissions) for a detailed writeup.
 
-Note: if you use `git`, and change file permissions on your remote server, you may encounter git complaining about `overwriting existing local changes` when you try to deploy. This is because git considers changing the executable flag to be a change in the file, so it thinks you changed the files on your server (and the changes are not checked into your git repo).
-
-To fix this, we just need to tell git to ignore permission changes on the server. You can change the `fileMode` setting for `git` on your server, telling it to ignore permission changes of the files on the server:
-
-    git config --global core.fileMode false
-
-See the [git-config man page](https://git-scm.com/docs/git-config#git-config-corefileMode) for details.
-
-The other way to fix this is to set the permission using `set_perms.sh` in `local` dev, and then check the files into your git repo. This will cause them to be saved with the correct permissions in your git repo to begin with.
+Note: if you use `git`, please see the **Permissions and Git** section below.
 
 ### clear_caches.sh
 
@@ -154,6 +146,20 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 `REMOTE_DB_LOGIN_PATH` if this is set, it will use `--login-path=` for your remote db credentials instead of sending them in via the commandline (see below)
 
 `REMOTE_BACKUPS_PATH` is the absolute path to the directory where the remote backups are stored. For database backups, a sub-directory `REMOTE_DB_NAME/db` inside the `REMOTE_BACKUPS_PATH` directory is used for the database backups. Paths should always have a trailing `/`
+
+### Permissions and Git
+
+If you use `git`, and change file permissions on your remote server, you may encounter git complaining about `overwriting existing local changes` when you try to deploy. This is because git considers changing the executable flag to be a change in the file, so it thinks you changed the files on your server (and the changes are not checked into your git repo).
+
+To fix this, we just need to tell git to ignore permission changes on the server. You can change the `fileMode` setting for `git` on your server, telling it to ignore permission changes of the files on the server:
+
+    git config --global core.fileMode false
+
+See the [git-config man page](https://git-scm.com/docs/git-config#git-config-corefileMode) for details.
+
+The other way to fix this is to set the permission using `set_perms.sh` in `local` dev, and then check the files into your git repo. This will cause them to be saved with the correct permissions in your git repo to begin with.
+
+The downside to the latter approach is that you must have matching user/groups in both `local` dev and on `live` production.
 
 ### Automatic Script Execution
 
