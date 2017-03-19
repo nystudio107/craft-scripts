@@ -11,6 +11,10 @@
 # @since     1.0.3
 # @license   MIT
 
+# gzip/gunzip compression commands
+GZIP_CMD="gzip -f"
+ZCAT_CMD="zcat"
+
 # Set defaults in case they have an older `.env.sh`
 if [[ "${REMOTE_SSH_PORT}" == "" || "${REMOTE_SSH_PORT}" == "REPLACE_ME" ]] ; then
     REMOTE_SSH_PORT="22"

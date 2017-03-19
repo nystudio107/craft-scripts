@@ -21,19 +21,19 @@ if [[ ! -f "${DIR}/.env.sh" ]] ; then
 fi
 source "${DIR}/.env.sh"
 
-# Make sure the `common_db.sh` exists
-if [[ ! -f "${DIR}/common/common_db.sh" ]] ; then
-    echo 'File "${DIR}/common/common_db.sh" is missing, aborting.'
-    exit
-fi
-source "${DIR}/common/common_db.sh"
-
 # Make sure the `common_env.sh` exists
 if [[ ! -f "${DIR}/common/common_env.sh" ]] ; then
     echo 'File "${DIR}/common/common_env.sh" is missing, aborting.'
     exit
 fi
 source "${DIR}/common/common_env.sh"
+
+# Make sure the `common_db.sh` exists
+if [[ ! -f "${DIR}/common/common_db.sh" ]] ; then
+    echo 'File "${DIR}/common/common_db.sh" is missing, aborting.'
+    exit
+fi
+source "${DIR}/common/common_db.sh"
 
 # Make sure the directory exists
 if [[ ! -d "${LOCAL_BACKUPS_PATH}" ]] ; then
@@ -53,9 +53,9 @@ if [[ ! -d "${BACKUP_DB_DIR_PATH}" ]] ; then
 fi
 
 # Backup the local db
-$LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS --single-transaction --no-data > "$BACKUP_DB_PATH"
-$LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS --no-create-info $IGNORED_TABLES_STRING >> "$BACKUP_DB_PATH"
-gzip -f $BACKUP_DB_PATH
+$LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS $MYSQLDUMP_SCHEMA_ARGS > "$BACKUP_DB_PATH"
+$LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS $MYSQLDUMP_DATA_ARGS >> "$BACKUP_DB_PATH"
+$GZIP_CMD "$BACKUP_DB_PATH"
 echo "*** Backed up local database to ${BACKUP_DB_PATH}.gz"
 
 # Remove backups older than LOCAL_BACKUPS_MAX_AGE

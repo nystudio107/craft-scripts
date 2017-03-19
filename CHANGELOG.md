@@ -1,5 +1,15 @@
 # Craft-Scripts Changelog
 
+## 1.0.4 - 2017.03.20
+### Added
+* Added the ability to run the scripts from anywhere (no need to `cd` to the directory)
+* Added support for `.gz` compressing the database before transfering it
+* Added support for restoring directly from a `.gz` compressed database dump
+* Added additional arguments to the `mysqldump`
+
+### Changed
+* Code cleanup
+
 ## 1.0.3 - 2017.03.15
 ### Added
 * Added support for `login-path` to store your mysql db credentials in an encrypted file, and thus avoid `mysql: [Warning] Using a password on the command line interface can be insecure.` warnings

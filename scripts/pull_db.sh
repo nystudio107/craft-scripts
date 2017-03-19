@@ -21,13 +21,6 @@ if [[ ! -f "${DIR}/.env.sh" ]] ; then
 fi
 source "${DIR}/.env.sh"
 
-# Make sure the `common_db.sh` exists
-if [[ ! -f "${DIR}/common/common_db.sh" ]] ; then
-    echo 'File "${DIR}/common/common_db.sh" is missing, aborting.'
-    exit
-fi
-source "${DIR}/common/common_db.sh"
-
 # Make sure the `common_env.sh` exists
 if [[ ! -f "${DIR}/common/common_env.sh" ]] ; then
     echo 'File "${DIR}/common/common_env.sh" is missing, aborting.'
@@ -35,19 +28,27 @@ if [[ ! -f "${DIR}/common/common_env.sh" ]] ; then
 fi
 source "${DIR}/common/common_env.sh"
 
+# Make sure the `common_db.sh` exists
+if [[ ! -f "${DIR}/common/common_db.sh" ]] ; then
+    echo 'File "${DIR}/common/common_db.sh" is missing, aborting.'
+    exit
+fi
+source "${DIR}/common/common_db.sh"
+
 # Temporary db dump path (remote & local)
 TMP_DB_PATH="/tmp/${REMOTE_DB_NAME}-db-dump-$(date '+%Y%m%d').sql"
 BACKUP_DB_PATH="/tmp/${LOCAL_DB_NAME}-db-backup-$(date '+%Y%m%d').sql"
 
 # Get the remote db dump
-ssh $REMOTE_SSH_LOGIN -p $REMOTE_SSH_PORT "$REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS --single-transaction --no-data > '$TMP_DB_PATH' ; $REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS --no-create-info $IGNORED_TABLES_STRING >> '$TMP_DB_PATH'"
-scp -P $REMOTE_SSH_PORT -- $REMOTE_SSH_LOGIN:"$TMP_DB_PATH" "$TMP_DB_PATH"
+ssh $REMOTE_SSH_LOGIN -p $REMOTE_SSH_PORT "$REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS $MYSQLDUMP_SCHEMA_ARGS > '$TMP_DB_PATH' ; $REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS $MYSQLDUMP_DATA_ARGS >> '$TMP_DB_PATH' ; $GZIP_CMD '$TMP_DB_PATH'"
+scp -P $REMOTE_SSH_PORT -- $REMOTE_SSH_LOGIN:"${TMP_DB_PATH}.gz" "${TMP_DB_PATH}.gz"
 
 # Backup the local db
-$LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS --single-transaction --no-data > "$BACKUP_DB_PATH"
-$LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS --no-create-info $IGNORED_TABLES_STRING >> "$BACKUP_DB_PATH"
-echo "*** Backed up local database to $BACKUP_DB_PATH"
+$LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS $MYSQLDUMP_SCHEMA_ARGS > "$BACKUP_DB_PATH"
+$LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS $MYSQLDUMP_DATA_ARGS >> "$BACKUP_DB_PATH"
+$GZIP_CMD "$BACKUP_DB_PATH"
+echo "*** Backed up local database to ${BACKUP_DB_PATH}.gz"
 
 # Restore the local db from the remote db dump
-$LOCAL_MYSQL_CMD $LOCAL_DB_CREDS < "$TMP_DB_PATH"
-echo "*** Restored local database from $TMP_DB_PATH"
+$ZCAT_CMD "${TMP_DB_PATH}.gz" | $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS
+echo "*** Restored local database from ${TMP_DB_PATH}.gz"
