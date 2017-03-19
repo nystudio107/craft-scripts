@@ -41,7 +41,7 @@ fi
 for DIR in "${LOCAL_ASSETS_DIRS[@]}"
 do
     rsync -a -z -e "ssh -p ${REMOTE_SSH_PORT}" "${REMOTE_SSH_LOGIN}:${REMOTE_ASSETS_PATH}${DIR}" "${LOCAL_ASSETS_PATH}" --progress
-    echo "*** Synced assets from ${DIR}"
+    echo "*** Synced assets from ${REMOTE_ASSETS_PATH}${DIR}"
 done
 
 # Make sure the Craft files directory exists
@@ -54,7 +54,7 @@ fi
 for DIR in "${LOCAL_CRAFT_FILE_DIRS[@]}"
 do
     rsync -a -z -e "ssh -p ${REMOTE_SSH_PORT}" "${REMOTE_SSH_LOGIN}:${REMOTE_CRAFT_FILES_PATH}${DIR}" "${LOCAL_CRAFT_FILES_PATH}" --progress
-    echo "*** Synced assets from ${DIR}"
+    echo "*** Synced assets from ${REMOTE_CRAFT_FILES_PATH}${DIR}"
 done
 
 # Normal exit

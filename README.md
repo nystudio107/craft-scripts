@@ -61,11 +61,7 @@ The `backup_db.sh` script backs up the local database into a timestamped, `gzip`
 
 The database backups exclude temporary/cache tables, and are stored in the sub-directory `LOCAL_DB_NAME/db`, inside of `LOCAL_BACKUPS_PATH`.
 
-If you're using [Forge](https://forge.laravel.com/) you can set the `backup_db.sh` script to right nightly (or whatever interval you want) via the Scheduler. If you're using [ServerPilot.io](https://serverpilot.io/community/articles/how-to-use-cron-to-schedule-scripts.html) or are managing the server yourself, just set the `backup_db.sh` script to run via `cron` at whatever interval you desire.
-
-`craft-scripts` includes a `crontab-helper.txt` that you can add to your `crontab` to make configuring `cron` easier. Remember to use full, absolute paths to the scripts when running them via `cron`, e.g.:
-
-    /home/forge/nystudio107.com/scripts/backup_db.sh
+See the **Automated Script Execution** section below for details on how to run this automatically
 
 ### Setting it up
 
@@ -76,7 +72,6 @@ If you're using [Forge](https://forge.laravel.com/) you can set the `backup_db.s
 5. Then open up the `.env.sh` file into your favorite editor, and replace `REPLACE_ME` with the appropriate settings.
 
 All configuration is done in the `.env.sh` file, rather than in the scripts themselves. This is is so that the same scripts can be used in multiple environments such as `local` dev, `staging`, and `live` production without modification. Just create a `.env.sh` file in each environment, and keep it out of your git repo via `.gitignore`.
-
 
 #### Global Settings
 
@@ -159,6 +154,40 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 `REMOTE_DB_LOGIN_PATH` if this is set, it will use `--login-path=` for your remote db credentials instead of sending them in via the commandline (see below)
 
 `REMOTE_BACKUPS_PATH` is the absolute path to the directory where the remote backups are stored. For database backups, a sub-directory `REMOTE_DB_NAME/db` inside the `REMOTE_BACKUPS_PATH` directory is used for the database backups. Paths should always have a trailing `/`
+
+### Automatic Script Execution
+
+If you want to run any of these scripts automatically at a set schedule, here's how to do it. We'll use the `backup_db.sh` script as an example, but the same applies to any of the scripts.
+
+#### On Linux
+
+If you're using [Forge](https://forge.laravel.com/) you can set the `backup_db.sh` script to right nightly (or whatever interval you want) via the Scheduler. If you're using [ServerPilot.io](https://serverpilot.io/community/articles/how-to-use-cron-to-schedule-scripts.html) or are managing the server yourself, just set the `backup_db.sh` script to run via `cron` at whatever interval you desire.
+
+`craft-scripts` includes a `crontab-helper.txt` that you can add to your `crontab` to make configuring `cron` easier. Remember to use full, absolute paths to the scripts when running them via `cron`, e.g.:
+
+    /home/forge/nystudio107.com/scripts/backup_db.sh
+
+#### On a Mac
+
+If you're using a Mac and you want to execute the script locally, Apple uses [Launch Daemons](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html) instead of `cron`.
+
+**N.B.:** Even if you _are_ on a Mac, if you run your `local` dev in a VM like Vagrant/Homestead, you'll want to execute the `craft-scripts` from inside of the VM itself, not on your local Mac. If you use something like Valet or Mamp, read on.
+
+Included in `craft-scripts` is a `com.example.launch_daemon.plist` to help you get started. This file is an `XML` file, and the name should be a unique, reverse-DNS-style name suffixed with `.plist`. This file is analogous to a single line in a `crontab` file.
+
+Rename `com.example.launch_daemon.plist` to something unique to your project/script, e.g.: `com.clientdomain.backup_db.plist` and place it in `/Library/LaunchDaemons/` (you'll need to `sudo` to do this).
+
+The Launch Daemon `.plist` file is an `XML` file with a series of `<key></key>`s followed by some type that is a value for that key. The value for the `<key>Label</key>` should match the name of the file, minus the `.plist` extension, e.g.: `<string>com.clientdomain.backup_db</string>`. The value for the `<key>UserName</key>` should be the user name that you want the task to run as, e.g.: `<string>andrew</string>`
+
+The value for the `<key>Program</key>` is a path to the command to execute, e.g.: `<string>/Users/andrew/webdev/sites/nystudio107/scripts/backup_db.sh</string>`
+
+Launch Daemons offer any number of ways to schedule when and how they execute; please see the [Launch Daemon documentation](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html) for details.
+
+Once the file has been created in `/Library/LaunchDaemons/`, it'll need to be loaded (you only need to do this once) via `launchctl`, e.g.:
+
+    sudo launchctl load /Library/LaunchDaemons/com.clientdomain.backup_db.plist
+
+For more information on configuring Launch Daemons, please see the excellent [launchd.info](http://www.launchd.info/) website.
 
 ### Using login-path with mysql 5.6
 

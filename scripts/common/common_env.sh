@@ -21,3 +21,4 @@ PLURAL_CHAR="s"
 # Sub-directories for the various backup types
 DB_BACKUP_SUBDIR="db"
 ASSETS_BACKUP_SUBDIR="assets"
+CRAFT_BACKUP_SUBDIR="craft"

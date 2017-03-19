@@ -4,6 +4,7 @@
 ### Added
 * Added the ability to run the scripts from anywhere (no need to `cd` to the directory)
 * Added `backup_db.sh` for doing local, rotating database backups
+* Added local asset backup via `backup_assets.sh`
 * Added the ability to pull backups down from the remote server via `pull_backups.sh`
 * Added pulling of the Craft `userphotos` & `rebrand` directories via `pull_assets.sh`
 * Added support for `.gz` compressing the database before transfering it, to speed things up
@@ -11,6 +12,7 @@
 * Added additional arguments to the `mysqldump`
 * Added `common/defaults.sh` to set reasonable defaults for many settings
 * Added the ability to change the `craft` folder location
+* Added `com.example.launch_daemon.plist` as a Mac [Launch Daemon](https://developer.apple.com/library/content/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html) example
 
 ### Changed
 * Revised `README.md` to document the changes/new features
