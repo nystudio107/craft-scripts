@@ -47,6 +47,14 @@ It will also pull down the Craft `userphotos` and `rebrand` directories from `cr
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
 
+### pull_backups.sh
+
+The `pull_backups.sh` script pulls down the backups created by `craft-scripts` from a remote server, and synced into the `LOCAL_BACKUPS_PATH`
+
+For database backups, a sub-directory `REMOTE_DB_NAME/db` inside the `REMOTE_BACKUPS_PATH` directory is used for the database backups.
+
+For asset backups, a sub-directory `REMOTE_DB_NAME/assets` inside the `REMOTE_BACKUPS_PATH` directory is used for the asset backups.
+
 ### backup_db.sh
 
 The `backup_db.sh` script backs up the local database into a timestamped, `gzip` compressed archive into the directory set via `LOCAL_BACKUPS_PATH`. It will also automatically rotate out (delete) any backups that are older than `GLOBAL_DB_BACKUPS_MAX_AGE` old.
