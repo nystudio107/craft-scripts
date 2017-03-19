@@ -16,6 +16,7 @@ DIR="$(dirname "${BASH_SOURCE[0]}")"
 
 # Include files
 INCLUDE_FILES=(
+            "common/defaults.sh"
             ".env.sh"
             "common/common_env.sh"
             )
@@ -36,3 +37,7 @@ do
     rsync -a -z -e "ssh -p ${REMOTE_SSH_PORT}" "${REMOTE_SSH_LOGIN}:${REMOTE_ASSETS_PATH}${DIR}" "${LOCAL_ASSETS_PATH}" --progress
     echo "*** Synced assets from ${DIR}"
 done
+
+# Normal exit
+exit 0
+

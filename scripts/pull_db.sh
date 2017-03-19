@@ -16,6 +16,7 @@ DIR="$(dirname "${BASH_SOURCE[0]}")"
 
 # Include files
 INCLUDE_FILES=(
+            "common/defaults.sh"
             ".env.sh"
             "common/common_env.sh"
             "common/common_db.sh"
@@ -48,3 +49,6 @@ echo "*** Backed up local database to ${BACKUP_DB_PATH}.gz"
 # Restore the local db from the remote db dump
 $ZCAT_CMD "${TMP_DB_PATH}.gz" | $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS
 echo "*** Restored local database from ${TMP_DB_PATH}.gz"
+
+# Normal exit
+exit 0

@@ -6,6 +6,7 @@
 * Added support for `.gz` compressing the database before transfering it
 * Added support for restoring directly from a `.gz` compressed database dump
 * Added additional arguments to the `mysqldump`
+* Added `common/defaults.sh` to set reasonable defaults for many settings
 
 ### Changed
 * Code cleanup

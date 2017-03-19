@@ -11,23 +11,6 @@
 # @since     1.0.4
 # @license   MIT
 
-# Set defaults in case they have an older `.env.sh`
-if [[ "${GLOBAL_DB_TABLE_PREFIX}" == "" || "${GLOBAL_DB_TABLE_PREFIX}" == "REPLACE_ME" ]] ; then
-    GLOBAL_DB_TABLE_PREFIX="craft_"
-fi
-if [[ "${LOCAL_MYSQL_CMD}" == "" || "${LOCAL_MYSQL_CMD}" == "REPLACE_ME" ]] ; then
-    LOCAL_MYSQL_CMD="mysql"
-fi
-if [[ "${LOCAL_MYSQLDUMP_CMD}" == "" || "${LOCAL_MYSQLDUMP_CMD}" == "REPLACE_ME" ]] ; then
-    LOCAL_MYSQLDUMP_CMD="mysqldump"
-fi
-if [[ "${REMOTE_MYSQL_CMD}" == "" || "${REMOTE_MYSQL_CMD}" == "REPLACE_ME" ]] ; then
-    REMOTE_MYSQL_CMD="mysql"
-fi
-if [[ "${REMOTE_MYSQLDUMP_CMD}" == "" || "${REMOTE_MYSQLDUMP_CMD}" == "REPLACE_ME" ]] ; then
-    REMOTE_MYSQLDUMP_CMD="mysqldump"
-fi
-
 # Tables to exclude from the mysqldump
 EXCLUDED_TABLES=(
             "assetindexdata"

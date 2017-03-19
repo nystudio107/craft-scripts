@@ -16,6 +16,7 @@ DIR="$(dirname "${BASH_SOURCE[0]}")"
 
 # Include files
 INCLUDE_FILES=(
+            "common/defaults.sh"
             ".env.sh"
             "common/common_env.sh"
             "common/common_db.sh"
@@ -68,4 +69,5 @@ if [ $FILE_COUNT == 0 ] ; then
 fi
 echo "*** ${FILE_COUNT} old database backup${PLURAL_CHAR} removed${DETAILS_MSG}"
 
+# Normal exit
 exit 0
