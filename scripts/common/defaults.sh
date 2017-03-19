@@ -54,7 +54,7 @@ LOCAL_DB_USER="REPLACE_ME"
 LOCAL_DB_HOST="localhost"
 LOCAL_DB_PORT="3306"
 
-# If are using mysql 5.6.10 or later and you have `login-path` setup as per:
+# If you are using mysql 5.6.10 or later and you have `login-path` setup as per:
 # https://opensourcedbms.com/dbms/passwordless-authentication-using-mysql_config_editor-with-mysql-5-6/
 # you can use it instead of the above LOCAL_DB_* constants; otherwise leave this blank
 LOCAL_DB_LOGIN_PATH=""
@@ -83,7 +83,7 @@ REMOTE_DB_USER="REPLACE_ME"
 REMOTE_DB_HOST="localhost"
 REMOTE_DB_PORT="3306"
 
-# If are using mysql 5.6.10 or later and you have `login-path` setup as per:
+# If you are using mysql 5.6.10 or later and you have `login-path` setup as per:
 # https://opensourcedbms.com/dbms/passwordless-authentication-using-mysql_config_editor-with-mysql-5-6/
 # you can use it instead of the above REMOTE_DB_* constants; otherwise leave this blank
 REMOTE_DB_LOGIN_PATH=""
