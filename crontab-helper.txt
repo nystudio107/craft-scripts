@@ -3,7 +3,7 @@
 # Add this to the bottom of your crontab
 #
 # Example: Backup all the hosted sites once per week on Sunday @ 5am
-  0    5    *    *    0    /htdocs/_scripts/backup_all_sites.sh > /dev/null 2>&1
+# 0    5    *    *    0    /htdocs/_scripts/backup_all_sites.sh > /dev/null 2>&1
 
 # *    *    *    *    *  command to execute
 # ┬    ┬    ┬    ┬    ┬
@@ -14,3 +14,15 @@
 # │    │    └─────────────── day of month (1 - 31)
 # │    └──────────────────── hour (0 - 23)
 # └───────────────────────── min (0 - 59)
+
+# You can also use the following shortcuts instead:
+#
+# @hourly - Once an hour at the beginning of the hour
+# @daily - Once a day at midnight
+# @weekly - Once a week at midnight on Sunday morning
+# @monthly - Once a month at midnight on the morning of the first day of the month
+# @yearly - Once a year at midnight on the morning of January 1
+# @reboot - At startup
+#
+# Example: Backup all the hosted sites every day at midnight
+# @daily /htdocs/_scripts/backup_all_sites.sh > /dev/null 2>&1

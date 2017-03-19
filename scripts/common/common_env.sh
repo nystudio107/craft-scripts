@@ -11,6 +11,6 @@
 # @since     1.0.4
 # @license   MIT
 
-# gzip/gunzip compression commands
+# gzip/zcat compression commands
 GZIP_CMD="gzip -f"
 ZCAT_CMD="zcat"

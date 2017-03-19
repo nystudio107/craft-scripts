@@ -27,11 +27,9 @@ The `clear_caches.sh` script clears the Craft CMS caches by removing all of the 
 
 If you want to add this to your Forge / DeployBot / Buddy.works deploy script so that caches are auto-cleared on deploy, set up the `.env.sh` on your remote server(s) and then add this to your deploy script:
 
-    cd scripts && ./clear_caches.sh
+    scripts/clear_caches.sh
 
 The above assumes that the current working directory is the project root already.
-
-![Screenshot](resources/img/forge_clear_caches.png)
 
 ### pull_db.sh
 
@@ -41,29 +39,21 @@ The db dumps that `craft-scripts` does will exclude tables that are temporary/ca
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
 
-If you're using `mysql 5.6` or later, you’ll note the warning from mysql (this is [not an issue if you’re using MariaDB](https://mariadb.com/kb/en/mariadb/mysql_config_editor-compatibility/)):
-
-    mysql: [Warning] Using a password on the command line interface can be insecure.
-
-What the `craft-scripts` is doing isn’t any less secure than if you typed it on the command line yourself; everything sent over the wire is always encrypted via ssh. However, you can set up `login-path` to store your credentials in an encrypted file as per the [Passwordless authentication using mysql_config_editor with MySQL 5.6](https://opensourcedbms.com/dbms/passwordless-authentication-using-mysql_config_editor-with-mysql-5-6/) article.
-
-If you set `LOCAL_DB_LOGIN_PATH` or `REMOTE_DB_LOGIN_PATH` it will use `--login-path=` for your db credentials on the respective environments instead of sending them in via the commandline.
-
-For example, for my `local` dev setup:
-
-    mysql_config_editor set --login-path=localdev --user=homestead --host=localhost --port=3306 --password
-
-...and then enter the password for that user. And then in the `.env.sh` I set it to:
-
-    LOCAL_DB_LOGIN_PATH="localdev"
-
-...and it will use my stored, encrypted credentials instead of passing them in via commandline. You can also set this up on your remote server, and then set it via `REMOTE_DB_LOGIN_PATH`
-
 ### pull_assets.sh
 
 The `pull_assets.sh` script pulls down an arbitrary number of asset directories from a remote server, since we keep client-uploadable assets out of the git repo
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
+
+### backup_db.sh
+
+The `backup_db.sh` script backs up the local database into a timestamped, `gzip` compressed archive into the directory set via `LOCAL_BACKUPS_PATH`. It will also automatically rotate out (delete) any backups that are older than `LOCAL_BACKUPS_MAX_AGE` old.
+
+The database backups exclude temporary/cache tables, and are stored in a directory named after the database inside of `LOCAL_BACKUPS_PATH`.
+
+If you're using [Forge](https://forge.laravel.com/) you can set the `backup_db.sh` script to right nightly (or whatever interval you want) via the Scheduler. If you're using [ServerPilot.io](https://serverpilot.io/community/articles/how-to-use-cron-to-schedule-scripts.html) or are managing the server yourself, just set the `backup_db.sh` script to run via `cron` at whatever interval you desire.
+
+`craft-scripts` includes a `crontab-helper.txt` that you can add to your `crontab` to make configuring `cron` easier.
 
 ### Setting it up
 
@@ -112,6 +102,12 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 
 `LOCAL_MYSQLDUMP_CMD` is the command for the local mysqldump executable, normally just `mysqldump`. It is provided because some setups like MAMP require a full path to a copy of `mysqldump` inside of the application bundle.
 
+`LOCAL_DB_LOGIN_PATH` if this is set, it will use `--login-path=` for your local db credentials instead of sending them in via the commandline (see below)
+
+`LOCAL_BACKUPS_PATH` is the absolute path to the directory where backups should be stored. For database backups, a directory with the name of the database will be created inside the `LOCAL_BACKUPS_PATH` directory to store the database backups. Paths should always have a trailing /
+
+`LOCAL_BACKUPS_MAX_AGE` Is the maximum age of local backups in days; backups older than this will be automatically rotated out (removed).
+
 ##### Using mysql within a local docker container
 
 `LOCAL_MYSQL_CMD` which is normally just `mysql`, is prepended with `docker exec -i CONTAINER_NAME` to execute the command within the container. (Example: `docker exec -i container_mysql_1 mysql`)
@@ -143,5 +139,27 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 `REMOTE_MYSQL_CMD` is the command for the local mysql executable, normally just `mysql`.
 
 `REMOTE_MYSQLDUMP_CMD` is the command for the local mysqldump executable, normally just `mysqldump`.
+
+`REMOTE_DB_LOGIN_PATH` if this is set, it will use `--login-path=` for your remote db credentials instead of sending them in via the commandline (see below)
+
+### Using login-path with mysql 5.6
+
+If you're using `mysql 5.6` or later, you’ll note the warning from mysql (this is [not an issue if you’re using MariaDB](https://mariadb.com/kb/en/mariadb/mysql_config_editor-compatibility/)):
+
+    mysql: [Warning] Using a password on the command line interface can be insecure.
+
+What the `craft-scripts` is doing isn’t any less secure than if you typed it on the command line yourself; everything sent over the wire is always encrypted via ssh. However, you can set up `login-path` to store your credentials in an encrypted file as per the [Passwordless authentication using mysql_config_editor with MySQL 5.6](https://opensourcedbms.com/dbms/passwordless-authentication-using-mysql_config_editor-with-mysql-5-6/) article.
+
+If you set `LOCAL_DB_LOGIN_PATH` or `REMOTE_DB_LOGIN_PATH` it will use `--login-path=` for your db credentials on the respective environments instead of sending them in via the commandline.
+
+For example, for my `local` dev setup:
+
+    mysql_config_editor set --login-path=localdev --user=homestead --host=localhost --port=3306 --password
+
+...and then enter the password for that user. And then in the `.env.sh` I set it to:
+
+    LOCAL_DB_LOGIN_PATH="localdev"
+
+...and it will use my stored, encrypted credentials instead of passing them in via commandline. You can also set this up on your remote server, and then set it via `REMOTE_DB_LOGIN_PATH`
 
 Brought to you by [nystudio107](https://nystudio107.com/)
