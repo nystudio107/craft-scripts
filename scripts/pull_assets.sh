@@ -7,7 +7,7 @@
 # @author    nystudio107
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
-# @package   craft-permissions
+# @package   craft-scripts
 # @since     1.1.0
 # @license   MIT
 
