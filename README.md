@@ -1,5 +1,5 @@
 # craft-scripts
-Shell scripts to manage permissions, asset syncing, cache clearing, and database syncing between Craft CMS environments
+Shell scripts to manage database backups, asset backups, file permissions, asset syncing, cache clearing, and database syncing between Craft CMS environments
 
 ## Overview
 
