@@ -11,6 +11,13 @@
 # @since     1.0.4
 # @license   MIT
 
-# gzip/zcat compression commands
-GZIP_CMD="gzip -f"
-ZCAT_CMD="zcat"
+# Craft paths; ; paths should always have a trailing /
+LOCAL_CRAFT_FILES_PATH=${LOCAL_ROOT_PATH}"${GLOBAL_CRAFT_PATH}storage/"
+REMOTE_CRAFT_FILES_PATH=${REMOTE_ROOT_PATH}"${GLOBAL_CRAFT_PATH}storage/"
+
+# For nicer user messages
+PLURAL_CHAR="s"
+
+# Sub-directories for the various backup types
+DB_BACKUP_SUBDIR="db"
+ASSETS_BACKUP_SUBDIR="assets"

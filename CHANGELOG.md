@@ -1,15 +1,18 @@
 # Craft-Scripts Changelog
 
-## 1.0.4 - 2017.03.20
+## 1.0.4 - 2017.03.19
 ### Added
 * Added the ability to run the scripts from anywhere (no need to `cd` to the directory)
-* Added support for `.gz` compressing the database before transfering it
+* Added `backup_db.sh` for doing local, rotating database backups
+* Added support for `.gz` compressing the database before transfering it, to speed things up
 * Added support for restoring directly from a `.gz` compressed database dump
 * Added additional arguments to the `mysqldump`
 * Added `common/defaults.sh` to set reasonable defaults for many settings
+* Added the ability to change the `craft` folder location
 
 ### Changed
-* Code cleanup
+* Revised `README.md` to document the changes/new features
+* Code cleanup & refactoring
 
 ## 1.0.3 - 2017.03.15
 ### Added

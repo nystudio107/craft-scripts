@@ -47,13 +47,15 @@ See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudi
 
 ### backup_db.sh
 
-The `backup_db.sh` script backs up the local database into a timestamped, `gzip` compressed archive into the directory set via `LOCAL_BACKUPS_PATH`. It will also automatically rotate out (delete) any backups that are older than `LOCAL_BACKUPS_MAX_AGE` old.
+The `backup_db.sh` script backs up the local database into a timestamped, `gzip` compressed archive into the directory set via `LOCAL_BACKUPS_PATH`. It will also automatically rotate out (delete) any backups that are older than `GLOBAL_DB_BACKUPS_MAX_AGE` old.
 
-The database backups exclude temporary/cache tables, and are stored in a directory named after the database inside of `LOCAL_BACKUPS_PATH`.
+The database backups exclude temporary/cache tables, and are stored in a directory named after the database, inside of `LOCAL_BACKUPS_PATH`.
 
 If you're using [Forge](https://forge.laravel.com/) you can set the `backup_db.sh` script to right nightly (or whatever interval you want) via the Scheduler. If you're using [ServerPilot.io](https://serverpilot.io/community/articles/how-to-use-cron-to-schedule-scripts.html) or are managing the server yourself, just set the `backup_db.sh` script to run via `cron` at whatever interval you desire.
 
-`craft-scripts` includes a `crontab-helper.txt` that you can add to your `crontab` to make configuring `cron` easier.
+`craft-scripts` includes a `crontab-helper.txt` that you can add to your `crontab` to make configuring `cron` easier. Remember to use full, absolute paths to the scripts when running them via `cron`, e.g.:
+
+    /home/forge/nystudio107.com/scripts/backup_db.sh
 
 ### Setting it up
 
@@ -71,6 +73,10 @@ All configuration is done in the `.env.sh` file, rather than in the scripts them
 All settings that are prefaced with `GLOBAL_` apply to **all** environments.
 
 `GLOBAL_DB_TABLE_PREFIX` is the Craft database table prefix, usually `craft_`
+
+`GLOBAL_CRAFT_PATH` is the path of the `craft` folder, relative to the root path. This should normally be `craft/`, unless you have moved it elsewhere. Paths should always have a trailing `/`
+
+`GLOBAL_DB_BACKUPS_MAX_AGE` Is the maximum age of local backups in days; backups older than this will be automatically rotated out (removed).
 
 #### Local Settings
 
@@ -105,8 +111,6 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 `LOCAL_DB_LOGIN_PATH` if this is set, it will use `--login-path=` for your local db credentials instead of sending them in via the commandline (see below)
 
 `LOCAL_BACKUPS_PATH` is the absolute path to the directory where backups should be stored. For database backups, a directory with the name of the database will be created inside the `LOCAL_BACKUPS_PATH` directory to store the database backups. Paths should always have a trailing /
-
-`LOCAL_BACKUPS_MAX_AGE` Is the maximum age of local backups in days; backups older than this will be automatically rotated out (removed).
 
 ##### Using mysql within a local docker container
 

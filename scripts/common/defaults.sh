@@ -11,7 +11,14 @@
 
 # -- GLOBAL settings --
 
+# What to prefix the database table names with
 GLOBAL_DB_TABLE_PREFIX="craft_"
+
+# The path of the `craft` folder, relative to the root path; paths should always have a trailing /
+GLOBAL_CRAFT_PATH="craft/"
+
+# The maximum age of backups in days; backups older than this will be automatically removed
+GLOBAL_DB_BACKUPS_MAX_AGE=90
 
 # -- LOCAL settings --
 
@@ -25,13 +32,25 @@ LOCAL_CHOWN_GROUP="apache"
 
 # Local directories relative to LOCAL_ROOT_PATH that should be writeable by the $CHOWN_GROUP
 LOCAL_WRITEABLE_DIRS=(
-                "craft/storage"
+                "${GLOBAL_CRAFT_PATH}storage"
                 "public/assets"
                 )
 
 # Local asset directories relative to LOCAL_ASSETS_PATH that should be synched with remote assets
 LOCAL_ASSETS_DIRS=(
                 ""
+                )
+
+# Craft-specific file directories relative LOCAL_CRAFT_FILES_PATH that should be synched with remote files
+LOCAL_CRAFT_FILE_DIRS=(
+                "rebrand"
+                "userphotos"
+                )
+
+# Craft-specific asset directories relative LOCAL_CRAFT_ASSETS_PATH that should be synched with remote assets
+LOCAL_CRAFT_ASSET_DIRS=(
+                "rebrand"
+                "userphotos"
                 )
 
 # Local database constants
@@ -52,9 +71,6 @@ LOCAL_MYSQLDUMP_CMD="mysqldump"
 
 # Local backups path; paths should always have a trailing /
 LOCAL_BACKUPS_PATH="/tmp/"
-
-# The maximum age of local backups in days; backups older than this will be automatically removed
-LOCAL_BACKUPS_MAX_AGE=90
 
 # -- REMOTE settings --
 
@@ -81,3 +97,7 @@ REMOTE_DB_LOGIN_PATH=""
 # The `mysql` and `mysqldump` commands to run remotely
 REMOTE_MYSQL_CMD="mysql"
 REMOTE_MYSQLDUMP_CMD="mysqldump"
+
+# Remote backups path; paths should always have a trailing /
+REMOTE_BACKUPS_PATH="/tmp/"
+

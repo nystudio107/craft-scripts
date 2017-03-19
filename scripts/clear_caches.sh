@@ -35,11 +35,11 @@ done
 # The permissions for files & directories that need to be writeable
 WRITEABLE_DIR_PERMS=775  # `-rwxrwxr-x`
 
-# Local directories relative to LOCAL_ROOT_PATH that should be removed to clear the cache
+# Local directories relative to LOCAL_CRAFT_FILES_PATH that should be removed to clear the cache
 CRAFT_CACHE_DIRS=(
-                "craft/storage/runtime/cache"
-                "craft/storage/runtime/compiled_templates"
-                "craft/storage/runtime/state"
+                "runtime/cache"
+                "runtime/compiled_templates"
+                "runtime/state"
                 )
 
 # Craft Database tables to be emptied to clear the cache
@@ -51,7 +51,7 @@ CRAFT_CACHE_TABLES=(
 # Delete the cache dirs
 for DIR in ${CRAFT_CACHE_DIRS[@]}
     do
-        FULLPATH="${LOCAL_ROOT_PATH}${DIR}"
+        FULLPATH="${LOCAL_CRAFT_FILES_PATH}${DIR}"
         if [ -d "${FULLPATH}" ]
         then
             echo "Removing cache dir ${FULLPATH}"
