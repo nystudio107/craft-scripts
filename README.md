@@ -55,6 +55,8 @@ The `backup_db.sh` script backs up the local database into a timestamped, `gzip`
 
 The database backups exclude temporary/cache tables, and are stored in the sub-directory `LOCAL_DB_NAME/db`, inside of `LOCAL_BACKUPS_PATH`.
 
+The numbers at the end of the backup archive are a timestamp in the format of `YYYYMMDD-HHMMSS`.
+
 See the **Automated Script Execution** section below for details on how to run this automatically
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
