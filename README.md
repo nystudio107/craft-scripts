@@ -47,6 +47,8 @@ For database backups, a sub-directory `REMOTE_DB_NAME/db` inside the `REMOTE_BAC
 
 For asset backups, a sub-directory `REMOTE_DB_NAME/assets` inside the `REMOTE_BACKUPS_PATH` directory is used for the asset backups.
 
+See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
+
 ### backup_db.sh
 
 The `backup_db.sh` script backs up the local database into a timestamped, `gzip` compressed archive into the directory set via `LOCAL_BACKUPS_PATH`. It will also automatically rotate out (delete) any backups that are older than `GLOBAL_DB_BACKUPS_MAX_AGE` old.
@@ -55,6 +57,8 @@ The database backups exclude temporary/cache tables, and are stored in the sub-d
 
 See the **Automated Script Execution** section below for details on how to run this automatically
 
+See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
+
 ### backup_assets.sh
 
 The `backup_assets.sh` script backs up an arbitrary number of asset directories to the directory specified in `LOCAL_BACKUPS_PATH`. The directories it backs are up specified in `LOCAL_ASSETS_DIRS`, just as they were for the `pull_assets.sh` script.
@@ -62,6 +66,8 @@ The `backup_assets.sh` script backs up an arbitrary number of asset directories 
 It will also back up the Craft `userphotos` and `rebrand` directories from `craft/storage` by default. The directories it will backup are specified in `LOCAL_CRAFT_FILE_DIRS`
 
 See the **Automated Script Execution** section below for details on how to run this automatically
+
+See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
 ### Setting it up
 
