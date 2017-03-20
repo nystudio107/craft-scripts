@@ -55,6 +55,14 @@ The database backups exclude temporary/cache tables, and are stored in the sub-d
 
 See the **Automated Script Execution** section below for details on how to run this automatically
 
+### backup_assets.sh
+
+The `backup_assets.sh` script backs up an arbitrary number of asset directories to the directory specified in `LOCAL_BACKUPS_PATH`. The directories it backs are up specified in `LOCAL_ASSETS_DIRS`, just as they were for the `pull_assets.sh` script.
+
+It will also back up the Craft `userphotos` and `rebrand` directories from `craft/storage` by default. The directories it will backup are specified in `LOCAL_CRAFT_FILE_DIRS`
+
+See the **Automated Script Execution** section below for details on how to run this automatically
+
 ### Setting it up
 
 1. Download or clone the `craft-scripts` git repo
