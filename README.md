@@ -185,9 +185,9 @@ If you want to run any of these scripts automatically at a set schedule, here's 
 
 #### On Linux
 
-If you're using [Forge](https://forge.laravel.com/) you can set the `backup_db.sh` script to right nightly (or whatever interval you want) via the Scheduler. If you're using [ServerPilot.io](https://serverpilot.io/community/articles/how-to-use-cron-to-schedule-scripts.html) or are managing the server yourself, just set the `backup_db.sh` script to run via `cron` at whatever interval you desire.
+If you're using [Forge](https://forge.laravel.com/) you can set the `backup_db.sh` script to run nightly (or whatever interval you want) via the Scheduler. If you're using [ServerPilot.io](https://serverpilot.io/community/articles/how-to-use-cron-to-schedule-scripts.html) or are managing the server yourself, just set the `backup_db.sh` script to run via `cron` at whatever interval you desire.
 
-`craft-scripts` includes a `crontab-helper.txt` that you can add to your `crontab` to make configuring `cron` easier. Remember to use full, absolute paths to the scripts when running them via `cron`, e.g.:
+`craft-scripts` includes a `crontab-helper.txt` that you can add to your `crontab` to make configuring `cron` easier. Remember to use full, absolute paths to the scripts when running them via `cron`, as `cron` does not have access to your environment paths, e.g.:
 
     /home/forge/nystudio107.com/scripts/backup_db.sh
 
