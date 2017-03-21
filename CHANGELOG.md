@@ -1,5 +1,12 @@
 # Craft-Scripts Changelog
 
+## 1.1.1 - 2017.03.20
+### Added
+* Added the `restore_db.sh` script to make restoring local databases easier
+
+### Changed
+* Revised `README.md` to document `restore_db.sh`
+
 ## 1.1.0 - 2017.03.19
 ### Added
 * Added the ability to run the scripts from anywhere (no need to `cd` to the directory)

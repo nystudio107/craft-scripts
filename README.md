@@ -25,7 +25,7 @@ The above assumes that the current working directory is the project root already
 
 ### pull_db.sh
 
-The `pull_db.sh` script pulls down a database dump from a remote server, and then dumps it into your local database.
+The `pull_db.sh` script pulls down a database dump from a remote server, and then dumps it into your local database. It backs up your local database before doing the dump.
 
 The db dumps that `craft-scripts` does will exclude tables that are temporary/cache tables that we don't want in our backups/restores, such as the `templatecaches` table.
 
@@ -68,6 +68,14 @@ The `backup_assets.sh` script backs up an arbitrary number of asset directories 
 It will also back up the Craft `userphotos` and `rebrand` directories from `craft/storage` by default. The directories it will backup are specified in `LOCAL_CRAFT_FILE_DIRS`
 
 See the **Automated Script Execution** section below for details on how to run this automatically
+
+See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
+
+### restore_db.sh
+
+The `restore_db.sh` restores the local database to the database dumb passed in via command line argument. It backs up your local database before doing the restore.
+
+You can pass in either a path to a `.sql` file or ` .gz` file to `restore_db.sh`, and it will do the right thing based on the file type.
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
