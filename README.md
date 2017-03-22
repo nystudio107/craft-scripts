@@ -49,6 +49,16 @@ For asset backups, a sub-directory `REMOTE_DB_NAME/assets` inside the `REMOTE_BA
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
+### sync_backups_to_s3.sh
+
+The `sync_backups_to_s3.sh` script syncs the backups from `LOCAL_BACKUPS_PATH` to the Amazon S3 bucket specified in `REMOTE_S3_BUCKET`.
+
+This script assumes that you have already [installed awscli](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) and have [configured it](http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html) with your credentials.
+
+It's recommended that you set up a separate user with access to only S3, and set up a private S3 bucket for your backups.
+
+See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
+
 ### backup_db.sh
 
 The `backup_db.sh` script backs up the local database into a timestamped, `gzip` compressed archive into the directory set via `LOCAL_BACKUPS_PATH`. It will also automatically rotate out (delete) any backups that are older than `GLOBAL_DB_BACKUPS_MAX_AGE` old.
@@ -170,6 +180,8 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 `REMOTE_DB_LOGIN_PATH` if this is set, it will use `--login-path=` for your remote db credentials instead of sending them in via the commandline (see below)
 
 `REMOTE_BACKUPS_PATH` is the absolute path to the directory where the remote backups are stored. For database backups, a sub-directory `REMOTE_DB_NAME/db` inside the `REMOTE_BACKUPS_PATH` directory is used for the database backups. Paths should always have a trailing `/`
+
+`REMOTE_S3_BUCKET` is the name of the Amazon S3 bucket to backup to via the `sync_backups_to_s3.sh` script
 
 ### Permissions and Git
 

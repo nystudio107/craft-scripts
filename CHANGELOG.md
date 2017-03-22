@@ -1,5 +1,10 @@
 # Craft-Scripts Changelog
 
+## 1.1.2 - 2017.03.22
+### Added
+* Added the `sync_backups_to_s3.sh` script to sync backups to an Amazon S3 bucket
+* Pull all the backups on `pull_backups.sh`
+
 ## 1.1.1 - 2017.03.20
 ### Added
 * Added the `restore_db.sh` script to make restoring local databases easier

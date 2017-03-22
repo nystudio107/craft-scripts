@@ -37,9 +37,9 @@ if [[ ! -d "${LOCAL_BACKUPS_PATH}" ]] ; then
     mkdir -p "${LOCAL_BACKUPS_PATH}"
 fi
 
-# Pull down the backup dir files via rsync
-rsync -a -z -e "ssh -p ${REMOTE_SSH_PORT}" "${REMOTE_SSH_LOGIN}:${REMOTE_BACKUPS_PATH}" "${LOCAL_BACKUPS_PATH}" --progress
-echo "*** Synced backups from ${REMOTE_BACKUPS_PATH}"
+# Sync the local backups to the Amazon S3 bucket
+aws s3 sync ${LOCAL_BACKUPS_PATH} s3://${REMOTE_S3_BUCKET}
+echo "*** Synced backups to ${REMOTE_S3_BUCKET}"
 
 # Normal exit
 exit 0
