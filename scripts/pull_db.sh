@@ -47,7 +47,7 @@ gzip -f "$BACKUP_DB_PATH"
 echo "*** Backed up local database to ${BACKUP_DB_PATH}.gz"
 
 # Restore the local db from the remote db dump
-zcat "${TMP_DB_PATH}.gz" | $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS
+gunzip -c "${TMP_DB_PATH}.gz" | $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS
 echo "*** Restored local database from ${TMP_DB_PATH}.gz"
 
 # Normal exit
