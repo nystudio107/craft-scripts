@@ -1,5 +1,9 @@
 # Craft-Scripts Changelog
 
+## 1.1.3 - 2017.03.22
+### Changed
+* Changed `zcat` to `gunzip -c` for MaxOS X compatibility
+
 ## 1.1.2 - 2017.03.22
 ### Added
 * Added the `sync_backups_to_s3.sh` script to sync backups to an Amazon S3 bucket

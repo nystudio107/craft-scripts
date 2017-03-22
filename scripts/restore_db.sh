@@ -46,10 +46,10 @@ fi
 # Figure out what type of file we're being passed in
 CAT_CMD=""
 if [ "${SRC_DB_PATH: -3}" == ".gz" ] ; then
-    CAT_CMD="zcat"
+    CAT_CMD="${DB_ZCAT_CMD}"
 fi
 if [ "${SRC_DB_PATH: -4}" == ".sql" ] ; then
-    CAT_CMD="cat"
+    CAT_CMD="${DB_CAT_CMD}"
 fi
 if [ "${CAT_CMD}" == "" ] ; then
     echo "Unknown file type"
