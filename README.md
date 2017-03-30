@@ -183,6 +183,12 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 
 `REMOTE_S3_BUCKET` is the name of the Amazon S3 bucket to backup to via the `sync_backups_to_s3.sh` script
 
+### Setting up SSH Keys
+
+Normally when you `ssh` into a remote server (as some of the `craft-scripts` do), you have to enter your password. Best practices from a security POV is to not allow for password-based logins, but instead use [SSH Keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2).
+
+The day in, day out benefit of setting up SSH Keys is that you never have to enter your password again, so it allows for automated execution of the various `craft-scripts`. Use the excellent [How To Set Up SSH Keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2) artice as a guide for setting up your SSH keys.
+
 ### Permissions and Git
 
 If you use `git`, a sample `.gitignore` file that you can modify & use for your Craft CMS projects is included in `craft-scripts` as `example.gitignore`. If you wish to use it, the file should be copied to your Craft CMS project root, and renamed `.gitignore`
@@ -202,6 +208,8 @@ The downside to the latter approach is that you must have matching user/groups i
 ### Automatic Script Execution
 
 If you want to run any of these scripts automatically at a set schedule, here's how to do it. We'll use the `backup_db.sh` script as an example, but the same applies to any of the scripts.
+
+Please see the **Setting up SSH Keys** section and set up your SSH keys before you set up automatic script execution.
 
 #### On Linux
 
