@@ -15,6 +15,10 @@
 LOCAL_CRAFT_FILES_PATH=${LOCAL_ROOT_PATH}"${GLOBAL_CRAFT_PATH}storage/"
 REMOTE_CRAFT_FILES_PATH=${REMOTE_ROOT_PATH}"${GLOBAL_CRAFT_PATH}storage/"
 
+# Commands to output database dumps, using gunzip -c instead of zcat for MacOS X compatibility
+DB_ZCAT_CMD="gunzip -c"
+DB_CAT_CMD="cat"
+
 # For nicer user messages
 PLURAL_CHAR="s"
 
