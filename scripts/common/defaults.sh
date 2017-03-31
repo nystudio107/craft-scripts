@@ -97,3 +97,6 @@ REMOTE_BACKUPS_PATH="/tmp/"
 
 # Remote Amazon S3 bucket name
 REMOTE_S3_BUCKET="REPLACE_ME"
+
+# Remote Dropbox path; paths should always have a trailing /
+REMOTE_DROPBOX_PATH="REPLACE_ME"

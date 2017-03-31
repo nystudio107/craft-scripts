@@ -23,7 +23,7 @@
 * Added local asset backup via `backup_assets.sh`
 * Added the ability to pull backups down from the remote server via `pull_backups.sh`
 * Added pulling of the Craft `userphotos` & `rebrand` directories via `pull_assets.sh`
-* Added support for `.gz` compressing the database before transfering it, to speed things up
+* Added support for `.gz` compressing the database before transferring it, to speed things up
 * Added support for restoring directly from a `.gz` compressed database dump
 * Added additional arguments to the `mysqldump`
 * Added `common/defaults.sh` to set reasonable defaults for many settings
