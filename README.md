@@ -59,6 +59,12 @@ It's recommended that you set up a separate user with access to only S3, and set
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
+### sync_backups_to_dropbox.sh
+
+The `sync_backups_to_dropbox.sh` script uploads a compressed archive of the backups from `LOCAL_BACKUPS_PATH` to the Dropbox folder specified in `REMOTE_DROPBOX_PATH`.
+
+This script assumes that you have already [installed dbxcli](https://github.com/dropbox/dbxcli#installation) and have configured it with your credentials.
+
 ### backup_db.sh
 
 The `backup_db.sh` script backs up the local database into a timestamped, `gzip` compressed archive into the directory set via `LOCAL_BACKUPS_PATH`. It will also automatically rotate out (delete) any backups that are older than `GLOBAL_DB_BACKUPS_MAX_AGE` old.
