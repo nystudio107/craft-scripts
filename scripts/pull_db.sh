@@ -27,7 +27,7 @@ do
     then
         source "${DIR}/${INCLUDE_FILE}"
     else
-        echo 'File "${DIR}/${INCLUDE_FILE}" is missing, aborting.'
+        echo "File ${DIR}/${INCLUDE_FILE} is missing, aborting."
         exit 1
     fi
 done
