@@ -83,6 +83,9 @@ Because `rsync` is used for these backups, you can put a `.rsync-filter` in any 
 
 For example, if you don't want any Craft image transforms backed up, your `.rsync-filter` file in each assets directory might look like this:
 
+    # This file allows you to add filter rules to rsync, one per line, preceded by either
+    # `-` or `exclude` and then a pattern to exclude, or `+` or `include` and then a pattern
+    # to include. More info: http://askubuntu.com/questions/291322/how-to-exclude-files-in-rsync
     - _*/**
 
 See the **Automated Script Execution** section below for details on how to run this automatically
@@ -99,8 +102,11 @@ Because `rsync` is used for these backups, you can put a `.rsync-filter` in any 
 
 For example, if you have a wiki with `data/cache` and `data/tmp` directories that you don't want backed up, your `.rsync-filter` file in the wiki directory might look like this:
 
-    - data/cache
-    - data/tmp
+    # This file allows you to add filter rules to rsync, one per line, preceded by either
+    # `-` or `exclude` and then a pattern to exclude, or `+` or `include` and then a pattern
+    # to include. More info: http://askubuntu.com/questions/291322/how-to-exclude-files-in-rsync
+    - public/data/cache
+    - public/data/tmp
 
 See the **Automated Script Execution** section below for details on how to run this automatically
 
