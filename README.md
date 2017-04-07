@@ -104,6 +104,8 @@ For example, if you have a wiki with `data/cache` and `data/tmp` directories tha
 
 See the **Automated Script Execution** section below for details on how to run this automatically
 
+See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
+
 ### restore_db.sh
 
 The `restore_db.sh` restores the local database to the database dumb passed in via command line argument. It backs up your local database before doing the restore.
