@@ -31,11 +31,20 @@ do
     fi
 done
 
-find ${LOCAL_ROOT_PATH} -type f | grep -Ev '(\.idea|\.git)' |
-    grep -v -f <(sed 's/\([.|]\)/\\\1/g; s/\?/./g ; s/\*/.*/g' ${LOCAL_ROOT_PATH}/.gitignore) |
-    while IFS= read -r file ; do
-        echo $file
-    done
+BACKUP_FILES_DIR_PATH="${LOCAL_BACKUPS_PATH}${FILES_BACKUP_SUBDIR}/"
+
+# Make sure the asset backup directory exists
+if [[ ! -d "${BACKUP_FILES_DIR_PATH}" ]] ; then
+    echo "Creating backup directory ${BACKUP_FILES_DIR_PATH}"
+    mkdir -p "${BACKUP_FILES_DIR_PATH}"
+fi
+
+# Backup the files dirs via rsync
+for DIR in "${LOCAL_DIRS_TO_BACKUP[@]}"
+do
+    rsync -F -a -z "${DIR}" "${BACKUP_FILES_DIR_PATH}" --progress
+    echo "*** Backed up assets from ${DIR}"
+done
 
 # Normal exit
 exit 0

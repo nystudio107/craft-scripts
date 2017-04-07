@@ -47,6 +47,8 @@ For database backups, a sub-directory `REMOTE_DB_NAME/db` inside the `REMOTE_BAC
 
 For asset backups, a sub-directory `REMOTE_DB_NAME/assets` inside the `REMOTE_BACKUPS_PATH` directory is used for the asset backups.
 
+Because `rsync` is used for these backups, you can put a `.rsync-filter` in any directory to define files/folders to ignore. [More info](http://serverfault.com/questions/414358/rsync-filter-file-rules-for-subpath)
+
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
 ### sync_backups_to_s3.sh
@@ -77,9 +79,30 @@ The `backup_assets.sh` script backs up an arbitrary number of asset directories 
 
 It will also back up the Craft `userphotos` and `rebrand` directories from `craft/storage` by default. The directories it will backup are specified in `LOCAL_CRAFT_FILE_DIRS`
 
+Because `rsync` is used for these backups, you can put a `.rsync-filter` in any directory to define files/folders to ignore. [More info](http://serverfault.com/questions/414358/rsync-filter-file-rules-for-subpath)
+
+For example, if you don't want any Craft image transforms backed up, your `.rsync-filter` file in each assets directory might look like this:
+
+    - _*/**
+
 See the **Automated Script Execution** section below for details on how to run this automatically
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
+
+### backup_dirs.sh
+
+The `backup_dirs.sh` script backs up an arbitrary number of directories to the directory specified in `LOCAL_BACKUPS_PATH`. The directories it backs are up specified in `LOCAL_DIRS_TO_BACKUP`.
+
+This script is provided in case you have other files outside of your project that need backing up. For example, you might have a separate wiki or directory of config files.
+
+Because `rsync` is used for these backups, you can put a `.rsync-filter` in any directory to define files/folders to ignore. [More info](http://serverfault.com/questions/414358/rsync-filter-file-rules-for-subpath)
+
+For example, if you have a wiki with `data/cache` and `data/tmp` directories that you don't want backed up, your `.rsync-filter` file in the wiki directory might look like this:
+
+    - data/cache
+    - data/tmp
+
+See the **Automated Script Execution** section below for details on how to run this automatically
 
 ### restore_db.sh
 

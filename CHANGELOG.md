@@ -1,5 +1,12 @@
 # Craft-Scripts Changelog
 
+## 1.1.4 - 2017.04.07
+### Changed
+* Added the `backup_files.sh` script to backup arbitrary directories of files
+* Added `rsync -F` to allow for excluding files/directories via `.rsync-filter` files
+* Fixed an unparsed error message if one of the include scripts is missing
+* Revised `README.md`
+
 ## 1.1.3 - 2017.03.22
 ### Changed
 * Changed `zcat` to `gunzip -c` for MaxOS X compatibility

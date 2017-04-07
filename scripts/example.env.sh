@@ -20,7 +20,7 @@ GLOBAL_DB_TABLE_PREFIX="craft_"
 # The path of the `craft` folder, relative to the root path; paths should always have a trailing /
 GLOBAL_CRAFT_PATH="craft/"
 
-# The maximum age of backups in days; backups older than this will be automatically removed
+# The maximum age of db backups in days; backups older than this will be automatically removed
 GLOBAL_DB_BACKUPS_MAX_AGE=90
 
 # -- LOCAL settings --
@@ -48,6 +48,10 @@ LOCAL_ASSETS_DIRS=(
 LOCAL_CRAFT_FILE_DIRS=(
                 "rebrand"
                 "userphotos"
+                )
+
+# Absolute paths to directories to back up, in addition to `LOCAL_ASSETS_DIRS` and `LOCAL_CRAFT_FILE_DIRS`
+LOCAL_DIRS_TO_BACKUP=(
                 )
 
 # Local database constants
