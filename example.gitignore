@@ -17,6 +17,9 @@
 .env.sh
 .env
 
+# COMPOSER
+/vendor
+
 # CRAFT STORAGE
 /craft/storage/*
 
