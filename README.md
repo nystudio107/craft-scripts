@@ -11,7 +11,7 @@ The `set_perms.sh` script sets the Craft CMS install file permissions in a stric
 
 See [Hardening Craft CMS Permissions](https://nystudio107.com/blog/hardening-craft-cms-permissions) for a detailed writeup.
 
-Note: if you use `git`, please see the **Permissions and Git** section below.
+Note: if you use `git`, please see the [**Permissions and Git**](#permissions-and-git) section below.
 
 ### clear_caches.sh
 
@@ -69,7 +69,7 @@ The database backups exclude temporary/cache tables, and are stored in the sub-d
 
 The numbers at the end of the backup archive are a timestamp in the format of `YYYYMMDD-HHMMSS`.
 
-See the **Automated Script Execution** section below for details on how to run this automatically
+See the [**Automated Script Execution**](#automatic-script-execution) section below for details on how to run this automatically
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
@@ -88,7 +88,7 @@ For example, if you don't want any Craft image transforms backed up, your `.rsyn
     # to include. More info: http://askubuntu.com/questions/291322/how-to-exclude-files-in-rsync
     - _*/**
 
-See the **Automated Script Execution** section below for details on how to run this automatically
+See the [**Automated Script Execution**](#automatic-script-execution) section below for details on how to run this automatically
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
@@ -108,7 +108,7 @@ For example, if you have a wiki with `data/cache` and `data/tmp` directories tha
     - public/data/cache
     - public/data/tmp
 
-See the **Automated Script Execution** section below for details on how to run this automatically
+See the [**Automated Script Execution**](#automatic-script-execution) section below for details on how to run this automatically
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
