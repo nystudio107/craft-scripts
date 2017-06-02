@@ -240,7 +240,7 @@ The downside to the latter approach is that you must have matching user/groups i
 
 If you want to run any of these scripts automatically at a set schedule, here's how to do it. We'll use the `backup_db.sh` script as an example, but the same applies to any of the scripts.
 
-Please see the **Setting up SSH Keys** section and set up your SSH keys before you set up automatic script execution.
+Please see the [**Setting up SSH Keys**](#setting-up-ssh-keys) section and set up your SSH keys before you set up automatic script execution.
 
 #### On Linux
 
