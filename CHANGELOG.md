@@ -1,5 +1,10 @@
 # Craft-Scripts Changelog
 
+## 1.1.5 - 2017.06.12
+### Changed
+* The `pull_assets.sh` script now deletes local assets that have been removed from the remote
+* Added support for clearing the Redis cache in `clear_caches.sh` via `LOCAL_REDIS_DB_ID`
+
 ## 1.1.4 - 2017.04.07
 ### Changed
 * Added the `backup_files.sh` script to backup arbitrary directories of files

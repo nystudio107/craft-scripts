@@ -15,7 +15,7 @@ Note: if you use `git`, please see the **Permissions and Git** section below.
 
 ### clear_caches.sh
 
-The `clear_caches.sh` script clears the Craft CMS caches by removing all of the `craft/storage/runtime/` cache dirs, as well as emptying the `craft_templatecaches` db table.
+The `clear_caches.sh` script clears the Craft CMS caches by removing all of the `craft/storage/runtime/` cache dirs, as well as emptying the `craft_templatecaches` db table. It can also clear Redis db caches if `LOCAL_REDIS_DB_ID` is set.
 
 If you want to add this to your Forge / DeployBot / Buddy.works deploy script so that caches are auto-cleared on deploy, set up the `.env.sh` on your remote server(s) and then add this to your deploy script:
 

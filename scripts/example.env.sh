@@ -60,6 +60,7 @@ LOCAL_DB_PASSWORD="REPLACE_ME"
 LOCAL_DB_USER="REPLACE_ME"
 LOCAL_DB_HOST="localhost"
 LOCAL_DB_PORT="3306"
+LOCAL_REDIS_DB_ID=""
 
 # If you are using mysql 5.6.10 or later and you have `login-path` setup as per:
 # https://opensourcedbms.com/dbms/passwordless-authentication-using-mysql_config_editor-with-mysql-5-6/

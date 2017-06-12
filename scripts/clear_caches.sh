@@ -71,6 +71,13 @@ for TABLE in ${CRAFT_CACHE_TABLES[@]}
         $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS -e \
             "DELETE FROM $FULLTABLE"
     done
+
+# Clear the redis cache
+if [ "${LOCAL_REDIS_DB_ID}" != "" ] ; then
+    echo "Emptying redis cache for database ${LOCAL_REDIS_DB_ID}"
+    echo -e "select ${LOCAL_REDIS_DB_ID}\nflushdb" | redis-cli
+fi
+
 echo "*** Caches cleared"
 
 # Normal exit
