@@ -75,7 +75,7 @@ for TABLE in ${CRAFT_CACHE_TABLES[@]}
 # Clear the FastCGI Cache dir
 if [ "${LOCAL_FASTCGI_CACHE_DIR}" != "" ] ; then
     echo "Emptying FastCGI Cache at ${LOCAL_FASTCGI_CACHE_DIR}"
-    rm -rf "${LOCAL_FASTCGI_CACHE_DIR}*"
+    rm -rf "${LOCAL_FASTCGI_CACHE_DIR}"*
 fi
 
 # Clear the redis cache
