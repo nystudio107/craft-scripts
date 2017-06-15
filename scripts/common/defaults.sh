@@ -6,7 +6,7 @@
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts
-# @since     1.1.0
+# @since     1.1.6
 # @license   MIT
 
 # -- GLOBAL settings --
@@ -51,12 +51,17 @@ LOCAL_CRAFT_FILE_DIRS=(
 LOCAL_DIRS_TO_BACKUP=(
                 )
 
+# Local FastCGI Cache path; leave it empty ("") if you're not using FastCGI Cache; paths should always have a trailing /
+# The `clear_caches.sh` script will delete everything in this directory when it is executed (say, on deploy)
+LOCAL_FASTCGI_CACHE_DIR=""
+
 # Local database constants
 LOCAL_DB_NAME="REPLACE_ME"
 LOCAL_DB_PASSWORD="REPLACE_ME"
 LOCAL_DB_USER="REPLACE_ME"
 LOCAL_DB_HOST="localhost"
 LOCAL_DB_PORT="3306"
+LOCAL_REDIS_DB_ID=""
 
 # If you are using mysql 5.6.10 or later and you have `login-path` setup as per:
 # https://opensourcedbms.com/dbms/passwordless-authentication-using-mysql_config_editor-with-mysql-5-6/
@@ -86,7 +91,6 @@ REMOTE_DB_PASSWORD="REPLACE_ME"
 REMOTE_DB_USER="REPLACE_ME"
 REMOTE_DB_HOST="localhost"
 REMOTE_DB_PORT="3306"
-LOCAL_REDIS_DB_ID=""
 
 # If you are using mysql 5.6.10 or later and you have `login-path` setup as per:
 # https://opensourcedbms.com/dbms/passwordless-authentication-using-mysql_config_editor-with-mysql-5-6/

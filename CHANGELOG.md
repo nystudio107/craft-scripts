@@ -1,5 +1,9 @@
 # Craft-Scripts Changelog
 
+## 1.1.6 - 2017.06.15
+### Changed
+* Added support for clearing the FastCGI Cache in `clear_caches.sh` via `LOCAL_FASTCGI_CACHE_DIR`
+
 ## 1.1.5 - 2017.06.12
 ### Changed
 * The `pull_assets.sh` script now deletes local assets that have been removed from the remote

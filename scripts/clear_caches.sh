@@ -72,6 +72,12 @@ for TABLE in ${CRAFT_CACHE_TABLES[@]}
             "DELETE FROM $FULLTABLE"
     done
 
+# Clear the FastCGI Cache dir
+if [ "${LOCAL_FASTCGI_CACHE_DIR}" != "" ] ; then
+    echo "Emptying FastCGI Cache at ${LOCAL_FASTCGI_CACHE_DIR}"
+    rm -rf "${LOCAL_FASTCGI_CACHE_DIR}*"
+fi
+
 # Clear the redis cache
 if [ "${LOCAL_REDIS_DB_ID}" != "" ] ; then
     echo "Emptying redis cache for database ${LOCAL_REDIS_DB_ID}"

@@ -6,7 +6,7 @@
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts
-# @since     1.1.0
+# @since     1.1.6
 # @license   MIT
 #
 # This file should be renamed to '.env.sh' and it should reside in the
@@ -53,6 +53,10 @@ LOCAL_CRAFT_FILE_DIRS=(
 # Absolute paths to directories to back up, in addition to `LOCAL_ASSETS_DIRS` and `LOCAL_CRAFT_FILE_DIRS`
 LOCAL_DIRS_TO_BACKUP=(
                 )
+
+# Local FastCGI Cache path; leave it empty ("") if you're not using FastCGI Cache; paths should always have a trailing /
+# The `clear_caches.sh` script will delete everything in this directory when it is executed (say, on deploy)
+LOCAL_FASTCGI_CACHE_DIR=""
 
 # Local database constants
 LOCAL_DB_NAME="REPLACE_ME"
