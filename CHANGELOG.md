@@ -1,5 +1,10 @@
 # Craft-Scripts Changelog
 
+## 1.1.7 - 2017.06.28
+### Added
+* Added support for backups to an Amazon S3 bucket sub-folder
+* Added section links to the README.md
+
 ## 1.1.6 - 2017.06.15
 ### Changed
 * Added support for clearing the FastCGI Cache in `clear_caches.sh` via `LOCAL_FASTCGI_CACHE_DIR`

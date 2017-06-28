@@ -1,3 +1,4 @@
+#@IgnoreInspection BashAddShebang
 # Craft Scripts Defaults
 #
 # Default settings for Craft scripts
@@ -106,3 +107,6 @@ REMOTE_BACKUPS_PATH="/tmp/"
 
 # Remote Amazon S3 bucket name
 REMOTE_S3_BUCKET="REPLACE_ME"
+
+# Optional subfolder relative to the S3 bucket root; paths should always have a trailing /
+REMOTE_S3_PATH=""
