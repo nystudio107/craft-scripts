@@ -109,3 +109,6 @@ REMOTE_BACKUPS_PATH="REPLACE_ME"
 
 # Remote Amazon S3 bucket name
 REMOTE_S3_BUCKET="REPLACE_ME"
+
+# Optional subfolder relative to the S3 bucket root; paths should always have a trailing /
+REMOTE_S3_PATH=""

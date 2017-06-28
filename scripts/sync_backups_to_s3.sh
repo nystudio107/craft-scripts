@@ -38,7 +38,7 @@ if [[ ! -d "${LOCAL_BACKUPS_PATH}" ]] ; then
 fi
 
 # Sync the local backups to the Amazon S3 bucket
-aws s3 sync ${LOCAL_BACKUPS_PATH} s3://${REMOTE_S3_BUCKET}
+aws s3 sync ${LOCAL_BACKUPS_PATH} s3://${REMOTE_S3_BUCKET}/${REMOTE_S3_PATH}
 echo "*** Synced backups to ${REMOTE_S3_BUCKET}"
 
 # Normal exit
