@@ -11,7 +11,7 @@ The `set_perms.sh` script sets the Craft CMS install file permissions in a stric
 
 See [Hardening Craft CMS Permissions](https://nystudio107.com/blog/hardening-craft-cms-permissions) for a detailed writeup.
 
-Note: if you use `git`, please see the **Permissions and Git** section below.
+Note: if you use `git`, please see the [**Permissions and Git**](#permissions-and-git) section below.
 
 ### clear_caches.sh
 
@@ -71,7 +71,7 @@ The database backups exclude temporary/cache tables, and are stored in the sub-d
 
 The numbers at the end of the backup archive are a timestamp in the format of `YYYYMMDD-HHMMSS`.
 
-See the **Automated Script Execution** section below for details on how to run this automatically
+See the [**Automated Script Execution**](#automatic-script-execution) section below for details on how to run this automatically
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
@@ -90,7 +90,7 @@ For example, if you don't want any Craft image transforms backed up, your `.rsyn
     # to include. More info: http://askubuntu.com/questions/291322/how-to-exclude-files-in-rsync
     - _*/**
 
-See the **Automated Script Execution** section below for details on how to run this automatically
+See the [**Automated Script Execution**](#automatic-script-execution) section below for details on how to run this automatically
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
@@ -110,7 +110,7 @@ For example, if you have a wiki with `data/cache` and `data/tmp` directories tha
     - public/data/cache
     - public/data/tmp
 
-See the **Automated Script Execution** section below for details on how to run this automatically
+See the [**Automated Script Execution**](#automatic-script-execution) section below for details on how to run this automatically
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
@@ -242,7 +242,7 @@ The downside to the latter approach is that you must have matching user/groups i
 
 If you want to run any of these scripts automatically at a set schedule, here's how to do it. We'll use the `backup_db.sh` script as an example, but the same applies to any of the scripts.
 
-Please see the **Setting up SSH Keys** section and set up your SSH keys before you set up automatic script execution.
+Please see the [**Setting up SSH Keys**](#setting-up-ssh-keys) section and set up your SSH keys before you set up automatic script execution.
 
 #### On Linux
 
