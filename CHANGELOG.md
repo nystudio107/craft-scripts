@@ -1,5 +1,12 @@
 # Craft-Scripts Changelog
 
+## 1.2.0 - 2017.07.18
+### Added
+* Added `postgres` database support for Craft 3
+
+### Changed
+* Updated `README.md`
+
 ## 1.1.7 - 2017.06.28
 ### Added
 * Added support for backups to an Amazon S3 bucket sub-folder

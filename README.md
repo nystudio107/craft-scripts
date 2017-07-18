@@ -5,6 +5,8 @@ Shell scripts to manage database backups, asset backups, file permissions, asset
 
 There are several scripts included in `craft-scripts`, each of which perform different functions. They all use a shared `.env.sh` to function. This `.env.sh` should be created on each environment where you wish to run the `craft-scripts`, and it should be excluded from your git repo via `.gitignore`.
 
+Craft-Scripts works with both Craft 2.x & Craft 3.x, and has built-in support for both `mysql` as well as `postgres` databases.
+
 ### set_perms.sh
 
 The `set_perms.sh` script sets the Craft CMS install file permissions in a strict manner, to assist in hardening Craft CMS installs.
@@ -144,6 +146,8 @@ All settings that are prefaced with `GLOBAL_` apply to **all** environments.
 
 `GLOBAL_DB_BACKUPS_MAX_AGE` Is the maximum age of local backups in days; backups older than this will be automatically rotated out (removed).
 
+`GLOBAL_DB_DRIVER` is the database driver for this Craft install (`mysql` or `pgsql`)
+
 #### Local Settings
 
 All settings that are prefaced with `LOCAL_` refer to the local environment where the script will be run, **not** your `local` dev environment.
@@ -162,6 +166,12 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 
 `LOCAL_CRAFT_FILE_DIRS` is a quoted list of Craft file directories relative to `LOCAL_CRAFT_FILES_PATH` that you want to pull down from the remote server. By default, it will pull down the `userphotos` and `rebrand` directories in `craft/storage`, which typically are not kept in `git`. If you don't want it to sync anything, just leave the setting empty, e.g.: `LOCAL_CRAFT_FILE_DIRS=()`
 
+`LOCAL_DIRS_TO_BACKUP` is an array of bsolute paths to directories to back up, in addition to `LOCAL_ASSETS_DIRS` and `LOCAL_CRAFT_FILE_DIRS`
+
+`LOCAL_FASTCGI_CACHE_DIR` is the local FastCGI Cache path; leave it empty ("") if you're not using FastCGI Cache; paths should always have a trailing `/`. The `clear_caches.sh` script will delete everything in this directory when it is executed (say, on deploy)
+
+`LOCAL_REDIS_DB_ID` is the local Redis database ID; leave it empty ("") if you're not using Redis. The `clear_caches.sh` script will purge this Redis database when it is executed (say, on deploy)
+
 `LOCAL_DB_NAME` is the name of the local mysql Craft CMS database
 
 `LOCAL_DB_PASSWORD` is the password for the local mysql Craft CMS database
@@ -170,11 +180,15 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 
 `LOCAL_DB_HOST` is the host name of the local mysql database host. This is normally `localhost`
 
-`LOCAL_DB_PORT` is the port number of the local mysql database host. This is normally `3306`
+`LOCAL_DB_PORT` is the port number of the local mysql database host. This is normally `3306` for `mysql`, and `5432` for `postgres`.
 
 `LOCAL_MYSQL_CMD` is the command for the local mysql executable, normally just `mysql`. It is provided because some setups like MAMP require a full path to a copy of `mysql` inside of the application bundle.
 
 `LOCAL_MYSQLDUMP_CMD` is the command for the local mysqldump executable, normally just `mysqldump`. It is provided because some setups like MAMP require a full path to a copy of `mysqldump` inside of the application bundle.
+
+`LOCAL_PSQL_CMD` is the command for the local postgres executable, normally just `psql`.
+
+`LOCAL_PG_DUMP_CMD` is the command for the local pg_dump executable, normally just `pg_dump`.
 
 `LOCAL_DB_LOGIN_PATH` if this is set, it will use `--login-path=` for your local db credentials instead of sending them in via the commandline (see below)
 
@@ -206,11 +220,15 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 
 `REMOTE_DB_HOST` is the host name of the remote mysql database host. This is normally `localhost`
 
-`REMOTE_DB_PORT` is the port number of the remote mysql database host. This is normally `3306`
+`REMOTE_DB_PORT` is the port number of the remote mysql database host. This is normally `3306` for `mysql`, and `5432` for `postgres`.
 
 `REMOTE_MYSQL_CMD` is the command for the local mysql executable, normally just `mysql`.
 
 `REMOTE_MYSQLDUMP_CMD` is the command for the local mysqldump executable, normally just `mysqldump`.
+
+`REMOTE_PSQL_CMD` is the command for the remote postgres executable, normally just `psql`.
+
+`REMOTE_PG_DUMP_CMD` is the command for the remote pg_dump executable, normally just `pg_dump`.
 
 `REMOTE_DB_LOGIN_PATH` if this is set, it will use `--login-path=` for your remote db credentials instead of sending them in via the commandline (see below)
 
