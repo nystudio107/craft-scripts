@@ -31,6 +31,12 @@ do
         exit 1
     fi
 done
+if [ "${GLOBAL_DB_DRIVER}" == "mysql" ] ; then
+    source "${DIR}/common/common_mysql.sh"
+fi
+if [ "${GLOBAL_DB_DRIVER}" == "pgsql" ] ; then
+    source "${DIR}/common/common_pgsql.sh"
+fi
 
 # The permissions for files & directories that need to be writeable
 WRITEABLE_DIR_PERMS=775  # `-rwxrwxr-x`
@@ -64,13 +70,21 @@ for DIR in ${CRAFT_CACHE_DIRS[@]}
     done
 
 # Empty the cache tables
-for TABLE in ${CRAFT_CACHE_TABLES[@]}
-    do
-        FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
-        echo "Emptying cache table $FULLTABLE"
-        $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS -e \
-            "DELETE FROM $FULLTABLE"
-    done
+if [ "${GLOBAL_DB_DRIVER}" == "mysql" ] ; then
+    for TABLE in ${CRAFT_CACHE_TABLES[@]}
+        do
+            FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
+            echo "Emptying cache table $FULLTABLE"
+            $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS -e \
+                "DELETE FROM $FULLTABLE"
+        done
+fi
+if [ "${GLOBAL_DB_DRIVER}" == "pgsql" ] ; then
+    echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
+    chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
+    PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}"
+    rm "${TMP_DB_DUMP_CREDS_PATH}"
+fi
 
 # Clear the FastCGI Cache dir
 if [ "${LOCAL_FASTCGI_CACHE_DIR}" != "" ] ; then

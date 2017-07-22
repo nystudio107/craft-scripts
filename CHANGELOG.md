@@ -1,5 +1,9 @@
 # Craft-Scripts Changelog
 
+## 1.2.1 - 2017.07.23
+### Changed
+* Fixed the `clear_caches.sh` script for `mysql`
+
 ## 1.2.0 - 2017.07.18
 ### Added
 * Added `postgres` database support for Craft 3
