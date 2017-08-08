@@ -1,5 +1,9 @@
 # Craft-Scripts Changelog
 
+## 1.2.2 - 2017.08.08
+### Changed
+* Added support for pulling db dumps directly from hosted MySQL/Postgres servers (needed for Heroku and other environments)
+
 ## 1.2.1 - 2017.07.23
 ### Changed
 * Fixed the `clear_caches.sh` script for `mysql`

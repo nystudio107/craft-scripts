@@ -7,7 +7,7 @@
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts
-# @since     1.2.0
+# @since     1.2.2
 # @license   MIT
 
 # -- GLOBAL settings --
@@ -96,6 +96,9 @@ REMOTE_SSH_PORT="22"
 # Remote path constants; paths should always have a trailing /
 REMOTE_ROOT_PATH="REPLACE_ME"
 REMOTE_ASSETS_PATH=${REMOTE_ROOT_PATH}"REPLACE_ME"
+
+# Should we connect to the remote database server via ssh?
+REMOTE_DB_USING_SSH="yes"
 
 # Remote database constants; default port for mysql is 3306, default port for postgres is 5432
 REMOTE_DB_NAME="REPLACE_ME"

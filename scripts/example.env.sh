@@ -6,7 +6,7 @@
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts
-# @since     1.2.0
+# @since     1.2.2
 # @license   MIT
 #
 # This file should be renamed to '.env.sh' and it should reside in the
@@ -94,6 +94,9 @@ LOCAL_BACKUPS_PATH="REPLACE_ME"
 # Remote ssh credentials, user@domain.com and Remote SSH Port
 REMOTE_SSH_LOGIN="REPLACE_ME"
 REMOTE_SSH_PORT="22"
+
+# Should we connect to the remote database server via ssh?
+REMOTE_DB_USING_SSH="yes"
 
 # Remote path constants; paths should always have a trailing /
 REMOTE_ROOT_PATH="REPLACE_ME"

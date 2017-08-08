@@ -8,7 +8,7 @@
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts
-# @since     1.2.0
+# @since     1.2.2
 # @license   MIT
 
 # Get the directory of the currently executing script
@@ -44,12 +44,33 @@ BACKUP_DB_PATH="/tmp/${LOCAL_DB_NAME}-db-backup-$(date '+%Y%m%d').sql"
 
 # Get the remote db dump
 if [ "${GLOBAL_DB_DRIVER}" == "mysql" ] ; then
-    ssh $REMOTE_SSH_LOGIN -p $REMOTE_SSH_PORT "$REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS $MYSQLDUMP_SCHEMA_ARGS > '$TMP_DB_PATH' ; $REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS $MYSQLDUMP_DATA_ARGS >> '$TMP_DB_PATH' ; gzip -f '$TMP_DB_PATH'"
+    if [ "${REMOTE_DB_USING_SSH}" == "yes" ] ; then
+        # The database server requires ssh'ing in to connect to it
+        ssh $REMOTE_SSH_LOGIN -p $REMOTE_SSH_PORT "$REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS $MYSQLDUMP_SCHEMA_ARGS > '$TMP_DB_PATH' ; $REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS $MYSQLDUMP_DATA_ARGS >> '$TMP_DB_PATH' ; gzip -f '$TMP_DB_PATH'"
+    else
+        # Connect to the database server directly
+        $REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS $MYSQLDUMP_SCHEMA_ARGS > "${TMP_DB_PATH}"
+        $REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS $MYSQLDUMP_DATA_ARGS >> "${TMP_DB_PATH}"
+        gzip -f "${TMP_DB_PATH}"
+    fi
 fi
 if [ "${GLOBAL_DB_DRIVER}" == "pgsql" ] ; then
-    ssh $REMOTE_SSH_LOGIN -p $REMOTE_SSH_PORT "echo ${REMOTE_DB_HOST}:${REMOTE_DB_PORT}:${REMOTE_DB_NAME}:${REMOTE_DB_USER}:${REMOTE_DB_PASSWORD} > '${TMP_DB_DUMP_CREDS_PATH}' ; chmod 600 '$TMP_DB_DUMP_CREDS_PATH' ; PGPASSFILE='$TMP_DB_DUMP_CREDS_PATH' $REMOTE_PG_DUMP_CMD $REMOTE_DB_CREDS $PG_DUMP_ARGS --schema='$REMOTE_DB_SCHEMA' --file='$TMP_DB_PATH' ; rm '$TMP_DB_DUMP_CREDS_PATH' ; gzip -f '$TMP_DB_PATH'"
+    if [ "${REMOTE_DB_USING_SSH}" == "yes" ] ; then
+        # The database server requires ssh'ing in to connect to it
+        ssh $REMOTE_SSH_LOGIN -p $REMOTE_SSH_PORT "echo ${REMOTE_DB_HOST}:${REMOTE_DB_PORT}:${REMOTE_DB_NAME}:${REMOTE_DB_USER}:${REMOTE_DB_PASSWORD} > '$TMP_DB_DUMP_CREDS_PATH' ; chmod 600 '$TMP_DB_DUMP_CREDS_PATH' ; PGPASSFILE='$TMP_DB_DUMP_CREDS_PATH' $REMOTE_PG_DUMP_CMD $REMOTE_DB_CREDS $PG_DUMP_ARGS --schema='$REMOTE_DB_SCHEMA' --file='$TMP_DB_PATH' ; rm '$TMP_DB_DUMP_CREDS_PATH' ; gzip -f '$TMP_DB_PATH'"
+    else
+        # Connect to the database server directly
+        echo ${REMOTE_DB_HOST}:${REMOTE_DB_PORT}:${REMOTE_DB_NAME}:${REMOTE_DB_USER}:${REMOTE_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
+        chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
+        PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}" $REMOTE_PG_DUMP_CMD $REMOTE_DB_CREDS $PG_DUMP_ARGS --schema="${REMOTE_DB_SCHEMA}" --file="${TMP_DB_PATH}"
+        rm "${TMP_DB_DUMP_CREDS_PATH}"
+        gzip -f "${TMP_DB_PATH}"
+    fi
 fi
-scp -P $REMOTE_SSH_PORT -- $REMOTE_SSH_LOGIN:"${TMP_DB_PATH}.gz" "${TMP_DB_PATH}.gz"
+# If the database dump was done remotely, copy it down locally
+if [ "${REMOTE_DB_USING_SSH}" == "yes" ] ; then
+    scp -P $REMOTE_SSH_PORT -- $REMOTE_SSH_LOGIN:"${TMP_DB_PATH}.gz" "${TMP_DB_PATH}.gz"
+fi
 
 # Backup the local db
 if [ "${GLOBAL_DB_DRIVER}" == "mysql" ] ; then
