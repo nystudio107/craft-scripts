@@ -3,6 +3,8 @@
 ## 1.2.2 - 2017.08.08
 ### Changed
 * Added support for pulling db dumps directly from hosted MySQL/Postgres servers (needed for Heroku and other environments)
+* Output from `clear_caches.sh` is suppressed for the table dropping (to prevent spurious "table doesn't exist" errors)
+* Support for proper Postgres cache table purging
 
 ## 1.2.1 - 2017.07.23
 ### Changed

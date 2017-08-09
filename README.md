@@ -7,6 +7,12 @@ There are several scripts included in `craft-scripts`, each of which perform dif
 
 Craft-Scripts works with both Craft 2.x & Craft 3.x, and has built-in support for both `mysql` as well as `postgres` databases.
 
+## Upgrading
+
+To upgrade to a later version of Craft-Scripts, replace the contents of your `scripts` folder with the newest Craft-Scripts, while preserving your existing `.env.sh` file.
+
+Craft-Scripts comes with defaults so that even older `.env.sh` files should work with the latest Craft-Scripts.
+
 ### set_perms.sh
 
 The `set_perms.sh` script sets the Craft CMS install file permissions in a strict manner, to assist in hardening Craft CMS installs.
@@ -207,6 +213,8 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 `REMOTE_SSH_LOGIN` is your ssh login to the remote server, e.g.: `user@domain.com`
 
 `REMOTE_SSH_PORT` is the port to use for ssh on the remote server. This is normally `22`
+
+`REMOTE_DB_USING_SSH` determines whether the database connection needs to be done over `ssh`, or the database should be directly connected to (such as for Heroku or Amazon RDS services). This is normally `yes`
 
 `REMOTE_ROOT_PATH` is the absolute path to the root of your Craft install on the remote server, with a trailing `/` after it.
 
