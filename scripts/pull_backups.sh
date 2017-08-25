@@ -38,7 +38,7 @@ if [[ ! -d "${LOCAL_BACKUPS_PATH}" ]] ; then
 fi
 
 # Pull down the backup dir files via rsync
-rsync -F -a -z -e "ssh -p ${REMOTE_SSH_PORT}" "${REMOTE_SSH_LOGIN}:${REMOTE_BACKUPS_PATH}" "${LOCAL_BACKUPS_PATH}" --progress
+rsync -F -L -a -z -e "ssh -p ${REMOTE_SSH_PORT}" "${REMOTE_SSH_LOGIN}:${REMOTE_BACKUPS_PATH}" "${LOCAL_BACKUPS_PATH}" --progress
 echo "*** Synced backups from ${REMOTE_BACKUPS_PATH}"
 
 # Normal exit
