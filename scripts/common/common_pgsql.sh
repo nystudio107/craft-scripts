@@ -11,11 +11,12 @@
 # @since     1.2.0
 # @license   MIT
 
-
-IGNORED_DB_TABLES_STRING=""
+LOCAL_IGNORED_DB_TABLES_STRING=""
+REMOTE_IGNORED_DB_TABLES_STRING=""
 for TABLE in "${EXCLUDED_DB_TABLES[@]}"
 do
-   IGNORED_DB_TABLES_STRING+="--exclude-table-data=${LOCAL_DB_SCHEMA}.${GLOBAL_DB_TABLE_PREFIX}${TABLE} "
+   LOCAL_IGNORED_DB_TABLES_STRING+="--exclude-table-data=${LOCAL_DB_SCHEMA}.${GLOBAL_DB_TABLE_PREFIX}${TABLE} "
+   REMOTE_IGNORED_DB_TABLES_STRING+="--exclude-table-data=${REMOTE_DB_SCHEMA}.${GLOBAL_DB_TABLE_PREFIX}${TABLE} "
 done
 
 # Additional arguments for mysqldump
@@ -27,7 +28,6 @@ PG_DUMP_ADDITIONAL_ARGS+="--clean "
 # Arguments to dump just the data
 PG_DUMP_ARGS=""
 PG_DUMP_ARGS+=$PG_DUMP_ADDITIONAL_ARGS
-PG_DUMP_ARGS+=$IGNORED_DB_TABLES_STRING
 
 # Build the remote psql credentials
 REMOTE_DB_CREDS=""
