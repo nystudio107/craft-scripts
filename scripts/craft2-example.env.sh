@@ -1,4 +1,4 @@
-# Craft Scripts Environment
+# Craft 2 Scripts Environment
 #
 # Local environmental config for nystudio107 Craft scripts
 #
@@ -6,7 +6,7 @@
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts
-# @since     1.2.2
+# @since     1.2.4
 # @license   MIT
 #
 # This file should be renamed to '.env.sh' and it should reside in the

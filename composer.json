@@ -1,0 +1,28 @@
+{
+    "name": "nystudio107/craft-scripts",
+    "description": "Shell scripts to manage database backups, asset backups, file permissions, asset syncing, cache clearing, and database syncing between Craft CMS environments",
+    "version": "1.2.5",
+    "keywords": [
+        "craft",
+        "craftcms",
+        "shell",
+        "scripts",
+        "database-sync",
+        "assets-sync",
+        "set-permissions",
+        "clear-caches",
+        "database-backup",
+        "asset-backup"
+    ],
+    "support": {
+        "docs": "https://github.com/nystudio107/craft-scripts/blob/master/README.md",
+        "issues": "https://github.com/nystudio107/craft-scripts/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+          "name": "nystudio107",
+          "homepage": "https://nystudio107.com/"
+        }
+    ]
+}

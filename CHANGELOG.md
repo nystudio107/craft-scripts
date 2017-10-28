@@ -1,5 +1,11 @@
 # Craft-Scripts Changelog
 
+## 1.2.4 - 2017.10.28
+### Added
+* Added separate example starter `*-example.env.sh` for Craft 2.x & Craft 3.x
+* Added composer support
+* Updated README.md
+
 ## 1.2.3 - 2017.09.07
 ### Changed
 * Fixed an issue where remote db pulls wouldn't exclude db tables that should have been ignored (such as the templatecaches table)
