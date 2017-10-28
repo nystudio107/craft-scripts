@@ -136,7 +136,7 @@ See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitig
 
 1. Download or clone the `craft-scripts` git repo
 2. Copy the `scripts` directory into the root directory of your Craft CMS project
-3. Duplicate the `example.env.sh` file, and rename it to `.env.sh`
+3. In the `scripts` directory, duplicate the `craft2-example.env.sh` (for Craft 2.x projects) or `craft3-example.env.sh` (for Craft 3.x projects) file, and rename it to `.env.sh`. These `*-example.env.sh` files are largely the same, just with some different defaults for Craft 2.x and Craft 3.x.
 4. Add `.env.sh` to your `.gitignore` file
 5. Then open up the `.env.sh` file into your favorite editor, and replace `REPLACE_ME` with the appropriate settings.
 
