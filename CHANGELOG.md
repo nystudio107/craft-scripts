@@ -1,5 +1,9 @@
 # Craft-Scripts Changelog
 
+## 1.2.5 - 2017.11.14
+### Changed
+* Fixed an issue with the backup path for the `backup_dir.sh` script 
+
 ## 1.2.4 - 2017.10.28
 ### Added
 * Added separate example starter `*-example.env.sh` for Craft 2.x & Craft 3.x
