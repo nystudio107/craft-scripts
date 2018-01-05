@@ -132,6 +132,27 @@ You can pass in either a path to a `.sql` file or ` .gz` file to `restore_db.sh`
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
+### restore_assets.sh
+
+The `restore_assets.sh` restores the assets from the backup that has been created with `backup_assets.sh`.
+
+### restore_dirs.sh
+
+The `restore_dirs.sh` restores the dirs from the backup that has been created with `backup_dirs.sh`.
+
+### sync_assets.sh
+
+The `sync_assets.sh` uses rsync to copy the assets from the remote server to the local server. You would use this instead of `pull_assets.sh` when the site is on the same server.
+
+### sync_dirs.sh
+
+The `sync_dirs.sh` uses rsync to copy the dirs from the remote server to the local server. You would use this instead of `pull_dirs.sh` when the site is on the same server.
+
+### sync_db.sh
+
+The `sync_db.sh` does the same job as `pull_db.sh` but is used when the local and remote servers are actually the same server.
+
+
 ### Setting it up
 
 1. Download or clone the `craft-scripts` git repo
