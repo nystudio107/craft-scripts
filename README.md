@@ -41,6 +41,8 @@ The db dumps that `craft-scripts` does will exclude tables that are temporary/ca
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
 
+*N.B.:* The `pull_db.sh` script can be used even if the local and remote are on the same server.
+
 ### pull_assets.sh
 
 The `pull_assets.sh` script pulls down an arbitrary number of asset directories from a remote server, since we keep client-uploadable assets out of the git repo. The directories it will pull down are specified in `LOCAL_ASSETS_DIRS`
@@ -48,6 +50,8 @@ The `pull_assets.sh` script pulls down an arbitrary number of asset directories 
 It will also pull down the Craft `userphotos` and `rebrand` directories from `craft/storage` by default. The directories it will pull down are specified in `LOCAL_CRAFT_FILE_DIRS`
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
+
+*N.B.:* The `pull_db.sh` script can be used even if the local and remote are on the same server.
 
 ### pull_backups.sh
 
@@ -131,6 +135,14 @@ The `restore_db.sh` restores the local database to the database dumb passed in v
 You can pass in either a path to a `.sql` file or ` .gz` file to `restore_db.sh`, and it will do the right thing based on the file type.
 
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
+
+### restore_assets.sh
+
+The `restore_assets.sh` restores the assets from the backup that has been created with `backup_assets.sh`.
+
+### restore_dirs.sh
+
+The `restore_dirs.sh` restores the dirs from the backup that has been created with `backup_dirs.sh`.
 
 ### Setting it up
 
