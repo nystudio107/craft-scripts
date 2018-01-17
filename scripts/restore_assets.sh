@@ -8,7 +8,7 @@
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts
-# @since     1.1.0
+# @since     1.2.6
 # @license   MIT
 
 # Get the directory of the currently executing script
@@ -58,4 +58,3 @@ done
 
 # Normal exit
 exit 0
-
