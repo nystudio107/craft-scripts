@@ -5,6 +5,10 @@
 * Fixed an issue with the backup path for the `backup_dir.sh` script (again)
 * Made `web/cpresources` a default `LOCAL_WRITEABLE_DIRS` in the `craft3-example.env.sh`
 
+### Added
+* Added `restore_assets.sh` restores the assets from the backup that has been created with `backup_assets.sh`.
+* Added `restore_dirs.sh` restores the dirs from the backup that has been created with `backup_dirs.sh`
+
 ## 1.2.5 - 2017.11.14
 ### Changed
 * Fixed an issue with the backup path for the `backup_dir.sh` script 

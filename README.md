@@ -41,6 +41,8 @@ The db dumps that `craft-scripts` does will exclude tables that are temporary/ca
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
 
+*N.B.:* The `pull_db.sh` script can be used even if the local and remote are on the same server.
+
 ### pull_assets.sh
 
 The `pull_assets.sh` script pulls down an arbitrary number of asset directories from a remote server, since we keep client-uploadable assets out of the git repo. The directories it will pull down are specified in `LOCAL_ASSETS_DIRS`
@@ -48,6 +50,8 @@ The `pull_assets.sh` script pulls down an arbitrary number of asset directories 
 It will also pull down the Craft `userphotos` and `rebrand` directories from `craft/storage` by default. The directories it will pull down are specified in `LOCAL_CRAFT_FILE_DIRS`
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
+
+*N.B.:* The `pull_db.sh` script can be used even if the local and remote are on the same server.
 
 ### pull_backups.sh
 
@@ -139,19 +143,6 @@ The `restore_assets.sh` restores the assets from the backup that has been create
 ### restore_dirs.sh
 
 The `restore_dirs.sh` restores the dirs from the backup that has been created with `backup_dirs.sh`.
-
-### sync_assets.sh
-
-The `sync_assets.sh` uses rsync to copy the assets from the remote server to the local server. You would use this instead of `pull_assets.sh` when the site is on the same server.
-
-### sync_dirs.sh
-
-The `sync_dirs.sh` uses rsync to copy the dirs from the remote server to the local server. You would use this instead of `pull_dirs.sh` when the site is on the same server.
-
-### sync_db.sh
-
-The `sync_db.sh` does the same job as `pull_db.sh` but is used when the local and remote servers are actually the same server.
-
 
 ### Setting it up
 
