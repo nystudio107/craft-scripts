@@ -8,7 +8,7 @@
 # @copyright Copyright (c) 2017 nystudio107
 # @link      https://nystudio107.com/
 # @package   craft-scripts
-# @since     1.1.0
+# @since     1.2.6
 # @license   MIT
 
 # Get the directory of the currently executing script
@@ -31,7 +31,7 @@ do
     fi
 done
 
-BACKUP_FILES_DIR_PATH="${LOCAL_BACKUPS_PATH}${FILES_BACKUP_SUBDIR}/"
+BACKUP_FILES_DIR_PATH="${LOCAL_BACKUPS_PATH}${LOCAL_DB_NAME}/${FILES_BACKUP_SUBDIR}/"
 
 # Make sure the asset backup directory exists
 if [[ ! -d "${BACKUP_FILES_DIR_PATH}" ]] ; then
@@ -48,4 +48,3 @@ done
 
 # Normal exit
 exit 0
-
