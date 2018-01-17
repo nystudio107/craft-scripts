@@ -39,6 +39,7 @@ LOCAL_CHOWN_GROUP="apache"
 # Local directories relative to LOCAL_ROOT_PATH that should be writeable by the $CHOWN_GROUP
 LOCAL_WRITEABLE_DIRS=(
                 "${GLOBAL_CRAFT_PATH}storage"
+                "web/cpresources"
                 "web/assets"
                 )
 
