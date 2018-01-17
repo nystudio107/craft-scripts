@@ -31,7 +31,7 @@ do
     fi
 done
 
-BACKUP_FILES_DIR_PATH="${LOCAL_BACKUPS_PATH}${LOCAL_DB_NAME}${FILES_BACKUP_SUBDIR}/"
+BACKUP_FILES_DIR_PATH="${LOCAL_BACKUPS_PATH}${LOCAL_DB_NAME}/${FILES_BACKUP_SUBDIR}/"
 
 # Make sure the asset backup directory exists
 if [[ ! -d "${BACKUP_FILES_DIR_PATH}" ]] ; then
