@@ -1,5 +1,10 @@
 # Craft-Scripts Changelog
 
+## 1.2.6 - 2018.01.17
+### Changed
+* Fixed an issue with the backup path for the `backup_dir.sh` script (again)
+* Made `web/cpresources` a default `LOCAL_WRITEABLE_DIRS` in the `craft3-example.env.sh`
+
 ## 1.2.5 - 2017.11.14
 ### Changed
 * Fixed an issue with the backup path for the `backup_dir.sh` script 
