@@ -41,7 +41,7 @@ The db dumps that `craft-scripts` does will exclude tables that are temporary/ca
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
 
-*N.B.:* The `pull_db.sh` script can be used even if the local and remote are on the same server.
+**N.B.:** The `pull_db.sh` script can be used even if the local and remote are on the same server.
 
 ### pull_assets.sh
 
@@ -51,7 +51,7 @@ It will also pull down the Craft `userphotos` and `rebrand` directories from `cr
 
 See [Database & Asset Syncing Between Environments in Craft CMS](https://nystudio107.com/blog/database-asset-syncing-between-environments-in-craft-cms) for a detailed writeup.
 
-*N.B.:* The `pull_db.sh` script can be used even if the local and remote are on the same server.
+**N.B.:** The `pull_assets.sh` script can be used even if the local and remote are on the same server.
 
 ### pull_backups.sh
 
