@@ -101,7 +101,11 @@ fi
 # Clear the redis cache
 if [ "${LOCAL_REDIS_DB_ID}" != "" ] ; then
     echo "Emptying redis cache for database ${LOCAL_REDIS_DB_ID}"
-    echo -e "select ${LOCAL_REDIS_DB_ID}\nflushdb" | redis-cli
+    if [ "${LOCAL_REDIS_PASSWORD}" != "" ] ; then
+        echo -e "auth ${LOCAL_REDIS_PASSWORD}\nselect ${LOCAL_REDIS_DB_ID}\nflushdb" | redis-cli
+    else
+        echo -e "select ${LOCAL_REDIS_DB_ID}\nflushdb" | redis-cli
+    fi
 fi
 
 echo "*** Caches cleared"
