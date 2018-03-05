@@ -144,6 +144,14 @@ The `restore_assets.sh` restores the assets from the backup that has been create
 
 The `restore_dirs.sh` restores the dirs from the backup that has been created with `backup_dirs.sh`.
 
+### rotate_assets.sh
+
+The `rotate_assets.sh` moves the backed up `assets` and `craft` dirs created with `backup_assets.sh` to `assets.old` and `craft.old`.
+
+### rotate_dirs.sh
+
+The `rotate_dirs.sh` moves the backed up `files` dir created with `backup_dirs.sh` to `files.old`.
+
 ### Setting it up
 
 1. Download or clone the `craft-scripts` git repo

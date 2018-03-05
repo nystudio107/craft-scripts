@@ -1,5 +1,10 @@
 # Craft-Scripts Changelog
 
+## 1.2.7 - 2018.03.05
+### Added
+* Added `rotate_assets.sh` moves the `assets` and `craft` dirs from `backup_assets.sh` to `assets.old` and `craft.old`.
+* Added `rotate_dirs.sh` moves the `files` dir from `backup_dirs.sh` to `files.old`.
+
 ## 1.2.6 - 2018.01.17
 ### Changed
 * Fixed an issue with the backup path for the `backup_dir.sh` script (again)
