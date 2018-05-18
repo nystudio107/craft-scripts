@@ -57,28 +57,28 @@ CRAFT_CACHE_TABLES=(
 
 # Delete the cache dirs
 for DIR in ${CRAFT_CACHE_DIRS[@]}
-    do
-        FULLPATH="${LOCAL_CRAFT_FILES_PATH}${DIR}"
-        if [[ -d "${FULLPATH}" ]]
-        then
-            echo "Removing cache dir ${FULLPATH}"
-            rm -rf "${FULLPATH}"
-        else
-            echo "Creating directory ${FULLPATH}"
-            mkdir "${FULLPATH}"
-            chmod -R $WRITEABLE_DIR_PERMS "${FULLPATH}"
-        fi
-    done
+do
+    FULLPATH="${LOCAL_CRAFT_FILES_PATH}${DIR}"
+    if [[ -d "${FULLPATH}" ]]
+    then
+        echo "Removing cache dir ${FULLPATH}"
+        rm -rf "${FULLPATH}"
+    else
+        echo "Creating directory ${FULLPATH}"
+        mkdir "${FULLPATH}"
+        chmod -R $WRITEABLE_DIR_PERMS "${FULLPATH}"
+    fi
+done
 
 # Empty the cache tables
 if [[ "${GLOBAL_DB_DRIVER}" == "mysql" ]] ; then
     for TABLE in ${CRAFT_CACHE_TABLES[@]}
-        do
-            FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
-            echo "Emptying cache table $FULLTABLE"
-            $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS -e \
-                "DELETE FROM $FULLTABLE" &>/dev/null
-        done
+    do
+        FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
+        echo "Emptying cache table $FULLTABLE"
+        $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS -e \
+            "DELETE FROM $FULLTABLE" &>/dev/null
+    done
 fi
 if [[ "${GLOBAL_DB_DRIVER}" == "pgsql" ]] ; then
     echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
