@@ -29,12 +29,12 @@ do
     fi
     source "${DIR}/${INCLUDE_FILE}"
 done
-if [[ "${GLOBAL_DB_DRIVER}" == "mysql" ]] ; then
-    source "${DIR}/common/common_mysql.sh"
-fi
-if [[ "${GLOBAL_DB_DRIVER}" == "pgsql" ]] ; then
-    source "${DIR}/common/common_pgsql.sh"
-fi
+
+# Source the correct file for the database driver
+case "$GLOBAL_DB_DRIVER" in
+    ( 'mysql' ) source "${DIR}/common/common_mysql.sh" ;;
+    ( 'pgsql' ) source "${DIR}/common/common_pgsql.sh" ;;
+esac
 
 # Get the path to the database passed in
 SRC_DB_PATH=$1
