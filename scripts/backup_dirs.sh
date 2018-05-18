@@ -38,7 +38,7 @@ mkdir -p "${BACKUP_FILES_DIR_PATH}"
 # Backup the files dirs via rsync
 for DIR in "${LOCAL_DIRS_TO_BACKUP[@]}"
 do
-    rsync -F -L -a -z "${DIR}" "${BACKUP_FILES_DIR_PATH}" --progress
+    rsync -F -L -a -z --progress "${DIR}" "${BACKUP_FILES_DIR_PATH}"
     echo "*** Backed up assets from ${DIR}"
 done
 

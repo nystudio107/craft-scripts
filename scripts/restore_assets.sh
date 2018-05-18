@@ -42,7 +42,7 @@ fi
 # Restore the asset dir files via rsync
 for DIR in "${LOCAL_ASSETS_DIRS[@]}"
 do
-    rsync -F -L -a -z "${BACKUP_ASSETS_DIR_PATH}${DIR}" "${LOCAL_ASSETS_PATH}" --progress
+    rsync -F -L -a -z --progress "${BACKUP_ASSETS_DIR_PATH}${DIR}" "${LOCAL_ASSETS_PATH}"
     echo "*** Restored assets to ${LOCAL_ASSETS_PATH}${DIR}"
 done
 
@@ -50,7 +50,7 @@ done
 # Restore the Craft-specific dir files via rsync
 for DIR in "${LOCAL_CRAFT_FILE_DIRS[@]}"
 do
-    rsync -F -L -a -z "${BACKUP_CRAFT_DIR_PATH}${DIR}" "${LOCAL_CRAFT_FILES_PATH}" --progress
+    rsync -F -L -a -z --progress "${BACKUP_CRAFT_DIR_PATH}${DIR}" "${LOCAL_CRAFT_FILES_PATH}"
     echo "*** Restored assets to ${LOCAL_CRAFT_FILES_PATH}${DIR}"
 done
 

@@ -40,7 +40,7 @@ mkdir -p "${BACKUP_ASSETS_DIR_PATH}"
 # Backup the asset dir files via rsync
 for DIR in "${LOCAL_ASSETS_DIRS[@]}"
 do
-    rsync -F -L -a -z "${LOCAL_ASSETS_PATH}${DIR}" "${BACKUP_ASSETS_DIR_PATH}" --progress
+    rsync -F -L -a -z --progress "${LOCAL_ASSETS_PATH}${DIR}" "${BACKUP_ASSETS_DIR_PATH}"
     echo "*** Backed up assets from ${LOCAL_ASSETS_PATH}${DIR}"
 done
 
@@ -54,7 +54,7 @@ fi
 # Backup the Craft-specific dir files via rsync
 for DIR in "${LOCAL_CRAFT_FILE_DIRS[@]}"
 do
-    rsync -F -L -a -z "${LOCAL_CRAFT_FILES_PATH}${DIR}" "${BACKUP_CRAFT_DIR_PATH}" --progress
+    rsync -F -L -a -z --progress "${LOCAL_CRAFT_FILES_PATH}${DIR}" "${BACKUP_CRAFT_DIR_PATH}"
     echo "*** Backed up assets from ${LOCAL_CRAFT_FILES_PATH}${DIR}"
 done
 

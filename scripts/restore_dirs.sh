@@ -40,7 +40,7 @@ fi
 # Restore the files dirs via rsync
 for DIR in "${LOCAL_DIRS_TO_BACKUP[@]}"
 do
-    rsync -F -L -a -z "${BACKUP_FILES_DIR_PATH}${DIR}" "${DIR}" --progress
+    rsync -F -L -a -z --progress "${BACKUP_FILES_DIR_PATH}${DIR}" "${DIR}"
     echo "*** Restored files to ${DIR}"
 done
 
