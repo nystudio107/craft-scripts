@@ -45,10 +45,8 @@ BACKUP_DB_DIR_PATH="${LOCAL_BACKUPS_PATH}${LOCAL_DB_NAME}/${DB_BACKUP_SUBDIR}/"
 BACKUP_DB_PATH="${BACKUP_DB_DIR_PATH}${BACKUP_DB_NAME}"
 
 # Make sure the directory exists
-if [[ ! -d "${BACKUP_DB_DIR_PATH}" ]] ; then
-    echo "Creating backup directory ${BACKUP_DB_DIR_PATH}"
-    mkdir -p "${BACKUP_DB_DIR_PATH}"
-fi
+echo "Ensuring backup directory exists at '${BACKUP_DB_DIR_PATH}'"
+mkdir -p "${BACKUP_DB_DIR_PATH}"
 
 # Backup the local db
 if [[ "${GLOBAL_DB_DRIVER}" == "mysql" ]] ; then

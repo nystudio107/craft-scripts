@@ -30,10 +30,8 @@ do
 done
 
 # Make sure the local assets directory exists
-if [[ ! -d "${LOCAL_ASSETS_PATH}" ]] ; then
-    echo "Creating asset directory ${LOCAL_ASSETS_PATH}"
-    mkdir -p "${LOCAL_ASSETS_PATH}"
-fi
+echo "Ensuring asset directory exists at '${LOCAL_ASSETS_PATH}'"
+mkdir -p "${LOCAL_ASSETS_PATH}"
 
 # Pull down the asset dir files via rsync
 for DIR in "${LOCAL_ASSETS_DIRS[@]}"
@@ -43,10 +41,8 @@ do
 done
 
 # Make sure the Craft files directory exists
-if [[ ! -d "${LOCAL_CRAFT_FILES_PATH}" ]] ; then
-    echo "Creating Craft files directory ${LOCAL_CRAFT_FILES_PATH}"
-    mkdir -p "${LOCAL_CRAFT_FILES_PATH}"
-fi
+echo "Ensuring Craft files directory exists at '${LOCAL_CRAFT_FILES_PATH}'"
+mkdir -p "${LOCAL_CRAFT_FILES_PATH}"
 
 # Pull down the Craft-specific dir files via rsync
 for DIR in "${LOCAL_CRAFT_FILE_DIRS[@]}"

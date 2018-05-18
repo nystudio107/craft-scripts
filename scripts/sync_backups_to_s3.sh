@@ -30,10 +30,8 @@ do
 done
 
 # Make sure the local assets directory exists
-if [[ ! -d "${LOCAL_BACKUPS_PATH}" ]] ; then
-    echo "Creating asset directory ${LOCAL_BACKUPS_PATH}"
-    mkdir -p "${LOCAL_BACKUPS_PATH}"
-fi
+echo "Ensuring asset directory exists at '${LOCAL_BACKUPS_PATH}'"
+mkdir -p "${LOCAL_BACKUPS_PATH}"
 
 # Sync the local backups to the Amazon S3 bucket
 aws s3 sync ${LOCAL_BACKUPS_PATH} s3://${REMOTE_S3_BUCKET}/${REMOTE_S3_PATH}

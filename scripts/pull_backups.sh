@@ -30,10 +30,8 @@ do
 done
 
 # Make sure the local assets directory exists
-if [[ ! -d "${LOCAL_BACKUPS_PATH}" ]] ; then
-    echo "Creating asset directory ${LOCAL_BACKUPS_PATH}"
-    mkdir -p "${LOCAL_BACKUPS_PATH}"
-fi
+echo "Ensuring asset directory exists at '${LOCAL_BACKUPS_PATH}'"
+mkdir -p "${LOCAL_BACKUPS_PATH}"
 
 # Pull down the backup dir files via rsync
 rsync -F -L -a -z -e "ssh -p ${REMOTE_SSH_PORT}" "${REMOTE_SSH_LOGIN}:${REMOTE_BACKUPS_PATH}" "${LOCAL_BACKUPS_PATH}" --progress

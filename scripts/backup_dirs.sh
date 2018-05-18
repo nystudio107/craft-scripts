@@ -32,10 +32,8 @@ done
 BACKUP_FILES_DIR_PATH="${LOCAL_BACKUPS_PATH}${LOCAL_DB_NAME}/${FILES_BACKUP_SUBDIR}/"
 
 # Make sure the asset backup directory exists
-if [[ ! -d "${BACKUP_FILES_DIR_PATH}" ]] ; then
-    echo "Creating backup directory ${BACKUP_FILES_DIR_PATH}"
-    mkdir -p "${BACKUP_FILES_DIR_PATH}"
-fi
+echo "Ensuring backup directory exists at '${BACKUP_FILES_DIR_PATH}'"
+mkdir -p "${BACKUP_FILES_DIR_PATH}"
 
 # Backup the files dirs via rsync
 for DIR in "${LOCAL_DIRS_TO_BACKUP[@]}"
