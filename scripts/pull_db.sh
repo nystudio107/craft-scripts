@@ -34,6 +34,9 @@ done
 case "$GLOBAL_DB_DRIVER" in
     ( 'mysql' ) source "${DIR}/common/common_mysql.sh" ;;
     ( 'pgsql' ) source "${DIR}/common/common_pgsql.sh" ;;
+    ( * )
+        echo "Environment variable GLOBAL_DB_DRIVER was neither 'mysql' nor 'pgsql'. Aborting."
+        exit 1 ;;
 esac
 
 # Temporary db dump path (remote & local)
