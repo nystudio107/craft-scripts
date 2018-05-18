@@ -22,7 +22,7 @@ INCLUDE_FILES=(
             )
 for INCLUDE_FILE in "${INCLUDE_FILES[@]}"
 do
-    if [ -f "${DIR}/${INCLUDE_FILE}" ]
+    if [[ -f "${DIR}/${INCLUDE_FILE}" ]]
     then
         source "${DIR}/${INCLUDE_FILE}"
     else
@@ -48,7 +48,7 @@ find "${LOCAL_ROOT_PATH}" -type f ! -name "*.sh" -exec chmod $GLOBAL_FILE_PERMS 
 for DIR in ${LOCAL_WRITEABLE_DIRS[@]}
     do
         FULLPATH=${LOCAL_ROOT_PATH}${DIR}
-        if [ -d "${FULLPATH}" ]
+        if [[ -d "${FULLPATH}" ]]
         then
             echo "Fixing permissions for ${FULLPATH}"
             chmod -R $WRITEABLE_DIR_PERMS "${FULLPATH}"

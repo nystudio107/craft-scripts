@@ -23,7 +23,7 @@ INCLUDE_FILES=(
             )
 for INCLUDE_FILE in "${INCLUDE_FILES[@]}"
 do
-    if [ -f "${DIR}/${INCLUDE_FILE}" ]
+    if [[ -f "${DIR}/${INCLUDE_FILE}" ]]
     then
         source "${DIR}/${INCLUDE_FILE}"
     else
@@ -31,10 +31,10 @@ do
         exit 1
     fi
 done
-if [ "${GLOBAL_DB_DRIVER}" == "mysql" ] ; then
+if [[ "${GLOBAL_DB_DRIVER}" == "mysql" ]] ; then
     source "${DIR}/common/common_mysql.sh"
 fi
-if [ "${GLOBAL_DB_DRIVER}" == "pgsql" ] ; then
+if [[ "${GLOBAL_DB_DRIVER}" == "pgsql" ]] ; then
     source "${DIR}/common/common_pgsql.sh"
 fi
 
@@ -58,7 +58,7 @@ CRAFT_CACHE_TABLES=(
 for DIR in ${CRAFT_CACHE_DIRS[@]}
     do
         FULLPATH="${LOCAL_CRAFT_FILES_PATH}${DIR}"
-        if [ -d "${FULLPATH}" ]
+        if [[ -d "${FULLPATH}" ]]
         then
             echo "Removing cache dir ${FULLPATH}"
             rm -rf "${FULLPATH}"
@@ -70,7 +70,7 @@ for DIR in ${CRAFT_CACHE_DIRS[@]}
     done
 
 # Empty the cache tables
-if [ "${GLOBAL_DB_DRIVER}" == "mysql" ] ; then
+if [[ "${GLOBAL_DB_DRIVER}" == "mysql" ]] ; then
     for TABLE in ${CRAFT_CACHE_TABLES[@]}
         do
             FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
@@ -79,7 +79,7 @@ if [ "${GLOBAL_DB_DRIVER}" == "mysql" ] ; then
                 "DELETE FROM $FULLTABLE" &>/dev/null
         done
 fi
-if [ "${GLOBAL_DB_DRIVER}" == "pgsql" ] ; then
+if [[ "${GLOBAL_DB_DRIVER}" == "pgsql" ]] ; then
     echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
     chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
     for TABLE in ${CRAFT_CACHE_TABLES[@]}
@@ -93,13 +93,13 @@ if [ "${GLOBAL_DB_DRIVER}" == "pgsql" ] ; then
 fi
 
 # Clear the FastCGI Cache dir
-if [ "${LOCAL_FASTCGI_CACHE_DIR}" != "" ] ; then
+if [[ "${LOCAL_FASTCGI_CACHE_DIR}" != "" ]] ; then
     echo "Emptying FastCGI Cache at ${LOCAL_FASTCGI_CACHE_DIR}"
     rm -rf "${LOCAL_FASTCGI_CACHE_DIR}"*
 fi
 
 # Clear the redis cache
-if [ "${LOCAL_REDIS_DB_ID}" != "" ] ; then
+if [[ "${LOCAL_REDIS_DB_ID}" != "" ]] ; then
     echo "Emptying redis cache for database ${LOCAL_REDIS_DB_ID}"
     echo -e "select ${LOCAL_REDIS_DB_ID}\nflushdb" | redis-cli
 fi

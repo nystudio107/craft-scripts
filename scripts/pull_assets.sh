@@ -22,7 +22,7 @@ INCLUDE_FILES=(
             )
 for INCLUDE_FILE in "${INCLUDE_FILES[@]}"
 do
-    if [ -f "${DIR}/${INCLUDE_FILE}" ]
+    if [[ -f "${DIR}/${INCLUDE_FILE}" ]]
     then
         source "${DIR}/${INCLUDE_FILE}"
     else
