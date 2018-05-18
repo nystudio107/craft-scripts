@@ -23,13 +23,11 @@ INCLUDE_FILES=(
             )
 for INCLUDE_FILE in "${INCLUDE_FILES[@]}"
 do
-    if [[ -f "${DIR}/${INCLUDE_FILE}" ]]
-    then
-        source "${DIR}/${INCLUDE_FILE}"
-    else
+    if [[ ! -f "${DIR}/${INCLUDE_FILE}" ]] ; then
         echo "File ${DIR}/${INCLUDE_FILE} is missing, aborting."
         exit 1
     fi
+    source "${DIR}/${INCLUDE_FILE}"
 done
 if [[ "${GLOBAL_DB_DRIVER}" == "mysql" ]] ; then
     source "${DIR}/common/common_mysql.sh"
