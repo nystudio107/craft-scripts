@@ -84,12 +84,12 @@ if [[ "${GLOBAL_DB_DRIVER}" == "pgsql" ]] ; then
     echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
     chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
     for TABLE in ${CRAFT_CACHE_TABLES[@]}
-        do
-            FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
-            echo "Emptying cache table $FULLTABLE"
-            PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}" $LOCAL_PSQL_CMD $LOCAL_DB_CREDS -c \
-                "DELETE FROM $FULLTABLE"
-        done
+    do
+        FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
+        echo "Emptying cache table $FULLTABLE"
+        PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}" $LOCAL_PSQL_CMD $LOCAL_DB_CREDS -c \
+            "DELETE FROM $FULLTABLE"
+    done
     rm "${TMP_DB_DUMP_CREDS_PATH}"
 fi
 
