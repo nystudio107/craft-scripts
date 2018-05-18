@@ -59,8 +59,7 @@ CRAFT_CACHE_TABLES=(
 for DIR in ${CRAFT_CACHE_DIRS[@]}
 do
     FULLPATH="${LOCAL_CRAFT_FILES_PATH}${DIR}"
-    if [[ -d "${FULLPATH}" ]]
-    then
+    if [[ -d "${FULLPATH}" ]] ; then
         echo "Removing cache dir ${FULLPATH}"
         rm -rf "${FULLPATH}"
     else
