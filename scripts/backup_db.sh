@@ -31,11 +31,11 @@ do
 done
 
 # Functions
-function do_mysql() {
+function backup_mysql() {
     $LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS $MYSQLDUMP_SCHEMA_ARGS > "$BACKUP_DB_PATH"
     $LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS $LOCAL_IGNORED_DB_TABLES_STRING $MYSQLDUMP_DATA_ARGS >> "$BACKUP_DB_PATH"
 }
-function do_pgsql() {
+function backup_pgsql() {
     echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
     chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
     PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}" $LOCAL_PG_DUMP_CMD $LOCAL_DB_CREDS $LOCAL_IGNORED_DB_TABLES_STRING $PG_DUMP_ARGS --schema="${LOCAL_DB_SCHEMA}" --file="${BACKUP_DB_PATH}"
@@ -62,8 +62,8 @@ mkdir -p "${BACKUP_DB_DIR_PATH}"
 
 # Backup the local db
 case "$GLOBAL_DB_DRIVER" in
-    ( 'mysql' ) do_mysql ;;
-    ( 'pgsql' ) do_pgsql ;;
+    ( 'mysql' ) backup_mysql ;;
+    ( 'pgsql' ) backup_pgsql ;;
 esac
 gzip -f "$BACKUP_DB_PATH"
 echo "*** Backed up local database to ${BACKUP_DB_PATH}.gz"
