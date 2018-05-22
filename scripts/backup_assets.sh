@@ -46,10 +46,8 @@ done
 
 
 # Make sure the Craft files backup directory exists
-if [[ ! -d "${BACKUP_CRAFT_DIR_PATH}" ]] ; then
-    echo "Creating backup directory ${BACKUP_CRAFT_DIR_PATH}"
-    mkdir -p "${BACKUP_CRAFT_DIR_PATH}"
-fi
+echo "Ensuring backup directory exists at '${BACKUP_CRAFT_DIR_PATH}'"
+mkdir -p "${BACKUP_CRAFT_DIR_PATH}"
 
 # Backup the Craft-specific dir files via rsync
 for DIR in "${LOCAL_CRAFT_FILE_DIRS[@]}"
