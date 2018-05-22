@@ -66,31 +66,47 @@ fi
 # Temporary db dump path (remote & local)
 BACKUP_DB_PATH="/tmp/${LOCAL_DB_NAME}-db-backup-$(date '+%Y%m%d').sql"
 
-# Backup the local db
-if [[ "${GLOBAL_DB_DRIVER}" == "mysql" ]] ; then
+# Functions
+function backup_local_mysql() {
+    # Backup the local db
     $LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS $MYSQLDUMP_SCHEMA_ARGS > "$BACKUP_DB_PATH"
     $LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS $LOCAL_IGNORED_DB_TABLES_STRING $MYSQLDUMP_DATA_ARGS >> "$BACKUP_DB_PATH"
-fi
-if [[ "${GLOBAL_DB_DRIVER}" == "pgsql" ]] ; then
+    gzip -f "$BACKUP_DB_PATH"
+    echo "*** Backed up local database to ${BACKUP_DB_PATH}.gz"
+}
+function backup_local_pgsql() {
+    # Backup the local db
     echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
     chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
     PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}" $LOCAL_PG_DUMP_CMD $LOCAL_DB_CREDS $LOCAL_IGNORED_DB_TABLES_STRING $PG_DUMP_ARGS --schema="${LOCAL_DB_SCHEMA}" --file="${BACKUP_DB_PATH}"
     rm "${TMP_DB_DUMP_CREDS_PATH}"
-fi
-gzip -f "$BACKUP_DB_PATH"
-echo "*** Backed up local database to ${BACKUP_DB_PATH}.gz"
-
-# Restore the local db from the passed in db dump
-if [[ "${GLOBAL_DB_DRIVER}" == "mysql" ]] ; then
+    gzip -f "$BACKUP_DB_PATH"
+    echo "*** Backed up local database to ${BACKUP_DB_PATH}.gz"
+}
+function restore_local_from_dump_mysql() {
+    # Restore the local db from the passed in db dump
     $CAT_CMD "${SRC_DB_PATH}" | $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS
-fi
-if [[ "${GLOBAL_DB_DRIVER}" == "pgsql" ]] ; then
+    echo "*** Restored local database from ${SRC_DB_PATH}"
+}
+function restore_local_from_dump_pgsql() {
+    # Restore the local db from the passed in db dump
     echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
     chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
     $CAT_CMD "${SRC_DB_PATH}" | PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}" $LOCAL_PSQL_CMD $LOCAL_DB_CREDS --no-password >/dev/null
     rm "${TMP_DB_DUMP_CREDS_PATH}"
-fi
-echo "*** Restored local database from ${SRC_DB_PATH}"
+    echo "*** Restored local database from ${SRC_DB_PATH}"
+}
+
+case "$GLOBAL_DB_DRIVER" in
+    ( 'mysql' )
+        backup_local_mysql
+        restore_local_from_dump_mysql
+        ;;
+    ( 'pgsql' )
+        backup_local_pgsql
+        restore_local_from_dump_pgsql
+        ;;
+esac
 
 # Normal exit
 exit 0

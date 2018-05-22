@@ -30,6 +30,29 @@ do
     source "${DIR}/${INCLUDE_FILE}"
 done
 
+# Functions
+function clear_mysql_cache() {
+    for TABLE in ${CRAFT_CACHE_TABLES[@]}
+    do
+        FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
+        echo "Emptying cache table $FULLTABLE"
+        $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS -e \
+            "DELETE FROM $FULLTABLE" &>/dev/null
+    done
+}
+function clear_pgsql_cache() {
+    echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
+    chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
+    for TABLE in ${CRAFT_CACHE_TABLES[@]}
+    do
+        FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
+        echo "Emptying cache table $FULLTABLE"
+        PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}" $LOCAL_PSQL_CMD $LOCAL_DB_CREDS -c \
+            "DELETE FROM $FULLTABLE"
+    done
+    rm "${TMP_DB_DUMP_CREDS_PATH}"
+}
+
 # Source the correct file for the database driver
 case "$GLOBAL_DB_DRIVER" in
     ( 'mysql' ) source "${DIR}/common/common_mysql.sh" ;;
@@ -70,27 +93,10 @@ do
 done
 
 # Empty the cache tables
-if [[ "${GLOBAL_DB_DRIVER}" == "mysql" ]] ; then
-    for TABLE in ${CRAFT_CACHE_TABLES[@]}
-    do
-        FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
-        echo "Emptying cache table $FULLTABLE"
-        $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS -e \
-            "DELETE FROM $FULLTABLE" &>/dev/null
-    done
-fi
-if [[ "${GLOBAL_DB_DRIVER}" == "pgsql" ]] ; then
-    echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
-    chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
-    for TABLE in ${CRAFT_CACHE_TABLES[@]}
-    do
-        FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
-        echo "Emptying cache table $FULLTABLE"
-        PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}" $LOCAL_PSQL_CMD $LOCAL_DB_CREDS -c \
-            "DELETE FROM $FULLTABLE"
-    done
-    rm "${TMP_DB_DUMP_CREDS_PATH}"
-fi
+case "$GLOBAL_DB_DRIVER" in
+    ( 'mysql' ) clear_mysql_cache ;;
+    ( 'pgsql' ) clear_pgsql_cache ;;
+esac
 
 # Clear the FastCGI Cache dir
 if [[ "${LOCAL_FASTCGI_CACHE_DIR}" != "" ]] ; then
