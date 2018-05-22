@@ -23,24 +23,25 @@ INCLUDE_FILES=(
             )
 for INCLUDE_FILE in "${INCLUDE_FILES[@]}"
 do
-    if [ -f "${DIR}/${INCLUDE_FILE}" ]
-    then
-        source "${DIR}/${INCLUDE_FILE}"
-    else
+    if [[ ! -f "${DIR}/${INCLUDE_FILE}" ]] ; then
         echo "File ${DIR}/${INCLUDE_FILE} is missing, aborting."
         exit 1
     fi
+    source "${DIR}/${INCLUDE_FILE}"
 done
-if [ "${GLOBAL_DB_DRIVER}" == "mysql" ] ; then
-    source "${DIR}/common/common_mysql.sh"
-fi
-if [ "${GLOBAL_DB_DRIVER}" == "pgsql" ] ; then
-    source "${DIR}/common/common_pgsql.sh"
-fi
+
+# Source the correct file for the database driver
+case "$GLOBAL_DB_DRIVER" in
+    ( 'mysql' ) source "${DIR}/common/common_mysql.sh" ;;
+    ( 'pgsql' ) source "${DIR}/common/common_pgsql.sh" ;;
+    ( * )
+        echo "Environment variable GLOBAL_DB_DRIVER was neither 'mysql' nor 'pgsql'. Aborting."
+        exit 1 ;;
+esac
 
 # Get the path to the database passed in
 SRC_DB_PATH=$1
-if [ "${SRC_DB_PATH}" == "" ] ; then
+if [[ "${SRC_DB_PATH}" == "" ]] ; then
     echo "No input database dump specified"
     exit 1
 fi
@@ -51,13 +52,13 @@ fi
 
 # Figure out what type of file we're being passed in
 CAT_CMD=""
-if [ "${SRC_DB_PATH: -3}" == ".gz" ] ; then
+if [[ "${SRC_DB_PATH: -3}" == ".gz" ]] ; then
     CAT_CMD="${DB_ZCAT_CMD}"
 fi
-if [ "${SRC_DB_PATH: -4}" == ".sql" ] ; then
+if [[ "${SRC_DB_PATH: -4}" == ".sql" ]] ; then
     CAT_CMD="${DB_CAT_CMD}"
 fi
-if [ "${CAT_CMD}" == "" ] ; then
+if [[ "${CAT_CMD}" == "" ]] ; then
     echo "Unknown file type"
     exit 1
 fi
@@ -66,11 +67,11 @@ fi
 BACKUP_DB_PATH="/tmp/${LOCAL_DB_NAME}-db-backup-$(date '+%Y%m%d').sql"
 
 # Backup the local db
-if [ "${GLOBAL_DB_DRIVER}" == "mysql" ] ; then
+if [[ "${GLOBAL_DB_DRIVER}" == "mysql" ]] ; then
     $LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS $MYSQLDUMP_SCHEMA_ARGS > "$BACKUP_DB_PATH"
     $LOCAL_MYSQLDUMP_CMD $LOCAL_DB_CREDS $LOCAL_IGNORED_DB_TABLES_STRING $MYSQLDUMP_DATA_ARGS >> "$BACKUP_DB_PATH"
 fi
-if [ "${GLOBAL_DB_DRIVER}" == "pgsql" ] ; then
+if [[ "${GLOBAL_DB_DRIVER}" == "pgsql" ]] ; then
     echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
     chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
     PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}" $LOCAL_PG_DUMP_CMD $LOCAL_DB_CREDS $LOCAL_IGNORED_DB_TABLES_STRING $PG_DUMP_ARGS --schema="${LOCAL_DB_SCHEMA}" --file="${BACKUP_DB_PATH}"
@@ -80,10 +81,10 @@ gzip -f "$BACKUP_DB_PATH"
 echo "*** Backed up local database to ${BACKUP_DB_PATH}.gz"
 
 # Restore the local db from the passed in db dump
-if [ "${GLOBAL_DB_DRIVER}" == "mysql" ] ; then
+if [[ "${GLOBAL_DB_DRIVER}" == "mysql" ]] ; then
     $CAT_CMD "${SRC_DB_PATH}" | $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS
 fi
-if [ "${GLOBAL_DB_DRIVER}" == "pgsql" ] ; then
+if [[ "${GLOBAL_DB_DRIVER}" == "pgsql" ]] ; then
     echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
     chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
     $CAT_CMD "${SRC_DB_PATH}" | PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}" $LOCAL_PSQL_CMD $LOCAL_DB_CREDS --no-password >/dev/null

@@ -22,13 +22,11 @@ INCLUDE_FILES=(
             )
 for INCLUDE_FILE in "${INCLUDE_FILES[@]}"
 do
-    if [ -f "${DIR}/${INCLUDE_FILE}" ]
-    then
-        source "${DIR}/${INCLUDE_FILE}"
-    else
+    if [[ ! -f "${DIR}/${INCLUDE_FILE}" ]] ; then
         echo "File ${DIR}/${INCLUDE_FILE} is missing, aborting."
         exit 1
     fi
+    source "${DIR}/${INCLUDE_FILE}"
 done
 
 BACKUP_FILES_DIR_PATH="${LOCAL_BACKUPS_PATH}${LOCAL_DB_NAME}/${FILES_BACKUP_SUBDIR}/"
@@ -42,7 +40,7 @@ fi
 # Restore the files dirs via rsync
 for DIR in "${LOCAL_DIRS_TO_BACKUP[@]}"
 do
-    rsync -F -L -a -z "${BACKUP_FILES_DIR_PATH}${DIR}" "${DIR}" --progress
+    rsync -F -L -a -z --progress "${BACKUP_FILES_DIR_PATH}${DIR}" "${DIR}"
     echo "*** Restored files to ${DIR}"
 done
 
