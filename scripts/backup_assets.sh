@@ -22,13 +22,11 @@ INCLUDE_FILES=(
             )
 for INCLUDE_FILE in "${INCLUDE_FILES[@]}"
 do
-    if [ -f "${DIR}/${INCLUDE_FILE}" ]
-    then
-        source "${DIR}/${INCLUDE_FILE}"
-    else
+    if [[ ! -f "${DIR}/${INCLUDE_FILE}" ]] ; then
         echo "File ${DIR}/${INCLUDE_FILE} is missing, aborting."
         exit 1
     fi
+    source "${DIR}/${INCLUDE_FILE}"
 done
 
 # Set the backup directory paths
@@ -36,15 +34,13 @@ BACKUP_ASSETS_DIR_PATH="${LOCAL_BACKUPS_PATH}${LOCAL_DB_NAME}/${ASSETS_BACKUP_SU
 BACKUP_CRAFT_DIR_PATH="${LOCAL_BACKUPS_PATH}${LOCAL_DB_NAME}/${CRAFT_BACKUP_SUBDIR}/"
 
 # Make sure the asset backup directory exists
-if [[ ! -d "${BACKUP_ASSETS_DIR_PATH}" ]] ; then
-    echo "Creating backup directory ${BACKUP_ASSETS_DIR_PATH}"
-    mkdir -p "${BACKUP_ASSETS_DIR_PATH}"
-fi
+echo "Ensuring backup directory exists at '${BACKUP_ASSETS_DIR_PATH}'"
+mkdir -p "${BACKUP_ASSETS_DIR_PATH}"
 
 # Backup the asset dir files via rsync
 for DIR in "${LOCAL_ASSETS_DIRS[@]}"
 do
-    rsync -F -L -a -z "${LOCAL_ASSETS_PATH}${DIR}" "${BACKUP_ASSETS_DIR_PATH}" --progress
+    rsync -F -L -a -z --progress "${LOCAL_ASSETS_PATH}${DIR}" "${BACKUP_ASSETS_DIR_PATH}"
     echo "*** Backed up assets from ${LOCAL_ASSETS_PATH}${DIR}"
 done
 
@@ -58,10 +54,9 @@ fi
 # Backup the Craft-specific dir files via rsync
 for DIR in "${LOCAL_CRAFT_FILE_DIRS[@]}"
 do
-    rsync -F -L -a -z "${LOCAL_CRAFT_FILES_PATH}${DIR}" "${BACKUP_CRAFT_DIR_PATH}" --progress
+    rsync -F -L -a -z --progress "${LOCAL_CRAFT_FILES_PATH}${DIR}" "${BACKUP_CRAFT_DIR_PATH}"
     echo "*** Backed up assets from ${LOCAL_CRAFT_FILES_PATH}${DIR}"
 done
 
 # Normal exit
 exit 0
-

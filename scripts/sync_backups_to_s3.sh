@@ -22,20 +22,16 @@ INCLUDE_FILES=(
             )
 for INCLUDE_FILE in "${INCLUDE_FILES[@]}"
 do
-    if [ -f "${DIR}/${INCLUDE_FILE}" ]
-    then
-        source "${DIR}/${INCLUDE_FILE}"
-    else
+    if [[ ! -f "${DIR}/${INCLUDE_FILE}" ]] ; then
         echo "File ${DIR}/${INCLUDE_FILE} is missing, aborting."
         exit 1
     fi
+    source "${DIR}/${INCLUDE_FILE}"
 done
 
 # Make sure the local assets directory exists
-if [[ ! -d "${LOCAL_BACKUPS_PATH}" ]] ; then
-    echo "Creating asset directory ${LOCAL_BACKUPS_PATH}"
-    mkdir -p "${LOCAL_BACKUPS_PATH}"
-fi
+echo "Ensuring asset directory exists at '${LOCAL_BACKUPS_PATH}'"
+mkdir -p "${LOCAL_BACKUPS_PATH}"
 
 # Sync the local backups to the Amazon S3 bucket
 aws s3 sync ${LOCAL_BACKUPS_PATH} s3://${REMOTE_S3_BUCKET}/${REMOTE_S3_PATH}
