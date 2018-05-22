@@ -73,14 +73,12 @@ TMP_LOG_PATH="/tmp/${REMOTE_DB_NAME}-db-backups.log"
 find "${BACKUP_DB_DIR_PATH}" -name "*.sql.gz" -mtime +${GLOBAL_DB_BACKUPS_MAX_AGE} -exec rm -fv "{}" \; &> $TMP_LOG_PATH
 
 # Report on what we did
-FILE_COUNT=`cat $TMP_LOG_PATH | wc -l`
-if [[ $FILE_COUNT == 1 ]] ; then
-    PLURAL_CHAR=""
-fi
+FILE_COUNT=$(cat $TMP_LOG_PATH | wc -l)
 DETAILS_MSG="; details logged to ${TMP_LOG_PATH}"
-if [[ $FILE_COUNT == 0 ]] ; then
-    DETAILS_MSG=""
-fi
+case $FILE_COUNT in
+    ( 0 ) DETAILS_MSG="" ;;
+    ( 1 ) PLURAL_CHAR="" ;;
+esac
 echo "*** ${FILE_COUNT} old database backup${PLURAL_CHAR} removed${DETAILS_MSG}"
 
 # Normal exit
