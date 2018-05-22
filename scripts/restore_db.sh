@@ -40,28 +40,24 @@ case "$GLOBAL_DB_DRIVER" in
 esac
 
 # Get the path to the database passed in
-SRC_DB_PATH=$1
-if [[ "${SRC_DB_PATH}" == "" ]] ; then
-    echo "No input database dump specified"
+SRC_DB_PATH="$1"
+if [[ -z "${SRC_DB_PATH}" ]] ; then
+    echo "No input database dump specified via variable SRC_DB_PATH"
     exit 1
 fi
 if [[ ! -f "${SRC_DB_PATH}" ]] ; then
-    echo "File not found"
+    echo "File not found for variable SRC_DB_PATH"
     exit 1
 fi
 
 # Figure out what type of file we're being passed in
-CAT_CMD=""
-if [[ "${SRC_DB_PATH: -3}" == ".gz" ]] ; then
-    CAT_CMD="${DB_ZCAT_CMD}"
-fi
-if [[ "${SRC_DB_PATH: -4}" == ".sql" ]] ; then
-    CAT_CMD="${DB_CAT_CMD}"
-fi
-if [[ "${CAT_CMD}" == "" ]] ; then
-    echo "Unknown file type"
-    exit 1
-fi
+case "$SRC_DB_PATH" in
+    ( *.gz )  CAT_CMD="${DB_ZCAT_CMD}" ;;
+    ( *.sql ) CAT_CMD="${DB_CAT_CMD}" ;;
+    ( * )
+        echo "Unknown file type for variable SRC_DB_PATH"
+        exit 1 ;;
+esac
 
 # Temporary db dump path (remote & local)
 BACKUP_DB_PATH="/tmp/${LOCAL_DB_NAME}-db-backup-$(date '+%Y%m%d').sql"
