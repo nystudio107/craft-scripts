@@ -1,5 +1,9 @@
 # Craft-Scripts Changelog
 
+## 1.2.8 - 2018.08.20
+### Changed
+* Refactor out to functions thanks to `preposthuman `
+
 ## 1.2.7 - 2018.05.22
 ### Changed
 * Code cleanup and refactoring thanks to `preposthuman `
