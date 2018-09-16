@@ -22,13 +22,11 @@ INCLUDE_FILES=(
             )
 for INCLUDE_FILE in "${INCLUDE_FILES[@]}"
 do
-    if [ -f "${DIR}/${INCLUDE_FILE}" ]
-    then
-        source "${DIR}/${INCLUDE_FILE}"
-    else
+    if [[ ! -f "${DIR}/${INCLUDE_FILE}" ]] ; then
         echo "File ${DIR}/${INCLUDE_FILE} is missing, aborting."
         exit 1
     fi
+    source "${DIR}/${INCLUDE_FILE}"
 done
 
 # The permissions for all files & directories in the Craft CMS install
@@ -46,19 +44,18 @@ chmod -R ${GLOBAL_DIR_PERMS} "${LOCAL_ROOT_PATH}"
 find "${LOCAL_ROOT_PATH}" -type f ! -name "*.sh" -exec chmod $GLOBAL_FILE_PERMS {} \;
 
 for DIR in ${LOCAL_WRITEABLE_DIRS[@]}
-    do
-        FULLPATH=${LOCAL_ROOT_PATH}${DIR}
-        if [ -d "${FULLPATH}" ]
-        then
-            echo "Fixing permissions for ${FULLPATH}"
-            chmod -R $WRITEABLE_DIR_PERMS "${FULLPATH}"
-            find "${FULLPATH}" -type f ! -name "*.sh" -exec chmod $WRITEABLE_FILE_PERMS {} \;
-        else
-            echo "Creating directory ${FULLPATH}"
-            mkdir "${FULLPATH}"
-            chmod -R $WRITEABLE_DIR_PERMS "${FULLPATH}"
-        fi
-    done
+do
+    FULLPATH=${LOCAL_ROOT_PATH}${DIR}
+    if [[ -d "${FULLPATH}" ]] ; then
+        echo "Fixing permissions for ${FULLPATH}"
+        chmod -R $WRITEABLE_DIR_PERMS "${FULLPATH}"
+        find "${FULLPATH}" -type f ! -name "*.sh" -exec chmod $WRITEABLE_FILE_PERMS {} \;
+    else
+        echo "Creating directory ${FULLPATH}"
+        mkdir "${FULLPATH}"
+        chmod -R $WRITEABLE_DIR_PERMS "${FULLPATH}"
+    fi
+done
 
 # Normal exit
 exit 0

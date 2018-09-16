@@ -66,6 +66,10 @@ LOCAL_FASTCGI_CACHE_DIR=""
 # this Redis database when it is executed (say, on deploy)
 LOCAL_REDIS_DB_ID=""
 
+# Local Redis password; leave it empty ("") if no password is required. You'll probably only need this if you've set a
+# password for Redis yourself. It's disabled by default on Redis installations.
+LOCAL_REDIS_PASSWORD=""
+
 # Local database constants; default port for mysql is 3306, default port for postgres is 5432
 LOCAL_DB_NAME="REPLACE_ME"
 LOCAL_DB_USER="REPLACE_ME"

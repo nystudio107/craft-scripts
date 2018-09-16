@@ -1,5 +1,13 @@
 # Craft-Scripts Changelog
 
+## 1.2.8 - 2018.08.20
+### Changed
+* Refactor out to functions thanks to `preposthuman `
+
+## 1.2.7 - 2018.05.22
+### Changed
+* Code cleanup and refactoring thanks to `preposthuman `
+
 ## 1.2.6 - 2018.01.17
 ### Changed
 * Fixed an issue with the backup path for the `backup_dir.sh` script (again)

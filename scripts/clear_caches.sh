@@ -23,20 +23,44 @@ INCLUDE_FILES=(
             )
 for INCLUDE_FILE in "${INCLUDE_FILES[@]}"
 do
-    if [ -f "${DIR}/${INCLUDE_FILE}" ]
-    then
-        source "${DIR}/${INCLUDE_FILE}"
-    else
+    if [[ ! -f "${DIR}/${INCLUDE_FILE}" ]] ; then
         echo "File ${DIR}/${INCLUDE_FILE} is missing, aborting."
         exit 1
     fi
+    source "${DIR}/${INCLUDE_FILE}"
 done
-if [ "${GLOBAL_DB_DRIVER}" == "mysql" ] ; then
-    source "${DIR}/common/common_mysql.sh"
-fi
-if [ "${GLOBAL_DB_DRIVER}" == "pgsql" ] ; then
-    source "${DIR}/common/common_pgsql.sh"
-fi
+
+# Functions
+function clear_mysql_cache() {
+    for TABLE in ${CRAFT_CACHE_TABLES[@]}
+    do
+        FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
+        echo "Emptying cache table $FULLTABLE"
+        $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS -e \
+            "DELETE FROM $FULLTABLE" &>/dev/null
+    done
+}
+function clear_pgsql_cache() {
+    echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
+    chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
+    for TABLE in ${CRAFT_CACHE_TABLES[@]}
+    do
+        FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
+        echo "Emptying cache table $FULLTABLE"
+        PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}" $LOCAL_PSQL_CMD $LOCAL_DB_CREDS -c \
+            "DELETE FROM $FULLTABLE"
+    done
+    rm "${TMP_DB_DUMP_CREDS_PATH}"
+}
+
+# Source the correct file for the database driver
+case "$GLOBAL_DB_DRIVER" in
+    ( 'mysql' ) source "${DIR}/common/common_mysql.sh" ;;
+    ( 'pgsql' ) source "${DIR}/common/common_pgsql.sh" ;;
+    ( * )
+        echo "Environment variable GLOBAL_DB_DRIVER was neither 'mysql' nor 'pgsql'. Aborting."
+        exit 1 ;;
+esac
 
 # The permissions for files & directories that need to be writeable
 WRITEABLE_DIR_PERMS=775  # `-rwxrwxr-x`
@@ -56,52 +80,38 @@ CRAFT_CACHE_TABLES=(
 
 # Delete the cache dirs
 for DIR in ${CRAFT_CACHE_DIRS[@]}
-    do
-        FULLPATH="${LOCAL_CRAFT_FILES_PATH}${DIR}"
-        if [ -d "${FULLPATH}" ]
-        then
-            echo "Removing cache dir ${FULLPATH}"
-            rm -rf "${FULLPATH}"
-        else
-            echo "Creating directory ${FULLPATH}"
-            mkdir "${FULLPATH}"
-            chmod -R $WRITEABLE_DIR_PERMS "${FULLPATH}"
-        fi
-    done
+do
+    FULLPATH="${LOCAL_CRAFT_FILES_PATH}${DIR}"
+    if [[ -d "${FULLPATH}" ]] ; then
+        echo "Removing cache dir ${FULLPATH}"
+        rm -rf "${FULLPATH}"
+    else
+        echo "Creating directory ${FULLPATH}"
+        mkdir "${FULLPATH}"
+        chmod -R $WRITEABLE_DIR_PERMS "${FULLPATH}"
+    fi
+done
 
 # Empty the cache tables
-if [ "${GLOBAL_DB_DRIVER}" == "mysql" ] ; then
-    for TABLE in ${CRAFT_CACHE_TABLES[@]}
-        do
-            FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
-            echo "Emptying cache table $FULLTABLE"
-            $LOCAL_MYSQL_CMD $LOCAL_DB_CREDS -e \
-                "DELETE FROM $FULLTABLE" &>/dev/null
-        done
-fi
-if [ "${GLOBAL_DB_DRIVER}" == "pgsql" ] ; then
-    echo ${LOCAL_DB_HOST}:${LOCAL_DB_PORT}:${LOCAL_DB_NAME}:${LOCAL_DB_USER}:${LOCAL_DB_PASSWORD} > "${TMP_DB_DUMP_CREDS_PATH}"
-    chmod 600 "${TMP_DB_DUMP_CREDS_PATH}"
-    for TABLE in ${CRAFT_CACHE_TABLES[@]}
-        do
-            FULLTABLE=${GLOBAL_DB_TABLE_PREFIX}${TABLE}
-            echo "Emptying cache table $FULLTABLE"
-            PGPASSFILE="${TMP_DB_DUMP_CREDS_PATH}" $LOCAL_PSQL_CMD $LOCAL_DB_CREDS -c \
-                "DELETE FROM $FULLTABLE"
-        done
-    rm "${TMP_DB_DUMP_CREDS_PATH}"
-fi
+case "$GLOBAL_DB_DRIVER" in
+    ( 'mysql' ) clear_mysql_cache ;;
+    ( 'pgsql' ) clear_pgsql_cache ;;
+esac
 
 # Clear the FastCGI Cache dir
-if [ "${LOCAL_FASTCGI_CACHE_DIR}" != "" ] ; then
+if [[ "${LOCAL_FASTCGI_CACHE_DIR}" != "" ]] ; then
     echo "Emptying FastCGI Cache at ${LOCAL_FASTCGI_CACHE_DIR}"
     rm -rf "${LOCAL_FASTCGI_CACHE_DIR}"*
 fi
 
 # Clear the redis cache
-if [ "${LOCAL_REDIS_DB_ID}" != "" ] ; then
+if [[ "${LOCAL_REDIS_DB_ID}" != "" ]] ; then
     echo "Emptying redis cache for database ${LOCAL_REDIS_DB_ID}"
-    echo -e "select ${LOCAL_REDIS_DB_ID}\nflushdb" | redis-cli
+    if [ "${LOCAL_REDIS_PASSWORD}" != "" ] ; then
+        echo -e "auth ${LOCAL_REDIS_PASSWORD}\nselect ${LOCAL_REDIS_DB_ID}\nflushdb" | redis-cli
+    else
+        echo -e "select ${LOCAL_REDIS_DB_ID}\nflushdb" | redis-cli
+    fi
 fi
 
 echo "*** Caches cleared"
