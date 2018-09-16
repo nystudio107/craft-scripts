@@ -158,9 +158,9 @@ All configuration is done in the `.env.sh` file, rather than in the scripts them
 
 All settings that are prefaced with `GLOBAL_` apply to **all** environments.
 
-`GLOBAL_DB_TABLE_PREFIX` is the Craft database table prefix, usually `craft_`
+`GLOBAL_DB_TABLE_PREFIX` is the Craft database table prefix, usually `craft_` for Craft v2 or blank for Craft v3
 
-`GLOBAL_CRAFT_PATH` is the path of the `craft` folder, relative to the root path. This should normally be `craft/`, unless you have moved it elsewhere. Paths should always have a trailing `/`
+`GLOBAL_CRAFT_PATH` is the path of the `craft` folder, relative to the root path. This should normally be `craft/` Craft v2 or `./` for Craft v3, unless you have moved it elsewhere. Paths should always have a trailing `/`
 
 `GLOBAL_DB_BACKUPS_MAX_AGE` Is the maximum age of local backups in days; backups older than this will be automatically rotated out (removed).
 
@@ -172,7 +172,9 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 
 `LOCAL_ROOT_PATH` is the absolute path to the root of your local Craft install, with a trailing `/` after it.
 
-`LOCAL_ASSETS_PATH` is the relative path to your local assets directories, with a trailing `/` after it.
+`LOCAL_ASSETS_PATH` is the relative path to your local assets directories, with a trailing `/` after it. Can be replaced with an absolute path if required
+
+`LOCAL_CRAFT_FILES_PATH` is the relative path to your storage directory, with a trailing `/` after it. You should only change this if you are using an absolute path.
 
 `LOCAL_CHOWN_USER` is the user that is the owner of your entire Craft install.
 
@@ -230,7 +232,9 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 
 `REMOTE_ROOT_PATH` is the absolute path to the root of your Craft install on the remote server, with a trailing `/` after it.
 
-`REMOTE_ASSETS_PATH` is the relative path to the remote assets directories, with a trailing `/` after it.
+`REMOTE_ASSETS_PATH` is the relative path to the remote assets directories, with a trailing `/` after it. This can be changed to an absolute path if required.
+
+`REMOTE_CRAFT_FILES_PATH` is the relative path to your storage directory, with a trailing `/` after it. You should only change this if you are using an absolute path.
 
 `REMOTE_DB_NAME` is the name of the remote mysql Craft CMS database
 
