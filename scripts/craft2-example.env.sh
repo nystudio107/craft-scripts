@@ -102,6 +102,9 @@ REMOTE_SSH_PORT="22"
 # Should we connect to the remote database server via ssh?
 REMOTE_DB_USING_SSH="yes"
 
+# Should we connect to the remote server via ssh for assets?
+REMOTE_ASSETS_USING_SSH="yes"
+
 # Remote path constants; paths should always have a trailing /
 REMOTE_ROOT_PATH="REPLACE_ME"
 REMOTE_ASSETS_PATH=${REMOTE_ROOT_PATH}"REPLACE_ME"

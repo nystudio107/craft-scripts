@@ -36,7 +36,11 @@ mkdir -p "${LOCAL_ASSETS_PATH}"
 # Pull down the asset dir files via rsync
 for DIR in "${LOCAL_ASSETS_DIRS[@]}"
 do
-    rsync -F -L -a -z -e "ssh -p ${REMOTE_SSH_PORT}" --delete-after --progress "${REMOTE_SSH_LOGIN}:${REMOTE_ASSETS_PATH}${DIR}" "${LOCAL_ASSETS_PATH}"
+    if [[ "${REMOTE_ASSETS_USING_SSH}" == "yes" ]] ; then
+        rsync -F -L -a -z -e "ssh -p ${REMOTE_SSH_PORT}" --delete-after --progress "${REMOTE_SSH_LOGIN}:${REMOTE_ASSETS_PATH}${DIR}" "${LOCAL_ASSETS_PATH}"
+    else
+        rsync -F -L -a -z --delete-after --progress "${REMOTE_ASSETS_PATH}${DIR}" "${LOCAL_ASSETS_PATH}"
+    fi
     echo "*** Synced assets from ${REMOTE_ASSETS_PATH}${DIR}"
 done
 
@@ -47,7 +51,11 @@ mkdir -p "${LOCAL_CRAFT_FILES_PATH}"
 # Pull down the Craft-specific dir files via rsync
 for DIR in "${LOCAL_CRAFT_FILE_DIRS[@]}"
 do
-    rsync -F -L -a -z -e "ssh -p ${REMOTE_SSH_PORT}" --delete-after --progress "${REMOTE_SSH_LOGIN}:${REMOTE_CRAFT_FILES_PATH}${DIR}" "${LOCAL_CRAFT_FILES_PATH}"
+    if [[ "${REMOTE_ASSETS_USING_SSH}" == "yes" ]] ; then
+        rsync -F -L -a -z -e "ssh -p ${REMOTE_SSH_PORT}" --delete-after --progress "${REMOTE_SSH_LOGIN}:${REMOTE_CRAFT_FILES_PATH}${DIR}" "${LOCAL_CRAFT_FILES_PATH}"
+    else
+        rsync -F -L -a -z --delete-after --progress "${REMOTE_CRAFT_FILES_PATH}${DIR}" "${LOCAL_CRAFT_FILES_PATH}"
+    fi
     echo "*** Synced assets from ${REMOTE_CRAFT_FILES_PATH}${DIR}"
 done
 
