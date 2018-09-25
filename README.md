@@ -7,6 +7,12 @@ There are several scripts included in `craft-scripts`, each of which perform dif
 
 Craft-Scripts works with both Craft 2.x & Craft 3.x, and has built-in support for both `mysql` as well as `postgres` databases.
 
+## Installation
+* Copy the scripts folder into the root directory of your Craft CMS project
+* Duplicate the example.env.sh file, and rename it to .env.sh
+* Add .env.sh to your .gitignore file
+* Then open up the .env.sh file into your favorite editor, and replace REPLACE_ME with the appropriate settings.
+
 ## Upgrading
 
 To upgrade to a later version of Craft-Scripts, replace the contents of your `scripts` folder with the newest Craft-Scripts, while preserving your existing `.env.sh` file.
