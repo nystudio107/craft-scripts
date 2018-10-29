@@ -20,6 +20,7 @@ EXCLUDED_DB_TABLES=(
             "templatecaches"
             "templatecachecriteria"
             "templatecacheelements"
+            "templatecachequeries"
             )
 
 TMP_DB_DUMP_CREDS_PATH="/tmp/craftscripts.creds"
