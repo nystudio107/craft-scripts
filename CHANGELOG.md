@@ -1,5 +1,9 @@
 # Craft-Scripts Changelog
 
+## 1.2.9 - 2018.10.29
+### Changed
+* Add `templatecachequeries` to the db tables excluded from database dumps
+
 ## 1.2.8 - 2018.08.20
 ### Changed
 * Refactor out to functions thanks to `preposthuman `
