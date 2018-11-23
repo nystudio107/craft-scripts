@@ -1,7 +1,7 @@
 {
     "name": "nystudio107/craft-scripts",
     "description": "Shell scripts to manage database backups, asset backups, file permissions, asset syncing, cache clearing, and database syncing between Craft CMS environments",
-    "version": "1.2.9",
+    "version": "1.2.10",
     "keywords": [
         "craft",
         "craftcms",

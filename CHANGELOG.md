@@ -1,5 +1,9 @@
 # Craft-Scripts Changelog
 
+## 1.2.10 - 2018.11.23
+### Changed
+* Don’t dump permission/ownership info for postgres
+
 ## 1.2.9 - 2018.10.29
 ### Changed
 * Add `templatecachequeries` to the db tables excluded from database dumps
