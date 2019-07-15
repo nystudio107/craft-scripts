@@ -2,7 +2,7 @@
 
 # Pull Database
 #
-# Pull remote database down from a remote and restore it to to local
+# Pull remote database down from a remote and restore it to local
 #
 # @author    nystudio107
 # @copyright Copyright (c) 2017 nystudio107
