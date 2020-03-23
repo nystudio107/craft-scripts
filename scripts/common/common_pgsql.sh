@@ -24,6 +24,9 @@ PG_DUMP_ADDITIONAL_ARGS=""
 PG_DUMP_ADDITIONAL_ARGS+="--no-password "
 PG_DUMP_ADDITIONAL_ARGS+="--if-exists "
 PG_DUMP_ADDITIONAL_ARGS+="--clean "
+PG_DUMP_ADDITIONAL_ARGS+="--no-owner "
+PG_DUMP_ADDITIONAL_ARGS+="--no-privileges "
+PG_DUMP_ADDITIONAL_ARGS+="--no-acl "
 
 # Arguments to dump just the data
 PG_DUMP_ARGS=""
