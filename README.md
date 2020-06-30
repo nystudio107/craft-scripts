@@ -81,6 +81,8 @@ This script assumes that you have already [installed awscli](http://docs.aws.ama
 
 It's recommended that you set up a separate user with access to only S3, and set up a private S3 bucket for your backups.
 
+You can set `LOCAL_AWS_PROFILE` to determine which AWS profile to connect with.
+
 See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitigating-disaster-via-website-backups) for a detailed writeup.
 
 ### backup_db.sh
@@ -217,6 +219,8 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 `LOCAL_DB_LOGIN_PATH` if this is set, it will use `--login-path=` for your local db credentials instead of sending them in via the commandline (see below)
 
 `LOCAL_BACKUPS_PATH` is the absolute path to the directory where local backups should be stored. For database backups, a sub-directory `LOCAL_DB_NAME/db` will be created inside the `LOCAL_BACKUPS_PATH` directory to store the database backups. Paths should always have a trailing `/`
+
+`LOCAL_AWS_PROFILE` is an [AWS named profile](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) you can set to determine which profile to connect to S3 with. 
 
 ##### Using mysql within a local docker container
 
