@@ -1,5 +1,9 @@
 # Craft-Scripts Changelog
 
+## 1.2.11 - 2020.08.11
+### Changed
+* Added `--no-tablespaces` to the mysqldump command options to work around changes in MySQL
+
 ## 1.2.10 - 2018.11.23
 ### Changed
 * Don’t dump permission/ownership info for postgres
