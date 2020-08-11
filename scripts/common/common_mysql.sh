@@ -23,6 +23,7 @@ done
 # Additional arguments for mysqldump
 MYSQLDUMP_ADDITIONAL_ARGS=""
 MYSQLDUMP_ADDITIONAL_ARGS+="--add-drop-table "
+MYSQLDUMP_ADDITIONAL_ARGS+="--no-tablespaces "
 MYSQLDUMP_ADDITIONAL_ARGS+="--comments "
 MYSQLDUMP_ADDITIONAL_ARGS+="--create-options "
 MYSQLDUMP_ADDITIONAL_ARGS+="--dump-date "
