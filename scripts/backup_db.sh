@@ -69,7 +69,7 @@ gzip -f "$BACKUP_DB_PATH"
 echo "*** Backed up local database to ${BACKUP_DB_PATH}.gz"
 
 # Remove backups older than LOCAL_BACKUPS_MAX_AGE
-TMP_LOG_PATH="/tmp/${REMOTE_DB_NAME}-db-backups.log"
+TMP_LOG_PATH="/tmp/${LOCAL_DB_NAME}-db-backups.log"
 find "${BACKUP_DB_DIR_PATH}" -name "*.sql.gz" -mtime +${GLOBAL_DB_BACKUPS_MAX_AGE} -exec rm -fv "{}" \; &> $TMP_LOG_PATH
 
 # Report on what we did
