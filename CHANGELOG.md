@@ -1,5 +1,9 @@
 # Craft-Scripts Changelog
 
+## 1.2.12 - 2020.10.20
+### Added
+* Added `--set-gtid-purged=OFF` to the `common_mysql.sh` to avoid permissions issues with some managed database dumps
+
 ## 1.2.11 - 2020.08.11
 ### Changed
 * Added `--no-tablespaces` to the mysqldump command options to work around changes in MySQL
