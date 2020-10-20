@@ -1,8 +1,8 @@
 # Craft-Scripts Changelog
 
-## Unreleased
-### Added
-* Added support for a `LOCAL_AWS_PROFILE` variable, which lets you specify which AWS named profile to connect to S3 with.
+## 1.2.11 - 2020.08.11
+### Changed
+* Added `--no-tablespaces` to the mysqldump command options to work around changes in MySQL
 
 ## 1.2.10 - 2018.11.23
 ### Changed
