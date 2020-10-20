@@ -34,7 +34,11 @@ echo "Ensuring asset directory exists at '${LOCAL_BACKUPS_PATH}'"
 mkdir -p "${LOCAL_BACKUPS_PATH}"
 
 # Sync the local backups to the Amazon S3 bucket
-aws s3 sync ${LOCAL_BACKUPS_PATH} s3://${REMOTE_S3_BUCKET}/${REMOTE_S3_PATH}
+if [ -z "${LOCAL_AWS_PROFILE}" ] ; then
+    aws s3 sync "${LOCAL_BACKUPS_PATH}" s3://"${REMOTE_S3_BUCKET}"/"${REMOTE_S3_PATH}"
+else
+    aws --profile="${LOCAL_AWS_PROFILE}" s3 sync "${LOCAL_BACKUPS_PATH}" s3://"${REMOTE_S3_BUCKET}"/"${REMOTE_S3_PATH}"
+fi
 echo "*** Synced backups to ${REMOTE_S3_BUCKET}"
 
 # Normal exit
