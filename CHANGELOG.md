@@ -1,5 +1,14 @@
 # Craft-Scripts Changelog
 
+## 1.2.12 - 2020.10.20
+### Added
+* Added `--set-gtid-purged=OFF` to the `common_mysql.sh` to avoid permissions issues with some database dumps
+* Added support for a `LOCAL_AWS_PROFILE` variable, which lets you specify which AWS named profile to connect to S3 with.
+* Add in-folder `.gitignore` to ensure that `.env.sh` is ignored
+
+### Fixed
+* Fix `TMP_LOG_PATH` for local db backups
+
 ## 1.2.11 - 2020.08.11
 ### Changed
 * Added `--no-tablespaces` to the mysqldump command options to work around changes in MySQL
