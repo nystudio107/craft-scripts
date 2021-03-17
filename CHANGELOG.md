@@ -2,7 +2,7 @@
 
 ## 1.2.13 - 2020.10.20
 ### Changed
-* Removed the MySQL-specific `--no-tablespaces` from the mysqldump command options
+* Removed the MySQL-specific `--set-gtid-purged=OFF` to the `common_mysql.sh` from the mysqldump command options
 
 ## 1.2.12 - 2020.10.20
 ### Added
