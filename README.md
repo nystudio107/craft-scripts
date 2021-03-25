@@ -138,7 +138,7 @@ See [Mitigating Disaster via Website Backups](https://nystudio107.com/blog/mitig
 
 ### restore_db.sh
 
-The `restore_db.sh` restores the local database to the database dumb passed in via command line argument. It backs up your local database before doing the restore.
+The `restore_db.sh` restores the local database to the database dump passed in via command line argument. It backs up your local database before doing the restore.
 
 You can pass in either a path to a `.sql` file or ` .gz` file to `restore_db.sh`, and it will do the right thing based on the file type.
 
