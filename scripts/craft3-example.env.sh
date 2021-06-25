@@ -31,6 +31,7 @@ GLOBAL_DB_DRIVER="mysql"
 # Local path constants; paths should always have a trailing /
 LOCAL_ROOT_PATH="REPLACE_ME"
 LOCAL_ASSETS_PATH=${LOCAL_ROOT_PATH}"REPLACE_ME"
+LOCAL_CRAFT_FILES_PATH=${LOCAL_ROOT_PATH}${GLOBAL_CRAFT_PATH}"storage/"
 
 # Local user & group that should own the Craft CMS install
 LOCAL_CHOWN_USER="admin"
@@ -71,8 +72,8 @@ LOCAL_REDIS_PASSWORD=""
 
 # Local database constants; default port for mysql is 3306, default port for postgres is 5432
 LOCAL_DB_NAME="REPLACE_ME"
-LOCAL_DB_PASSWORD="REPLACE_ME"
 LOCAL_DB_USER="REPLACE_ME"
+LOCAL_DB_PASSWORD="REPLACE_ME"
 LOCAL_DB_HOST="localhost"
 LOCAL_DB_PORT="3306"
 LOCAL_DB_SCHEMA="public"
@@ -105,11 +106,12 @@ REMOTE_DB_USING_SSH="yes"
 # Remote path constants; paths should always have a trailing /
 REMOTE_ROOT_PATH="REPLACE_ME"
 REMOTE_ASSETS_PATH=${REMOTE_ROOT_PATH}"REPLACE_ME"
+REMOTE_CRAFT_FILES_PATH=${REMOTE_ROOT_PATH}${GLOBAL_CRAFT_PATH}"storage/"
 
 # Remote database constants; default port for mysql is 3306, default port for postgres is 5432
 REMOTE_DB_NAME="REPLACE_ME"
-REMOTE_DB_PASSWORD="REPLACE_ME"
 REMOTE_DB_USER="REPLACE_ME"
+REMOTE_DB_PASSWORD="REPLACE_ME"
 REMOTE_DB_HOST="localhost"
 REMOTE_DB_PORT="3306"
 REMOTE_DB_SCHEMA="public"

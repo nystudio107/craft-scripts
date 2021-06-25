@@ -12,8 +12,7 @@
 # @license   MIT
 
 # Craft paths; ; paths should always have a trailing /
-LOCAL_CRAFT_FILES_PATH=${LOCAL_ROOT_PATH}"${GLOBAL_CRAFT_PATH}storage/"
-REMOTE_CRAFT_FILES_PATH=${REMOTE_ROOT_PATH}"${GLOBAL_CRAFT_PATH}storage/"
+
 
 # Commands to output database dumps, using gunzip -c instead of zcat for MacOS X compatibility
 DB_ZCAT_CMD="gunzip -c"
