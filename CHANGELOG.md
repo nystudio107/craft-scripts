@@ -1,5 +1,9 @@
 # Craft-Scripts Changelog
 
+## 1.2.14 - 2023.10.16
+### Added
+* Added `REMOTE_S3_DELETE` variable to enable an option in `sync_backups_to_s3.sh` to allow for deleting files in the S3 bucket that aren't in the local backup directory.
+
 ## 1.2.13 - 2020.10.20
 ### Changed
 * Removed the MySQL-specific `--set-gtid-purged=OFF` to the `common_mysql.sh` from the mysqldump command options
@@ -44,7 +48,7 @@
 
 ## 1.2.5 - 2017.11.14
 ### Changed
-* Fixed an issue with the backup path for the `backup_dir.sh` script 
+* Fixed an issue with the backup path for the `backup_dir.sh` script
 
 ## 1.2.4 - 2017.10.28
 ### Added
