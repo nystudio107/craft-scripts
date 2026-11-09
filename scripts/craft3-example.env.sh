@@ -135,3 +135,9 @@ REMOTE_S3_BUCKET="REPLACE_ME"
 
 # Optional subfolder relative to the S3 bucket root; paths should always have a trailing /
 REMOTE_S3_PATH=""
+
+# The Amazon S3 sync command can optionally add a --delete flag to delete files in the bucket that aren't in the local backup directory.
+# By default, this is set to "no". No files will be deleted, leaving a complete backup history in your S3 bucket in an ever growing archive.
+# If you'd like to enable the --delete flag, set it to "yes", and the sync command will maintain the same number of files in your S3 bucket
+# directory as are in your local backup directory.
+REMOTE_S3_DELETE="no"

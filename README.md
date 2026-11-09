@@ -220,7 +220,7 @@ All settings that are prefaced with `LOCAL_` refer to the local environment wher
 
 `LOCAL_BACKUPS_PATH` is the absolute path to the directory where local backups should be stored. For database backups, a sub-directory `LOCAL_DB_NAME/db` will be created inside the `LOCAL_BACKUPS_PATH` directory to store the database backups. Paths should always have a trailing `/`
 
-`LOCAL_AWS_PROFILE` is an [AWS named profile](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) you can set to determine which profile to connect to S3 with. 
+`LOCAL_AWS_PROFILE` is an [AWS named profile](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html) you can set to determine which profile to connect to S3 with.
 
 ##### Using mysql within a local docker container
 
@@ -267,6 +267,8 @@ All settings that are prefaced with `REMOTE_` refer to the remote environment wh
 `REMOTE_S3_BUCKET` is the name of the Amazon S3 bucket to backup to via the `sync_backups_to_s3.sh` script
 
 `REMOTE_S3_PATH` is a optional path relative to the Amazon S3 bucket where the `sync_backups_to_s3.sh` script will contain the backups if specified
+
+`REMOTE_S3_DELETE`, if set to `yes`, a `--delete` flag will be passed to the `aws sync` command so that the command will delete files from the Amazon S3 bucket backup directory that are not present in the local backup directory.
 
 ### Setting up SSH Keys
 
