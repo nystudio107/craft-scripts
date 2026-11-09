@@ -11,6 +11,9 @@
 # @since     1.2.2
 # @license   MIT
 
+# Stop at the first failure (including inside pipelines) instead of reporting a bogus restore
+set -eo pipefail
+
 # Get the directory of the currently executing script
 DIR="$(dirname "${BASH_SOURCE[0]}")"
 
@@ -47,7 +50,7 @@ function pull_mysql_direct() {
 }
 function pull_mysql_ssh() {
     # The database server requires ssh'ing in to connect to it
-    ssh $REMOTE_SSH_LOGIN -p $REMOTE_SSH_PORT "$REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS $MYSQLDUMP_SCHEMA_ARGS > '$TMP_DB_PATH' ; $REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS $REMOTE_IGNORED_DB_TABLES_STRING $MYSQLDUMP_DATA_ARGS >> '$TMP_DB_PATH' ; gzip -f '$TMP_DB_PATH'"
+    ssh $REMOTE_SSH_LOGIN -p $REMOTE_SSH_PORT "$REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS $MYSQLDUMP_SCHEMA_ARGS > '$TMP_DB_PATH' && $REMOTE_MYSQLDUMP_CMD $REMOTE_DB_CREDS $REMOTE_IGNORED_DB_TABLES_STRING $MYSQLDUMP_DATA_ARGS >> '$TMP_DB_PATH' && gzip -f '$TMP_DB_PATH'"
     copy_db_dump_locally
 }
 function pull_pgsql_direct() {

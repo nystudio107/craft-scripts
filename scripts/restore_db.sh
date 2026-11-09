@@ -11,6 +11,9 @@
 # @since     1.2.0
 # @license   MIT
 
+# Stop at the first failure (including inside pipelines) instead of reporting a bogus restore
+set -eo pipefail
+
 # Get the directory of the currently executing script
 DIR="$(dirname "${BASH_SOURCE[0]}")"
 
